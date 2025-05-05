@@ -5,7 +5,8 @@ use function App\Includes\asset;
 <html>
 <head>
     <title>Ôn tập và thi</title>
-    <link rel="stylesheet" type="text/css" href="<?=BASE_ASSETS_CSS?>/style.css"></head>
+    <base href="<?=BASE_URL?>/public/css/">
+    <link rel="stylesheet" type="text/css" href="style.css"></head>
 <body>
     <header class="header">
         <div class="logo">QUIZ</div>

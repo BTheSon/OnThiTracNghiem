@@ -2,7 +2,8 @@
 <html>
     <head>
     <title>Đăng ký</title>
-    <link rel="stylesheet" type="text/css" href="<?=BASE_ASSETS_CSS?>/cssDangky.css">
+    <base href="<?=BASE_URL?>/public/css/">
+    <link rel="stylesheet" type="text/css" href="cssDangky.css">
     </head>
     <body>
         <div class="container">

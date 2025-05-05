@@ -10,22 +10,19 @@ define('SUB_DIR_NAME', '/OnThiTracNghiem');
 define('BASE_DIR', dirname(__DIR__));
 
 // Thư mục chứa các file view của ứng dụng
-define('BASE_VIEWS_DIR', SUB_DIR_NAME . '/app/views');
+define('BASE_VIEWS_DIR', BASE_DIR . '/app/views');
 
 // Thư mục chứa các file model của ứng dụng
-define('BASE_MODELS_DIR', SUB_DIR_NAME . '/app/models');
+define('BASE_MODELS_DIR', BASE_DIR . '/app/models');
 
 // Thư mục chứa các file controller của ứng dụng
-define('BASE_CONTROLLERS_URL', SUB_DIR_NAME . '/app/controllers');
-
-// Thư mục chứa các file tài sản (assets) như CSS, JavaScript, hình ảnh,...
-define('BASE_ASSETS_CSS', SUB_DIR_NAME . '/public/css');
+define('BASE_CONTROLLERS_URL', BASE_DIR . '/app/controllers');
 
 // Thư mục chứa các file cấu hình của dự án
 define('BASE_CONFIG_DIR', SUB_DIR_NAME . '/config');
 
 // URL gốc của ứng dụng
-define('BASE_URL', (isset($_SERVER['HTTPS']) ? "https" : "http") . "://" . $_SERVER['HTTP_HOST']);
+define('BASE_URL', (isset($_SERVER['HTTPS']) ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'] . SUB_DIR_NAME);
 
 // Host của cơ sở dữ liệu
 define('DB_HOST', 'localhost');

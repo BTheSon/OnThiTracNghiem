@@ -5,7 +5,8 @@ use function App\Includes\asset;
 <html>
 <head>
     <title>Đăng nhập</title>
-    <link rel="stylesheet" type="text/css" href="<?=BASE_ASSETS_CSS?>/cssDangNhap.css"></head>
+    <base href="<?=BASE_URL?>/public/css/">
+    <link rel="stylesheet" type="text/css" href="cssDangNhap.css"></head>
 <body>
     <div class="container">
         <div class="heading">Đăng nhập</div>
