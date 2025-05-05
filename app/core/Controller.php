@@ -16,14 +16,27 @@ class Controller
     }
     
     // tải file view từ vị trí thứ mục BASE_VIEWS_DIR và data cho view
-    protected function view(string $view, array $data = []): void {
+    protected function view(string $view, array $data = [], string $layout = "layouts/default_layout"): void {
         $viewPath = BASE_VIEWS_DIR .'/' . $view; 
-        if (file_exists($viewPath)) {
-            extract($data);
-            require_once $viewPath;
-        } else {
-            echo $viewPath;
+        $layoutPath = BASE_VIEWS_DIR .'/' . $layout; 
+        if (!file_exists($viewPath)) {
             throw new Exception("View file not found: " . $viewPath);
         }
+
+        extract($data);
+        ob_start();
+        require_once $viewPath;
+        $content = ob_get_clean();
+        
+        if (!$layout) {
+            echo $content;
+            return;
+        }
+
+        if (!file_exists($layoutPath)) {
+            throw new Exception("Layout file not found: ".$layout);
+        }
+
+        require_once $layoutPath;
     }
 }

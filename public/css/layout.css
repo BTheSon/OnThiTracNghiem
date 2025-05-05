@@ -1,0 +1,36 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.header {
+    height: 60px;
+    width: 100%;
+}
+
+.container {
+    display: flex;
+    flex: 1;
+}
+
+.sidebar {
+    width: 200px;
+    min-height: calc(100vh - 120px);
+}
+
+.main-content {
+    flex: 1;
+    min-height: calc(100vh - 120px);
+}
+
+.footer {
+    height: 60px;
+    width: 100%;
+}
