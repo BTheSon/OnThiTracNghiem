@@ -7,9 +7,3 @@ require_once BASE_DIR . '/app/core/Autoloader.php';
 
 
 $app = new App();
-
-// echo"<pre>";
-// print_r($_SERVER);
-
-// echo "</pre>";
-// echo BASE_URL;
