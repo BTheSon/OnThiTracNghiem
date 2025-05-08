@@ -16,7 +16,7 @@ class Controller
     }
     
     // tải file view từ vị trí thứ mục BASE_VIEWS_DIR và data cho view
-    protected function view(string $view, array $data = [], string $layout = "layouts/default_layout"): void {
+    protected function view(string $view, array $data = [], string $layout = "layouts/default_layout.php"): void {
         $viewPath = BASE_VIEWS_DIR .'/' . $view; 
         $layoutPath = BASE_VIEWS_DIR .'/' . $layout; 
         if (!file_exists($viewPath)) {
