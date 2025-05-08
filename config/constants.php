@@ -16,10 +16,7 @@ define('BASE_VIEWS_DIR', BASE_DIR . '/app/views');
 define('BASE_MODELS_DIR', BASE_DIR . '/app/models');
 
 // Thư mục chứa các file controller của ứng dụng
-define('BASE_CONTROLLERS_URL', BASE_DIR . '/app/controllers');
-
-// Thư mục chứa các file cấu hình của dự án
-define('BASE_CONFIG_DIR', SUB_DIR_NAME . '/config');
+define('BASE_CONTROLLERS_DIR', BASE_DIR . '/app/controllers');
 
 // URL gốc của ứng dụng
 define('BASE_URL', (isset($_SERVER['HTTPS']) ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'] . SUB_DIR_NAME);
@@ -28,7 +25,7 @@ define('BASE_URL', (isset($_SERVER['HTTPS']) ? "https" : "http") . "://" . $_SER
 define('DB_HOST', 'localhost');
 
 // Tên của cơ sở dữ liệu
-define('DB_NAME', 'mindquest_db');
+define('DB_NAME', 'quizdb');
 
 // Tên người dùng để kết nối đến cơ sở dữ liệu
 define('DB_USER', 'root');

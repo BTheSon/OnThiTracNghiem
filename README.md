@@ -144,3 +144,6 @@
 - Có thể sẽ cho có thêm file __view__ layout chung, nhưng đó là lúc nào đó
 
 
+## THÊM Ý TƯỞNG:
+- Giáo viên: Thêm tài liệu ôn tập, tạo câu hỏi thi ( 4 mức 1,2,3,4 từ dễ đến khó ), Tạo bài thi(Thời gian làm bài ,số câu hỏi), Thống kê kết quả thi
+- Học Sinh: Lấy tài liệu từ giáo viên, Thi , xem điểm cá nhân.
