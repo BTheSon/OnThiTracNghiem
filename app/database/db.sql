@@ -2,176 +2,176 @@ CHARACTER SET utf8mb4
 COLLATE utf8mb4_unicode_ci;
 
 -- BẢNG NGƯỜI DÙNG
-CREATE TABLE Users (
-    user_id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100),
+CREATE TABLE NguoiDung (
+    nguoi_dung_id INT AUTO_INCREMENT PRIMARY KEY,
+    ho_ten VARCHAR(100),
     email VARCHAR(100) UNIQUE,
-    password VARCHAR(255),
-    role ENUM('student', 'teacher'),
-    avatar_url VARCHAR(255),
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    mat_khau VARCHAR(255),
+    vai_tro ENUM('hoc_sinh', 'giao_vien'),
+    duong_dan_anh VARCHAR(255),
+    ngay_tao DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
 -- BẢNG LỚP HỌC
-CREATE TABLE Classes (
-    class_id INT AUTO_INCREMENT PRIMARY KEY,
-    teacher_id INT,
-    class_code VARCHAR(20) UNIQUE,
-    class_name VARCHAR(100),
-    description TEXT,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (teacher_id) REFERENCES Users(user_id)
+CREATE TABLE LopHoc (
+    lop_hoc_id INT AUTO_INCREMENT PRIMARY KEY,
+    giao_vien_id INT,
+    ma_lop VARCHAR(20) UNIQUE,
+    ten_lop VARCHAR(100),
+    mo_ta TEXT,
+    ngay_tao DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (giao_vien_id) REFERENCES NguoiDung(nguoi_dung_id)
 );
 
 -- BẢNG HỌC SINH THAM GIA LỚP
-CREATE TABLE ClassStudents (
+CREATE TABLE HocSinhLopHoc (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    class_id INT,
-    student_id INT,
-    joined_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (class_id) REFERENCES Classes(class_id),
-    FOREIGN KEY (student_id) REFERENCES Users(user_id)
+    lop_hoc_id INT,
+    hoc_sinh_id INT,
+    ngay_tham_gia DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (lop_hoc_id) REFERENCES LopHoc(lop_hoc_id),
+    FOREIGN KEY (hoc_sinh_id) REFERENCES NguoiDung(nguoi_dung_id)
 );
 
 -- BẢNG THÔNG BÁO
-CREATE TABLE Announcements (
-    announcement_id INT AUTO_INCREMENT PRIMARY KEY,
-    class_id INT,
-    sender_id INT,
-    title VARCHAR(200),
-    content TEXT,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (class_id) REFERENCES Classes(class_id),
-    FOREIGN KEY (sender_id) REFERENCES Users(user_id)
+CREATE TABLE ThongBao (
+    thong_bao_id INT AUTO_INCREMENT PRIMARY KEY,
+    lop_hoc_id INT,
+    nguoi_gui_id INT,
+    tieu_de VARCHAR(200),
+    noi_dung TEXT,
+    ngay_tao DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (lop_hoc_id) REFERENCES LopHoc(lop_hoc_id),
+    FOREIGN KEY (nguoi_gui_id) REFERENCES NguoiDung(nguoi_dung_id)
 );
 
 -- BẢNG TÀI LIỆU
-CREATE TABLE Materials (
-    material_id INT AUTO_INCREMENT PRIMARY KEY,
-    uploader_id INT,
-    class_id INT,
-    title VARCHAR(200),
-    description TEXT,
-    file_url VARCHAR(255),
-    shared_with_teachers BOOLEAN DEFAULT FALSE,
-    uploaded_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (uploader_id) REFERENCES Users(user_id),
-    FOREIGN KEY (class_id) REFERENCES Classes(class_id)
+CREATE TABLE TaiLieu (
+    tai_lieu_id INT AUTO_INCREMENT PRIMARY KEY,
+    nguoi_dang_id INT,
+    lop_hoc_id INT,
+    tieu_de VARCHAR(200),
+    mo_ta TEXT,
+    duong_dan_file VARCHAR(255),
+    chia_se_voi_giao_vien BOOLEAN DEFAULT FALSE,
+    ngay_dang DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (nguoi_dang_id) REFERENCES NguoiDung(nguoi_dung_id),
+    FOREIGN KEY (lop_hoc_id) REFERENCES LopHoc(lop_hoc_id)
 );
 
 -- BẢNG CÂU HỎI
-CREATE TABLE Questions (
-    question_id INT AUTO_INCREMENT PRIMARY KEY,
-    creator_id INT,
-    subject VARCHAR(100),
-    chapter VARCHAR(100),
-    content TEXT,
-    image_url VARCHAR(255),
-    audio_url VARCHAR(255),
-    math_formula TEXT,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (creator_id) REFERENCES Users(user_id)
+CREATE TABLE CauHoi (
+    cau_hoi_id INT AUTO_INCREMENT PRIMARY KEY,
+    nguoi_tao_id INT,
+    mon_hoc VARCHAR(100),
+    chuong VARCHAR(100),
+    noi_dung TEXT,
+    duong_dan_hinh VARCHAR(255),
+    duong_dan_am_thanh VARCHAR(255),
+    cong_thuc_toan TEXT,
+    ngay_tao DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (nguoi_tao_id) REFERENCES NguoiDung(nguoi_dung_id)
 );
 
 -- BẢNG ĐÁP ÁN
-CREATE TABLE Options (
-    option_id INT AUTO_INCREMENT PRIMARY KEY,
-    question_id INT,
-    content TEXT,
-    is_correct BOOLEAN,
-    FOREIGN KEY (question_id) REFERENCES Questions(question_id)
+CREATE TABLE DapAn (
+    dap_an_id INT AUTO_INCREMENT PRIMARY KEY,
+    cau_hoi_id INT,
+    noi_dung TEXT,
+    la_dap_an_dung BOOLEAN,
+    FOREIGN KEY (cau_hoi_id) REFERENCES CauHoi(cau_hoi_id)
 );
 
 -- BẢNG ĐỀ THI
-CREATE TABLE Exams (
-    exam_id INT AUTO_INCREMENT PRIMARY KEY,
-    creator_id INT,
-    class_id INT,
-    title VARCHAR(200),
-    description TEXT,
-    duration_minutes INT,
-    total_score FLOAT,
-    exam_date DATETIME,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (creator_id) REFERENCES Users(user_id),
-    FOREIGN KEY (class_id) REFERENCES Classes(class_id)
+CREATE TABLE DeThi (
+    de_thi_id INT AUTO_INCREMENT PRIMARY KEY,
+    nguoi_tao_id INT,
+    lop_hoc_id INT,
+    tieu_de VARCHAR(200),
+    mo_ta TEXT,
+    thoi_gian_phut INT,
+    tong_diem FLOAT,
+    ngay_thi DATETIME,
+    ngay_tao DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (nguoi_tao_id) REFERENCES NguoiDung(nguoi_dung_id),
+    FOREIGN KEY (lop_hoc_id) REFERENCES LopHoc(lop_hoc_id)
 );
 
 -- BẢNG CÂU HỎI TRONG ĐỀ THI
-CREATE TABLE ExamQuestions (
-    exam_question_id INT AUTO_INCREMENT PRIMARY KEY,
-    exam_id INT,
-    question_id INT,
-    FOREIGN KEY (exam_id) REFERENCES Exams(exam_id),
-    FOREIGN KEY (question_id) REFERENCES Questions(question_id)
+CREATE TABLE CauHoiDeThi (
+    cau_hoi_de_thi_id INT AUTO_INCREMENT PRIMARY KEY,
+    de_thi_id INT,
+    cau_hoi_id INT,
+    FOREIGN KEY (de_thi_id) REFERENCES DeThi(de_thi_id),
+    FOREIGN KEY (cau_hoi_id) REFERENCES CauHoi(cau_hoi_id)
 );
 
 -- BẢNG HỌC SINH LÀM BÀI THI
-CREATE TABLE StudentExams (
-    student_exam_id INT AUTO_INCREMENT PRIMARY KEY,
-    exam_id INT,
-    student_id INT,
-    start_time DATETIME,
-    end_time DATETIME,
-    score FLOAT,
-    FOREIGN KEY (exam_id) REFERENCES Exams(exam_id),
-    FOREIGN KEY (student_id) REFERENCES Users(user_id)
+CREATE TABLE HocSinhLamBaiThi (
+    hoc_sinh_bai_thi_id INT AUTO_INCREMENT PRIMARY KEY,
+    de_thi_id INT,
+    hoc_sinh_id INT,
+    thoi_gian_bat_dau DATETIME,
+    thoi_gian_ket_thuc DATETIME,
+    diem FLOAT,
+    FOREIGN KEY (de_thi_id) REFERENCES DeThi(de_thi_id),
+    FOREIGN KEY (hoc_sinh_id) REFERENCES NguoiDung(nguoi_dung_id)
 );
 
 -- BẢNG TRẢ LỜI CÂU HỎI TRONG BÀI THI
-CREATE TABLE StudentExamAnswers (
-    answer_id INT AUTO_INCREMENT PRIMARY KEY,
-    student_exam_id INT,
-    question_id INT,
-    selected_option_id INT,
-    is_correct BOOLEAN,
-    FOREIGN KEY (student_exam_id) REFERENCES StudentExams(student_exam_id),
-    FOREIGN KEY (question_id) REFERENCES Questions(question_id),
-    FOREIGN KEY (selected_option_id) REFERENCES Options(option_id)
+CREATE TABLE TraLoiBaiThi (
+    tra_loi_id INT AUTO_INCREMENT PRIMARY KEY,
+    hoc_sinh_bai_thi_id INT,
+    cau_hoi_id INT,
+    dap_an_chon_id INT,
+    la_dap_an_dung BOOLEAN,
+    FOREIGN KEY (hoc_sinh_bai_thi_id) REFERENCES HocSinhLamBaiThi(hoc_sinh_bai_thi_id),
+    FOREIGN KEY (cau_hoi_id) REFERENCES CauHoi(cau_hoi_id),
+    FOREIGN KEY (dap_an_chon_id) REFERENCES DapAn(dap_an_id)
 );
 
 -- BẢNG BÀI TẬP
-CREATE TABLE Assignments (
-    assignment_id INT AUTO_INCREMENT PRIMARY KEY,
-    creator_id INT NOT NULL,
-    class_id INT NOT NULL,
-    title VARCHAR(100) NOT NULL,
-    description TEXT,
-    deadline DATETIME,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (creator_id) REFERENCES Users(user_id),
-    FOREIGN KEY (class_id) REFERENCES Classes(class_id)
+CREATE TABLE BaiTap (
+    bai_tap_id INT AUTO_INCREMENT PRIMARY KEY,
+    nguoi_tao_id INT NOT NULL,
+    lop_hoc_id INT NOT NULL,
+    tieu_de VARCHAR(100) NOT NULL,
+    mo_ta TEXT,
+    han_nop DATETIME,
+    ngay_tao DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (nguoi_tao_id) REFERENCES NguoiDung(nguoi_dung_id),
+    FOREIGN KEY (lop_hoc_id) REFERENCES LopHoc(lop_hoc_id)
 );
 
 -- BẢNG CÂU HỎI TRONG BÀI TẬP
-CREATE TABLE AssignmentQuestions (
-    assignment_question_id INT AUTO_INCREMENT PRIMARY KEY,
-    assignment_id INT NOT NULL,
-    question_id INT NOT NULL,
-    FOREIGN KEY (assignment_id) REFERENCES Assignments(assignment_id),
-    FOREIGN KEY (question_id) REFERENCES Questions(question_id)
+CREATE TABLE CauHoiBaiTap (
+    cau_hoi_bai_tap_id INT AUTO_INCREMENT PRIMARY KEY,
+    bai_tap_id INT NOT NULL,
+    cau_hoi_id INT NOT NULL,
+    FOREIGN KEY (bai_tap_id) REFERENCES BaiTap(bai_tap_id),
+    FOREIGN KEY (cau_hoi_id) REFERENCES CauHoi(cau_hoi_id)
 );
 
 -- BẢNG HỌC SINH LÀM BÀI TẬP
-CREATE TABLE StudentAssignments (
-    student_assignment_id INT AUTO_INCREMENT PRIMARY KEY,
-    assignment_id INT NOT NULL,
-    student_id INT NOT NULL,
-    start_time DATETIME,
-    end_time DATETIME,
-    score FLOAT,
-    FOREIGN KEY (assignment_id) REFERENCES Assignments(assignment_id),
-    FOREIGN KEY (student_id) REFERENCES Users(user_id)
+CREATE TABLE HocSinhLamBaiTap (
+    hoc_sinh_bai_tap_id INT AUTO_INCREMENT PRIMARY KEY,
+    bai_tap_id INT NOT NULL,
+    hoc_sinh_id INT NOT NULL,
+    thoi_gian_bat_dau DATETIME,
+    thoi_gian_ket_thuc DATETIME,
+    diem FLOAT,
+    FOREIGN KEY (bai_tap_id) REFERENCES BaiTap(bai_tap_id),
+    FOREIGN KEY (hoc_sinh_id) REFERENCES NguoiDung(nguoi_dung_id)
 );
 
 -- BẢNG TRẢ LỜI CÂU HỎI TRONG BÀI TẬP
-CREATE TABLE StudentAssignmentAnswers (
-    assignment_answer_id INT AUTO_INCREMENT PRIMARY KEY,
-    student_assignment_id INT NOT NULL,
-    question_id INT NOT NULL,
-    selected_option_id INT,
-    is_correct BOOLEAN,
-    FOREIGN KEY (student_assignment_id) REFERENCES StudentAssignments(student_assignment_id),
-    FOREIGN KEY (question_id) REFERENCES Questions(question_id),
-    FOREIGN KEY (selected_option_id) REFERENCES Options(option_id)
+CREATE TABLE TraLoiBaiTap (
+    tra_loi_bai_tap_id INT AUTO_INCREMENT PRIMARY KEY,
+    hoc_sinh_bai_tap_id INT NOT NULL,
+    cau_hoi_id INT NOT NULL,
+    dap_an_chon_id INT,
+    la_dap_an_dung BOOLEAN,
+    FOREIGN KEY (hoc_sinh_bai_tap_id) REFERENCES HocSinhLamBaiTap(hoc_sinh_bai_tap_id),
+    FOREIGN KEY (cau_hoi_id) REFERENCES CauHoi(cau_hoi_id),
+    FOREIGN KEY (dap_an_chon_id) REFERENCES DapAn(dap_an_id)
 );
