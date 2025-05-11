@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <base href="<?=BASE_URL?>/public/css/">
-    <link rel="stylesheet" type="text/css" href="-----"></head>
+    <base href="<?=BASE_URL?>/">
+    <link rel="stylesheet" type="text/css" href="public/css/trangchugv.css"></head>
     <title>Giáo Viên</title>
 </head>
 <body>
@@ -20,7 +20,7 @@
         </div>
     </header>
 
-   
+    
     <div class="side-menu">
         <div class="menu-item">
             <div class="menu-item-icon">⌂</div>
