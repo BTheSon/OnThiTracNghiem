@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <base href="<?=BASE_URL?>/">
-    <link rel="stylesheet" type="text/css" href="public/css/trangchugv.css"></head>
+    <base href="<?=BASE_URL?>/public/css/">
+    <link rel="stylesheet" type="text/css" href="-----"></head>
     <title>Giáo Viên</title>
 </head>
 <body>
@@ -19,6 +19,8 @@
             <div class="avatar"></div>
         </div>
     </header>
+
+   
     <div class="side-menu">
         <div class="menu-item">
             <div class="menu-item-icon">⌂</div>
@@ -26,29 +28,7 @@
         </div>
         <div class="menu-item">
             <div class="menu-item-icon">☐</div>
-            <div>Bài tập</div>
-        </div>
-        <div class="menu-item">
-            <div class="menu-item-icon">🔔</div>
-            <div>Thông báo</div>
-            <div style="margin-left: auto">▼</div>
-        </div>
-        <div class="menu-item">
-            <div class="menu-item-icon">📁</div>
-            <div>Đã đăng ký</div>
-            <div style="margin-left: auto">▼</div>
-        </div>
-        <div class="menu-item active">
-            <div class="menu-item-icon">
-                <div style="width: 24px; height: 24px; background: #ccc; border-radius: 50%;"></div>
-            </div>
-            <div>Giải tích</div>
-        </div>
-        <div style="position: absolute; bottom: 15px; width: 100%;">
-            <div class="menu-item">
-                <div class="menu-item-icon settings-icon">⚙</div>
-                <div>Cài đặt</div>
-            </div>
+            <div>Quản lý bài thi</div>
         </div>
     </div>
 
