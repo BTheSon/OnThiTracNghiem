@@ -8,7 +8,7 @@
     <title>Giáo Viên</title>
 </head>
 <body>
-<header>
+    <header>
         <div class="menu-icon">☰</div>
         <div class="title">QUIZ</div>
         <div class="user-profile">
@@ -19,14 +19,6 @@
             <div class="avatar"></div>
         </div>
     </header>
-
-    <div class="tab-menu">
-        <div class="tab active">Trang chủ</div>
-        <div class="tab">Ôn tập</div>
-        <div class="tab">Bài kiểm tra</div>
-        <div class="tab">Tiến độ</div>
-    </div>
-
     <div class="side-menu">
         <div class="menu-item">
             <div class="menu-item-icon">⌂</div>

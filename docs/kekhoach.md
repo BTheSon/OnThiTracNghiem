@@ -53,16 +53,14 @@
 - Theo dõi tiến độ học tập của lớp/cá nhân(hoàn thành bao nhiêu % bài tập)
 - Xem thống kê kết quả bài tập/bài thi
 
-**Đánh giá & Phản hồi**
+**Chấm điểm**
 
 - Chấm điểm tự động các bài thi trắc nghiệm
-- Gửi phản hồi, đánh giá bài thi cho từng cá nhân cho học sinh
 
 **Quản lý tài liệu**
 
 - Tải lên tài liệu học tập
 - Gửi tài liệu cho học sinh
-- Chia sẻ tài liệu với giáo viên khác
 
 ## 4 Một số tính năng thêm nếu dư thời gian (khi nào hoàng thành web cơ bản thì mới bắt đầu làm)
 ## 1. Học sinh
