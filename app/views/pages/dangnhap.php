@@ -14,7 +14,6 @@ use function App\Includes\asset;
             <input required="" class="input" type="email" name="email" id="email" placeholder="E-mail">
             <input required="" class="input" type="password" name="password" id="password" placeholder="Password">
             <span class="forgot-password"><a href="#">Quên mật khẩu</a></span>
-            <span class="register-link">Chưa có tài khoản? <a href="<?=SUB_DIR_NAME?>/home/dangky">Đăng nhập</a></span>
             <input class="login-button" type="submit" name="submit" value="Đăng nhập">  
         </form>
     </div>
