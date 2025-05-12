@@ -162,3 +162,7 @@
 | `cau_hoi_id` | INT | FK -> CauHoi.cau_hoi_id, NOT NULL | ID cua cau hoi cu the ma hoc sinh dang tra loi |
 | `dap_an_chon_id` | INT | FK -> DapAn.dap_an_id, NULLABLE | ID cua phuong an lua chon ma hoc sinh da chon |
 | `la_dap_an_dung` | BOOLEAN | | Danh dau cau tra loi nay dung hay sai |
+
+<!-- *Ghi chú: Có thể cần bảng `AnnouncementReadStatus(announcement_id, student_id)` để theo dõi trạng thái đọc chi tiết của từng học sinh.* -->
+
+Link sơ đồ diagram cho cơ sở dữ liệu: [Diagram](https://dbdiagram.io/d/onthitracnghi-68160fa91ca52373f54ef56a)
