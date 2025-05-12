@@ -8,17 +8,19 @@
     <title>Giáo Viên</title>
 </head>
 <body>
-    <header>
-        <div class="menu-icon">☰</div>
-        <div class="title">QUIZ</div>
-        <div class="user-profile">
-            <div class="user-info">
-                <div class="user-title">Title</div>
-                <div class="user-description">Description</div>
+    <div class="container">    
+        
+        <div class="header">
+            <div class="menu-icon">☰</div>
+            <div class="title">QUIZ</div>
+            <div class="user-profile">
+                <div class="user-info">
+                    <div class="user-title">Title</div>
+                    <div class="user-description">Description</div>
+                </div>
+                <div class="avatar"></div>
             </div>
-            <div class="avatar"></div>
         </div>
-    </header>
 
     
     <div class="side-menu">
@@ -28,7 +30,7 @@
         </div>
         <div class="menu-item">
             <div class="menu-item-icon">☐</div>
-            <div>Quản lý bài thi</div>
+            <div>Quản lý tài liệu</div>
         </div>
     </div>
 
@@ -46,16 +48,9 @@
         </div>
     </div>
 
-    <div class="floating-button">+</div>
 
-    <footer>
-        <div class="footer-links">
-            <a href="#" class="footer-link">Về chúng tôi</a>
-            <a href="#" class="footer-link">Điều khoản sử dụng</a>
-            <a href="#" class="footer-link">Chính sách bảo mật</a>
-            <a href="#" class="footer-link">Liên hệ</a>
-        </div>
-        <div>© 2025 QUIZ. Tất cả các quyền được bảo lưu.</div>
-    </footer>
+    <div class="floating-button">+</div>
+</div>
+    
 </body>
 </html>
