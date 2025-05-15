@@ -140,3 +140,7 @@
 | `cau_hoi_id` | INT                 | FK -> CauHoi.id                | ID của câu hỏi cụ thể mà học sinh đang trả lời                                          |
 | `da_id`      | INT                 | FK -> DapAn.id                 | ID của phương án lựa chọn (trong bảng `DapAn`) mà học sinh đã chọn                       |
 | `dung`       | BOOLEAN             |                                | Đánh dấu câu trả lời này đúng (`true`) hay sai (`false`)                                |
+
+---
+
+[Minh họa sơ đồ cơ sở dữ liệu trên dbdiagram.io](https://dbdiagram.io/d/onthitracnghi-68160fa91ca52373f54ef56a)
