@@ -1,0 +1,113 @@
+/* PAGE QUẢN LÝ LỚP */
+.ma-lop {
+    border: 1px solid #ccc;
+    padding: 8px 12px;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+    width: 120px;
+    display: inline-block;
+}
+
+.tim-kiem {
+    border: 1px solid #ccc;
+    padding: 8px 12px;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+    width: 120px;
+    display: inline-block;
+
+}
+
+.thong-ke {
+    border: 1px solid #ccc;
+    padding: 8px 12px;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+    width: 120px;
+    display: inline-block;
+}
+
+/* PAGE QUẢN LÝ  */
+.select-title {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.menu-add {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.menu-add .chon-lop-hoc select {
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    background-color: #f9f9f9;
+}
+
+.add-button-tai-lieu,
+.add-button-cau-hoi,
+.add-button-bai-thi {
+    background-color: #a8e6a3;
+    color: #206030;
+    border: none;
+    border-radius: 24px;
+    padding: 10px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.add-button-tai-lieu:hover,
+.add-button-cau-hoi:hover,
+.add-button-bai-thi:hover {
+    background-color: #7ed957;
+}
+
+
+.title-card {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 24px 0 12px 0;
+    color: #206030;
+}
+
+.tai-lieu-cards,
+.de-thi-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+}
+
+.card {
+    width: 100%;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+}
+
+.card-header {
+    font-size: 17px;
+    font-weight: 500;
+    color: #333;
+    flex: 1;
+}

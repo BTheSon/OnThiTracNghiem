@@ -1,0 +1,147 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* ==== HEADER ==== */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #b3e0ff;
+    /* màu xanh nhạt */
+    padding: 10px 20px;
+    height: 60px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.menu-icon {
+    font-size: 24px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #007acc;
+}
+
+/* ==== USER PROFILE TRÊN HEADER ==== */
+.user-profile {
+    display: flex;
+    align-items: center;
+}
+
+.user-info {
+    text-align: right;
+    margin-right: 10px;
+}
+
+.user-title {
+    font-weight: bold;
+    color: #444;
+}
+
+.user-description {
+    font-size: 12px;
+    color: #888;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    background-color: #ccc;
+    border-radius: 50%;
+    background-image: url('https://i.pravatar.cc/40');
+    background-size: cover;
+    background-position: center;
+}
+
+/* ==== SIDE MENU ==== */
+.side-menu {
+    width: 200px;
+    background-color: #f9f9f9;
+    height: 100vh;
+    padding-top: 20px;
+    border-right: 1px solid #ddd;
+    position: fixed;
+    top: 60px;
+
+    left: 0;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    border-radius: 8px;
+    margin: 5px 10px;
+}
+
+.menu-item:hover {
+    background-color: #e0f0ff;
+}
+
+.menu-item-icon {
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+
+/* CSS SỬ DỤNG CHUNG TRANG CHỦ 2 TRANG */
+/* Toàn bộ content bên phải */
+.content {
+    margin-left: 220px;
+    /* để tránh đè lên menu */
+    padding: 20px;
+    min-height: calc(100vh - 60px);
+    /* nếu header cao 60px */
+    background-color: #f9f9f9;
+}
+
+/* Tiêu đề nhỏ */
+.section-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 16px;
+    color: #333;
+}
+
+/* Container chứa các card */
+.class-cards {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* Thẻ card lớp học */
+.card {
+    width: 180px;
+    height: 120px;
+    border-radius: 10px;
+    background: linear-gradient(to bottom, #778cff 0%, #ffffff 60%);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: transform 0.2s;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: scale(1.03);
+}
+
+/* Phần đầu của card */
+.card-header {
+    background-color: #fff;
+    padding: 12px;
+    font-weight: bold;
+    color: #333;
+    border-top: 1px solid #eee;
+    border-radius: 0 0 10px 10px;
+}
