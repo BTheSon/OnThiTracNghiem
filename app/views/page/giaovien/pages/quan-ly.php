@@ -19,20 +19,20 @@
       
         <div class="title-card">Tài liệu đã giao</div>
         <div class="tai-lieu-cards">
-            <div class="card">
-                <div class="card-header">Tài liệu 1</div>
+            <div class="card-tl">
+                <div class="card-header-tl">Tài liệu 1</div>
             </div>
-            <div class="card">
-                <div class="card-header">Tài liệu 2</div>
+            <div class="card-tl">
+                <div class="card-header-tl">Tài liệu 2</div>
             </div>
         </div>
         <div class="title-card">Đề Thi đã giao</div>
         <div class ="de-thi-cards">
-            <div class="card">
-                <div class="card-header">Đề thi 1</div>
+            <div class="card-dt">
+                <div class="card-header-tl">Đề thi 1</div>
             </div>
-            <div class="card">
-                <div class="card-header">Đề thi 2</div>
+            <div class="card-dt">
+                <div class="card-header-tl">Đề thi 2</div>
             </div>                  
 
         </div>

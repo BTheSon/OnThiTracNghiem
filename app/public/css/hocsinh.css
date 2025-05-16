@@ -8,14 +8,19 @@
     text-align: center;
 }
 
-.content {
+.content-on-tap {
+    margin-left: 200px;
+    /* đúng bằng width của menu */
+
+    padding: 20px;
+    min-height: 100px;
     display: flex;
     align-items: center;
     gap: 16px;
     margin-bottom: 20px;
 }
 
-.content a {
+.content-on-tap a {
     display: inline-block;
     padding: 10px 20px;
     background-color: #3498db;
@@ -26,11 +31,11 @@
     transition: background 0.2s;
 }
 
-.content a:hover {
+.content-on-tap a:hover {
     background-color: #217dbb;
 }
 
-.down-load-button {
+.content-on-tap .down-load-button {
     padding: 10px 20px;
     background-color: #27ae60;
     color: #fff;
@@ -42,7 +47,7 @@
     text-align: center;
 }
 
-.down-load-button:hover {
+.content-on-tap .down-load-button:hover {
     background-color: #1e874b;
 }
 

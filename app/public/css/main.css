@@ -5,13 +5,17 @@ body {
 
 /* ==== HEADER ==== */
 .header {
+    position: fixed;
+    height: 60px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    /* Đảm bảo nằm trên menu */
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: #b3e0ff;
-    /* màu xanh nhạt */
-    padding: 10px 20px;
-    height: 60px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -59,46 +63,67 @@ body {
 }
 
 /* ==== SIDE MENU ==== */
-.side-menu {
-    width: 200px;
-    background-color: #f9f9f9;
-    height: 100vh;
-    padding-top: 20px;
-    border-right: 1px solid #ddd;
-    position: fixed;
-    top: 60px;
+/* Menu bên trái */
 
+.side-menu {
+    position: fixed;
     left: 0;
+    width: 200px;
+    height: calc(100vh - 60px);
+    background-color: #f9f9f9;
+    /* padding-top: 100px; */
+    border-right: 1px solid #ddd;
+    z-index: 900;
 }
 
 .menu-item {
     display: flex;
     align-items: center;
-    padding: 10px 15px;
+    padding: 12px 18px;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: background-color 0.2s, color 0.2s;
     border-radius: 8px;
-    margin: 5px 10px;
+    margin: 6px 12px;
+    color: #007acc;
+    font-weight: 500;
+    font-size: 16px;
+    text-decoration: none;
 }
 
 .menu-item:hover {
-    background-color: #e0f0ff;
+    background-color: #b3e0ff;
+    color: #005f99;
 }
 
 .menu-item-icon {
-    font-size: 18px;
-    margin-right: 10px;
+    font-size: 20px;
+    margin-right: 12px;
+    color: #007acc;
+    width: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 
 /* CSS SỬ DỤNG CHUNG TRANG CHỦ 2 TRANG */
 /* Toàn bộ content bên phải */
+
+#main-content {
+    margin-left: 200px;
+    /* Phải bằng chiều rộng menu */
+    margin-top: 60px;
+    /* Phải bằng chiều cao header */
+    /* padding: 20px; */
+    min-height: calc(100vh - 60px);
+    background-color: #f9f9f9;
+}
+
 .content {
-    margin-left: 220px;
-    /* để tránh đè lên menu */
+    margin-top: 60px;
+    /* đúng bằng height của header */
     padding: 20px;
     min-height: calc(100vh - 60px);
-    /* nếu header cao 60px */
     background-color: #f9f9f9;
 }
 
@@ -120,9 +145,9 @@ body {
 /* Thẻ card lớp học */
 .card {
     width: 180px;
-    height: 120px;
+    height: 180px;
     border-radius: 10px;
-    background: linear-gradient(to bottom, #778cff 0%, #ffffff 60%);
+    background: linear-gradient(to bottom, #909ff1 0%, #ffffff 60%);
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
     cursor: pointer;
     transition: transform 0.2s;
@@ -138,10 +163,38 @@ body {
 
 /* Phần đầu của card */
 .card-header {
-    background-color: #fff;
+
     padding: 12px;
     font-weight: bold;
     color: #333;
     border-top: 1px solid #eee;
     border-radius: 0 0 10px 10px;
+}
+
+/* NÚT THÊM LỚP HỌC CỦA HỌC SINH */
+.button-add {
+    margin: 20px 0;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.add-button {
+    background-color: #007acc;
+    color: #fff;
+    padding: 10px 22px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    transition: background 0.2s, box-shadow 0.2s;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.add-button:hover {
+    background-color: #005f99;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.13);
+    color: #e0f7ff;
 }
