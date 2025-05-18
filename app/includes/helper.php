@@ -19,6 +19,6 @@ function asset($path) {
 
 
 function redirect($url) {
-    header("Location:" .BASE_URL. " $url");
+    header("Location: " . BASE_URL . $url);
     exit();
 }

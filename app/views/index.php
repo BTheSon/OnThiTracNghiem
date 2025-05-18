@@ -14,7 +14,7 @@ use function App\Includes\asset;
             <a href="#">Trang chủ</a>
             <a href="#">Khám phá</a>
             <a href="#">Giới thiệu</a>
-            <a href="<?=SUB_DIR_NAME?>/home/dangnhap" id="loginBtn">Đăng nhập</a>
+            <a href="Auth/login" id="loginBtn">Đăng nhập</a>
         </nav>
     </header>
     

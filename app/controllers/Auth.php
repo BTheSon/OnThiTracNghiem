@@ -3,6 +3,8 @@ namespace App\Controllers;
 use App\Core\Controller;
 use App\Models\NguoiDungModel;
 
+use function App\Includes\redirect;
+
 class Auth extends Controller
 {
     private NguoiDungModel $model;
@@ -26,7 +28,6 @@ class Auth extends Controller
                 $this->view('auth/login', ['error' => 'Cần phải nhập email và mật khẩu.']);
                 return;
             }
-
             // Check user credentials
             $user = $this->model->getByEmail($email);
             if ($user && password_verify($password, $user['mk'])) {
@@ -36,7 +37,7 @@ class Auth extends Controller
                 $_SESSION['user_role'] = $user['vai_tro'];
 
                 // Redirect to dashboard
-                header('Location: /dashboard');
+                echo "<script>alert('Đăng nhập thành công" . $_SESSION['user_role'] ."!');</script>";
                 exit();
             } else {
                 $this->view('dangnhap.php', ['error' => 'Sai email hoặc mật khẩu.']);
@@ -47,22 +48,22 @@ class Auth extends Controller
         }
     }
 
-    public function register(): void
-    {
+    public function register(): void{
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $ho_ten = $_POST['name'];
             $email = $_POST['email'];
             $password = $_POST['password'];
+            $role = $_POST['role'] == 'hocsinh' ? 'hs' : 'gv';
 
             // Validate input
             if (empty($ho_ten) || empty($email) || empty($password)) {
-                $this->view('auth/register', ['error' => 'All fields are required.']);
+                $this->view('dangky.php', ['error' => 'All fields are required.']);
                 return;
             }
 
             // Check if email already exists
             if ($this->model->getByEmail($email)) {
-                $this->view('auth/register', ['error' => 'Email already exists.']);
+                $this->view('dangky.php', ['error' => 'Email already exists.']);
                 return;
             }
 
@@ -74,19 +75,19 @@ class Auth extends Controller
                 'ho_ten' => $ho_ten,
                 'email' => $email,
                 'mk' => $hashedPassword,
-                'vai_tro' => 'user'
+                'vai_tro' => $role,
             ]);
 
             // Set session variables
             $_SESSION['user_id'] = $userId;
             $_SESSION['user_name'] = $ho_ten;
-            $_SESSION['user_role'] = 'user';
+            $_SESSION['user_role'] = $role;
 
             // Redirect to dashboard
-            header('Location: /dashboard');
+            echo "<script>alert('Đăng ký thành công!');</script>";
             exit();
         } else {
-            $this->view('auth/register');
+            $this->view('dangky.php');
         }
     }
 }
