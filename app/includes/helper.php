@@ -17,8 +17,8 @@ function asset($path) {
     return base_url('public/' . ltrim($path, '/'));
 }
 
-
-function redirect($url) {
+// Hàm chuyển hướng đến một URL khác
+function navigate($url) {
     header("Location: " . BASE_URL . $url);
     exit();
 }
