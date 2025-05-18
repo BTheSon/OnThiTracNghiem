@@ -19,6 +19,7 @@ function asset($path) {
 
 // Hàm chuyển hướng đến một URL khác
 function navigate($url) {
-    header("Location: " . BASE_URL . $url);
+    $url = BASE_URL . $url;
+    header("Location: " . $url);
     exit();
 }

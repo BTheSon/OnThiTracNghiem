@@ -3,6 +3,7 @@ namespace App\Controllers;
 use App\Core\Controller;
 use App\Models\NguoiDungModel;
 
+use function App\Includes\navigate;
 use function App\Includes\redirect;
 
 class Auth extends Controller
@@ -37,7 +38,13 @@ class Auth extends Controller
                 $_SESSION['user_role'] = $user['vai_tro'];
 
                 // Redirect to dashboard
-                echo "<script>alert('Đăng nhập thành công" . $_SESSION['user_role'] ."!');</script>";
+                if ($user['vai_tro'] == 'hs') {
+                    navigate('/student');
+                } elseif ($user['vai_tro'] == 'gv') {
+                    navigate('/teacher');
+                } else {
+                    echo "<script>alert('không tìm thấy vai trò');</script>";
+                }
                 exit();
             } else {
                 $this->view('dangnhap.php', ['error' => 'Sai email hoặc mật khẩu.']);
