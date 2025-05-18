@@ -18,5 +18,6 @@ define('BASE_MODELS_DIR', BASE_DIR . '/app/models');
 // Thư mục chứa các file controller của ứng dụng
 define('BASE_CONTROLLERS_DIR', BASE_DIR . '/app/controllers');
 
-// URL gốc của ứng dụng
+// URL gốc của ứng dụng (localhost/OnThiTracNghiem)
+// Đường dẫn này sẽ được sử dụng để tạo các liên kết trong ứng dụng 
 define('BASE_URL', (isset($_SERVER['HTTPS']) ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'] . SUB_DIR_NAME);

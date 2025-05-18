@@ -16,3 +16,9 @@ function base_url($path = '') {
 function asset($path) {
     return base_url('public/' . ltrim($path, '/'));
 }
+
+
+function redirect($url) {
+    header("Location:" .BASE_URL. " $url");
+    exit();
+}

@@ -23,7 +23,7 @@ class Auth extends Controller
 
             // Validate input
             if (empty($email) || empty($password)) {
-                $this->view('auth/login', ['error' => 'Email and password are required.']);
+                $this->view('auth/login', ['error' => 'Cần phải nhập email và mật khẩu.']);
                 return;
             }
 
@@ -39,7 +39,8 @@ class Auth extends Controller
                 header('Location: /dashboard');
                 exit();
             } else {
-                $this->view('auth/login', ['error' => 'Invalid email or password.']);
+                $this->view('dangnhap.php', ['error' => 'Sai email hoặc mật khẩu.']);
+                return;
             }
         } else {
             $this->view('dangnhap.php');
