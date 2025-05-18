@@ -15,50 +15,35 @@ class Auth extends Controller
         $this->login();
         header('Location: '. BASE_URL .'/auth/login');
     }
-    
-    public function login(): void
-    {
-        switch ($_SERVER['REQUEST_METHOD']) {
-            case 'POST':
-                $this->postLogin();
-                break;
-            case 'GET':
-                $this->getLogin();
-                break;
-            default:
-                $this->view('auth/login');
-        }
-        
-    }
+    public function login(): void {
 
-    private function postLogin() {
-        $email = $_POST['email'];
-        $password = $_POST['password'];
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $email = $_POST['email'] ?? '';
+            $password = $_POST['password'] ?? '';
 
-        // Validate input
-        if (empty($email) || empty($password)) {
-            $this->view('auth/login', ['error' => 'Email and password are required.']);
-            return;
-        }
+            // Validate input
+            if (empty($email) || empty($password)) {
+                $this->view('auth/login', ['error' => 'Email and password are required.']);
+                return;
+            }
 
-        // Check user credentials
-        $user = $this->model->getByEmail($email);
-        if ($user && password_verify($password, $user['mk'])) {
-            // Set session variables
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['user_name'] = $user['ho_ten'];
-            $_SESSION['user_role'] = $user['vai_tro'];
+            // Check user credentials
+            $user = $this->model->getByEmail($email);
+            if ($user && password_verify($password, $user['mk'])) {
+                // Set session variables
+                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['user_name'] = $user['ho_ten'];
+                $_SESSION['user_role'] = $user['vai_tro'];
 
-            // Redirect to dashboard
-            header('Location: /dashboard');
-            exit();
+                // Redirect to dashboard
+                header('Location: /dashboard');
+                exit();
+            } else {
+                $this->view('auth/login', ['error' => 'Invalid email or password.']);
+            }
         } else {
-            $this->view('auth/login', ['error' => 'Invalid email or password.']);
+            $this->view('dangnhap.php');
         }
-    }
-
-    private function getLogin() {
-        $this->view('auth/login');
     }
 
     public function register(): void

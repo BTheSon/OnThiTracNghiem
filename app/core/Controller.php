@@ -15,7 +15,7 @@ class Controller
         }
     }
     
-    // tải file view từ vị trí thứ mục BASE_VIEWS_DIR và data cho view
+    // tải file view từ vị trí thứ mục BASE_VIEWS_DIR và data cho view, phải thêm .php sau view
     protected function view(string $view, array $data = []): void {
         $viewPath = BASE_VIEWS_DIR .'/' . $view; 
         $viewPath = str_replace(['\\', '//'], '/', $viewPath);  // chuẩn hóa đường dẫn viewPath
