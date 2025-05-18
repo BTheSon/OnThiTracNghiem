@@ -5,7 +5,7 @@ use App\Core\Controller;
 class Home extends Controller {
 
     public function index() {
-        $this->view('pages/index.php');
+        $this->view('index.php');
     }
 
     public function dangky() {

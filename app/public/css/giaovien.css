@@ -79,7 +79,6 @@
     background-color: #7ed957;
 }
 
-
 .title-card {
     font-size: 20px;
     font-weight: bold;
@@ -95,8 +94,9 @@
     width: 100%;
 }
 
-.card {
-    width: 100%;
+.card-tl,
+.card-dt {
+    /* width: 100%; */
     background: #fff;
     border-radius: 16px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
@@ -105,7 +105,7 @@
     align-items: center;
 }
 
-.card-header {
+.card-header-tl {
     font-size: 17px;
     font-weight: 500;
     color: #333;

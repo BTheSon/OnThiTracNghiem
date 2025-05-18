@@ -27,6 +27,7 @@ body {
     background-color: var(--color-bg-body);
     color: var(--color-text);
     line-height: 1.6;
+
 }
 
 /* Header */
@@ -89,6 +90,7 @@ body {
     color: #fff;
     text-align: center;
     padding: 5rem 1rem;
+    /* background-image: url("app/public/image/thuvien.jpg"); */
 }
 
 .hero h1 {
