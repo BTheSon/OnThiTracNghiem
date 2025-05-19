@@ -2,7 +2,7 @@
     <head>
     <title>Đăng ký</title>
     <base href="<?=BASE_URL?>/">
-    <link rel="stylesheet" type="text/css" href="app/public/css/cssDangky.css">
+    <link rel="stylesheet" type="text/css" href="public/css/cssDangky.css">
     </head>
     <body>
         <div class="container">

@@ -26,7 +26,7 @@ class Auth extends Controller
 
             // Validate input
             if (empty($email) || empty($password)) {
-                $this->view('auth/login', ['error' => 'Cần phải nhập email và mật khẩu.']);
+                $this->view('auth/login', [], ['error' => 'Cần phải nhập email và mật khẩu.']);
                 return;
             }
             // Check user credentials
@@ -47,11 +47,11 @@ class Auth extends Controller
                 }
                 exit();
             } else {
-                $this->view('dangnhap.php', ['error' => 'Sai email hoặc mật khẩu.']);
+                $this->view('auth/dangnhap.php',[], ['error' => 'Email hoặc mật khẩu không đúng.']);
                 return;
             }
         } else {
-            $this->view('dangnhap.php');
+            $this->view('auth/dangnhap.php');
         }
     }
 
@@ -64,13 +64,13 @@ class Auth extends Controller
 
             // Validate input
             if (empty($ho_ten) || empty($email) || empty($password)) {
-                $this->view('dangky.php', ['error' => 'All fields are required.']);
+                $this->view('auth/dangky.php',[], ['error' => 'All fields are required.']);
                 return;
             }
 
             // Check if email already exists
             if ($this->model->getByEmail($email)) {
-                $this->view('dangky.php', ['error' => 'Email already exists.']);
+                $this->view('auth/dangky.php',[], ['error' => 'Email already exists.']);
                 return;
             }
 
@@ -94,7 +94,7 @@ class Auth extends Controller
             echo "<script>alert('Đăng ký thành công!');</script>";
             exit();
         } else {
-            $this->view('dangky.php');
+            $this->view('auth/dangky.php');
         }
     }
 }

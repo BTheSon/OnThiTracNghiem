@@ -23,3 +23,8 @@ function navigate($url) {
     header("Location: " . $url);
     exit();
 }
+
+// chuẩn hóa đường dẫn
+function normalizePath($path): string {
+    return str_replace(['\\', '//'], '/', $path);
+}

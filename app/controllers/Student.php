@@ -16,10 +16,20 @@ class Student extends Controller
     }
     
     public function index(): void {
-        $this->view('page/student/layout.php');
+        $this->menu();
     }
 
     public function menu(): void{
-        $this->view('page/student/menu.php');
+        $this->view('layouts/main_layout.php', 
+                    [
+                        'sidebar' => 'hocsinh/partials/menu.php',
+                        'content' => 'hocsinh/pages/tat-ca-cac-lop.php'
+                    ],
+                    [
+                        'cssFiles' => [
+                            'public/css/hocsinh.css'
+                            
+                        ]
+                    ]);
     }
 }

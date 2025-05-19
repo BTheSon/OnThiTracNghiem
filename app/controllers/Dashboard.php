@@ -11,6 +11,6 @@ class Dashboard extends Controller
     
     public function index(): void
     {
-        $this->view('index.php');
+        $this->view('dashboard.php');
     }
 }
