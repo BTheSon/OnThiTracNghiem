@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang chủ học sinh</title>
+    <title>QUIZ</title>
     <base href="<?=BASE_URL?>/">    
     <link rel="stylesheet" href="public/css/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
@@ -17,8 +17,8 @@
         <div class="title">QUIZ</div>
         <div class="user-profile">
             <div class="user-info">
-                <div class="user-title">Title</div>
-                <div class="user-description">Description</div>
+                <div class="user-title"><?=$_SESSION['user_name']?></div>
+                <div class="user-description"><?=$_SESSION['user_role']?></div>
             </div>
             <div class="avatar"></div>
         </div>
@@ -29,9 +29,8 @@
     <!-- đây dùng để chuyển trang giữa các menu -->
     <div id="main-content" >
         <?=$content?>
-        <!-- <script src="public/js/menuload.js"></script> -->
     </div>
-    
+    <?=$data['js_file']?>
 </body>
 
 </html>

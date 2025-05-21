@@ -1,12 +1,15 @@
 <?php
 namespace App\Controllers;
 use App\Core\Controller;
+use App\Models\LopHocModel;
 
 use function App\Includes\navigate;
 
 class Teacher extends Controller
 {
+    private LopHocModel $model;
     public function __construct() {
+        $this->model = $this->model('LopHocModel');
         // Kiểm tra xem người dùng đã đăng nhập chưa
         if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'gv') {
             // Nếu chưa đăng nhập, chuyển hướng đến trang đăng nhập
@@ -19,13 +22,18 @@ class Teacher extends Controller
         $this->home();
     }
 
-    public function home(): void{
+    public function home(): void {
+        
+        $allClass = $this->model->getByTeacherId($_SESSION['user_id']);
+        
+
         $this->view('layouts/main_layout.php', 
-                    [
+                    [// layout partials
                         'sidebar' => 'giaovien/partials/menu.php',
                         'content' => 'giaovien/pages/tat-ca-lop-hoc.php'
                     ],
-                    [
+                    [// data
+                        'info_classes'=> $allClass,
                         'CSS_FILE' => [
                             'public/css/giaovien.css'
                         ]
@@ -55,6 +63,9 @@ class Teacher extends Controller
                         'CSS_FILE' => [
                             'public/css/giaovien.css',
                             'public/css/form_tao_lophoc.css'
+                        ],
+                        'JS_FILE' => [
+                            'public/js/form_tao_lophoc.js'
                         ]
                     ]);
     }

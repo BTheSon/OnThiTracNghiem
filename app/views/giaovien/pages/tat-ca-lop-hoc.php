@@ -1,11 +1,10 @@
 <div class="content">
     <div class="section-title">Lớp học:</div>
     <div class="class-cards">
-        <a href="#" class="card">
-            <div class="card-header">Giải Tích</div>
-        </a>
-        <a href="#" class="card">
-            <div class="card-header">Giải Tích</div>
-        </a>
+        <?php foreach($data['info_classes'] as $classes): ?>
+            <a href="<?=$classes['id']?>" class="card">
+                <div class="card-header"><?=$classes['ten_lop']?></div>
+            </a>
+        <?php endforeach; ?>
     </div>
 </div>
