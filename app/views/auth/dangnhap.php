@@ -17,10 +17,11 @@ use function App\Includes\asset;
                 }
             ?>
         <form action="" class="form" method="POST">
-            <input required="" class="input" type="email" name="email" id="email" placeholder="E-mail">
-            <input required="" class="input" type="password" name="password" id="password" placeholder="Password">
+            <input class="input" type="email" name="email" id="email" placeholder="E-mail" >
+            <input class="input" type="password" name="password" id="password" placeholder="Password" required>
             <span class="forgot-password"><a href="#">Quên mật khẩu</a></span>
             <input class="login-button" type="submit" name="submit" value="Đăng nhập">  
+            <i style="margin-top: 20px; color: #666;">Chưa có tài khoản? <a href="auth/register">Bấm vào đây</a></i>
         </form>
     </div>
 </body>

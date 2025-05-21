@@ -31,7 +31,7 @@
                 </div>
                 <input class="login-button" type="submit" name="submit" value="Đăng ký">
             </form>
-            <span class="register-link">Đã có tài khoản? <a href= "<?=SUB_DIR_NAME?>/home/dangnhap">Đăng nhập</a></span>
+            <i style="margin-top: 20px; color: #666;">Đã có tài khoản?  <a href="auth/login">Đăng nhập</a></i>
         </div>
     </body>
 </html>

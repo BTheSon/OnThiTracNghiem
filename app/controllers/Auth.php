@@ -92,7 +92,7 @@ class Auth extends Controller
 
             // Redirect to dashboard
             echo "<script>alert('Đăng ký thành công!');</script>";
-            exit();
+            navigate('/auth/login');
         } else {
             $this->view('auth/dangky.php');
         }

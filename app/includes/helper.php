@@ -17,7 +17,7 @@ function asset($path) {
     return base_url('public/' . ltrim($path, '/'));
 }
 
-// Hàm chuyển hướng đến một URL khác
+// Hàm chuyển hướng đến một URL khác /controller/action/parameter1/parameter2
 function navigate($url) {
     $url = BASE_URL . $url;
     header("Location: " . $url);
