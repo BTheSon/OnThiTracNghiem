@@ -77,7 +77,7 @@ class Controller
     }
 
     private function buildCssLinks(array $data): string {
-        if (isset($data['CSS_FILE']) && is_array($data['cssFiles'])) {
+        if (isset($data['CSS_FILE']) && is_array($data['CSS_FILE'])) {
             $cssLinks = [];
             foreach ($data['CSS_FILE'] as $cssFile) {
                 $cssLinks[] = '<link rel="stylesheet" href="' . htmlspecialchars($cssFile) . '">';
