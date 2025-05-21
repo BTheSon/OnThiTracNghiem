@@ -6,6 +6,7 @@
     <title>Trang chủ học sinh</title>
     <base href="<?=BASE_URL?>/">    
     <link rel="stylesheet" href="public/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <?=$data['css_file']?>
 
 </head>

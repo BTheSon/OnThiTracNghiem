@@ -26,8 +26,9 @@ class App {
 
         // Xác định method nếu có
         if (isset($url[1])) {
-            if (method_exists($this->controller, $url[1])) {
-                $this->method = $url[1];
+            $methodName = $this->convertKebabToSnake($url[1]);
+            if (method_exists($this->controller, $methodName)) {
+                $this->method = $methodName;
                 unset($url[1]);
             }
         }
@@ -45,5 +46,10 @@ class App {
             return explode('/', filter_var(rtrim($_GET['url'], '/'), FILTER_SANITIZE_URL));
         }
         return [];
+    }
+
+    // Hàm chuyển đổi kebab-case sang snake_case
+    private function convertKebabToSnake($string) {
+        return str_replace('-', '_', $string);
     }
 }

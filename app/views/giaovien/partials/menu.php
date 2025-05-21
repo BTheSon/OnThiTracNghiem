@@ -1,12 +1,12 @@
 <a href="teacher/home" class="menu-item">
-    <div class="menu-item-icon" id="man_hinh_chinh">🏠</div>
+    <div class="menu-item-icon" id="man_hinh_chinh"><i class="fas fa-house"></i></div>
     <div>Màn hình chính</div>
 </a>
 <a href="teacher/manager" class="menu-item">
-    <div class="menu-item-icon" id="quan_ly">🗂️</div>
+    <div class="menu-item-icon" id="quan_ly"><i class="fas fa-folder-open"></i></div>
     <div>Quản lý</div>
 </a>
 <a href="teacher/classroom" class="menu-item">
-    <div class="menu-item-icon" id="them-lop-hoc">➕</div>
+    <div class="menu-item-icon" id="them-lop-hoc"><i class="fas fa-plus-circle"></i></div>
     <div>Thêm lớp học</div>
 </a>
