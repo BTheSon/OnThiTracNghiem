@@ -45,15 +45,16 @@ class Teacher extends Controller
                     ]);
     }
 
-    public function classroom(): void {
+    public function add_class(): void {
         $this->view('layouts/main_layout.php', 
                     [
                         'sidebar' => 'giaovien/partials/menu.php',
-                        'content' => 'giaovien/pages/them-lop-hoc.php'
+                        'content' => 'giaovien/pages/tao-lop-hoc.php'
                     ],
                     [
                         'cssFiles' => [
-                            'public/css/giaovien.css'
+                            'public/css/giaovien.css',
+                            'public/css/form_tao_lophoc.css'
                         ]
                     ]);
     }
