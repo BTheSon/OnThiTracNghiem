@@ -16,10 +16,10 @@ class Student extends Controller
     }
     
     public function index(): void {
-        $this->menu();
+        $this->home();
     }
 
-    public function menu(): void{
+    public function home(): void{
         $this->view('layouts/main_layout.php', 
                     [
                         'sidebar' => 'hocsinh/partials/menu.php',
@@ -29,6 +29,32 @@ class Student extends Controller
                         'cssFiles' => [
                             'public/css/hocsinh.css'
                             
+                        ]
+                    ]);
+    }
+
+    public function review_materials(): void {
+        $this->view('layouts/main_layout.php', 
+                    [
+                        'sidebar' => 'hocsinh/partials/menu.php',
+                        'content' => 'hocsinh/pages/on-tap.php'
+                    ],
+                    [
+                        'cssFiles' => [
+                            'public/css/hocsinh.css'
+                        ]
+                    ]);
+    }
+
+    public function assigned_tests(): void {
+        $this->view('layouts/main_layout.php', 
+                    [
+                        'sidebar' => 'hocsinh/partials/menu.php',
+                        'content' => 'hocsinh/pages/de-kiem-tra.php'
+                    ],
+                    [
+                        'cssFiles' => [
+                            'public/css/hocsinh.css'
                         ]
                     ]);
     }
