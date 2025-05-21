@@ -3,7 +3,6 @@
 <div>
     <label for="lop">Lớp học:</label>
     <select name="lop" id="lop" required>
-     
     </select>
 </div>
 <div>

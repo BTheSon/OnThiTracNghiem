@@ -4,7 +4,7 @@ use App\Core\Controller;
 
 use function App\Includes\navigate;
 
-class Student extends Controller
+class Teacher extends Controller
 {
     public function __construct() {
         // Kiểm tra xem người dùng đã đăng nhập chưa
@@ -23,7 +23,7 @@ class Student extends Controller
         $this->view('layouts/main_layout.php', 
                     [
                         'sidebar' => 'giaovien/partials/menu.php',
-                        'content' => 'giaovien/pages/tat-ca-cac-lop.php'
+                        'content' => 'giaovien/pages/tat-ca-lop-hoc.php'
                     ],
                     [
                         'cssFiles' => [
