@@ -26,7 +26,7 @@ class Student extends Controller
                         'content' => 'hocsinh/pages/tat-ca-cac-lop.php'
                     ],
                     [
-                        'cssFiles' => [
+                        'CSS_FILE' => [
                             'public/css/hocsinh.css'
                             
                         ]
@@ -40,7 +40,7 @@ class Student extends Controller
                         'content' => 'hocsinh/pages/on-tap.php'
                     ],
                     [
-                        'cssFiles' => [
+                        'CSS_FILE' => [
                             'public/css/hocsinh.css'
                         ]
                     ]);
@@ -53,7 +53,7 @@ class Student extends Controller
                         'content' => 'hocsinh/pages/de-kiem-tra.php'
                     ],
                     [
-                        'cssFiles' => [
+                        'CSS_FILE' => [
                             'public/css/hocsinh.css'
                         ]
                     ]);

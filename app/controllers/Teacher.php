@@ -26,7 +26,7 @@ class Teacher extends Controller
                         'content' => 'giaovien/pages/tat-ca-lop-hoc.php'
                     ],
                     [
-                        'cssFiles' => [
+                        'CSS_FILE' => [
                             'public/css/giaovien.css'
                         ]
                     ]);
@@ -39,7 +39,7 @@ class Teacher extends Controller
                         'content' => 'giaovien/pages/quan-ly.php'
                     ],
                     [
-                        'cssFiles' => [
+                        'CSS_FILE' => [
                             'public/css/giaovien.css'
                         ]
                     ]);
@@ -52,7 +52,7 @@ class Teacher extends Controller
                         'content' => 'giaovien/pages/tao-lop-hoc.php'
                     ],
                     [
-                        'cssFiles' => [
+                        'CSS_FILE' => [
                             'public/css/giaovien.css',
                             'public/css/form_tao_lophoc.css'
                         ]

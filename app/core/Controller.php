@@ -5,7 +5,7 @@ use Exception;
 
 class Controller
 {
-    // tải model sử dụng autoloading (Autoloader.php)
+    // tải model sử dụng autoloading
     protected function model(string $model): Model {
         $modelClass = 'App\\Models\\' . $model;
         if (class_exists($modelClass)) {
@@ -21,10 +21,14 @@ class Controller
      *     'sidebar' => 'hocsinh/partials/menu.php',
      *      'content' => 'hocsinh/menu.php',]
      * data: [
-     *     'cssFiles' => [
+     *     'CSS_FILE' => [
      *        'public/css/cssDangNhap.css',
      *       'public/css/cssDangNhap2.css'
      *     ],
+     *    'JS_FILE' => [
+     *       'public/js/jsDangNhap.js',
+     *       'public/js/jsDangNhap2.js'
+     *    ],
      *    'error' => 'Cần phải nhập email và mật khẩu.'
      * ]
      */
@@ -41,6 +45,7 @@ class Controller
         }
         $partials = $this->loadPartials($layoutPartials, $data);
         $data['css_file'] = $this->buildCssLinks($data);
+        $data['js_file'] = $this->buildJsLinks($data);
 
         $content = $this->getContentPartial($partials, $layoutPartials);
 
@@ -72,12 +77,24 @@ class Controller
     }
 
     private function buildCssLinks(array $data): string {
-        if (isset($data['cssFiles']) && is_array($data['cssFiles'])) {
+        if (isset($data['CSS_FILE']) && is_array($data['cssFiles'])) {
             $cssLinks = [];
-            foreach ($data['cssFiles'] as $cssFile) {
+            foreach ($data['CSS_FILE'] as $cssFile) {
                 $cssLinks[] = '<link rel="stylesheet" href="' . htmlspecialchars($cssFile) . '">';
             }
             return implode("\n", $cssLinks);
+        }
+        return '';
+    }
+
+    private function buildJsLinks(array $data): string
+    {
+        if (isset($data['JS_FILE']) && is_array($data['JS_FILE'])) {
+            $jsLinks = [];
+            foreach ($data['JS_FILE'] as $jsFile) {
+                $jsLinks[] = '<script src="' . htmlspecialchars($jsFile) . '"></script>';
+            }
+            return implode("\n", $jsLinks);
         }
         return '';
     }
@@ -86,8 +103,9 @@ class Controller
         if (isset($partials['content']) && !empty($partials['content'])) {
             return $partials['content'];
         }
-        throw new Exception("nội dung partial  không tìm thấy hoặc trống trong các phần bố cục:". ($layoutPartials['content'] ?? ''));
+        throw new Exception("nội dung partial  không tìm thấy hoặc rỗng:". ($layoutPartials['content'] ?? ''));
     }
+
     private function getHtml($view, $data = []): string {
         ob_start();
         require $view;
