@@ -22,7 +22,9 @@
             <div class="avatar"></div>
         </div>
     </div>
-    <?=$sidebar?>
+    <div class="side-menu">
+        <?=$sidebar?>
+    </div>
     <!-- đây dùng để chuyển trang giữa các menu -->
     <div id="main-content" >
         <?=$content?>
