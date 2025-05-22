@@ -1,7 +1,7 @@
 <?php
 namespace App\Includes;
 
-// Hàm lấy URL gốc của ứng dụng
+/** Hàm lấy URL gốc của ứng dụng */
 function base_url($path = '') {
     // Lấy đường dẫn gốc của ứng dụng
     $base = str_replace('\\', '/', rtrim(dirname($_SERVER['SCRIPT_NAME']), '/'));
@@ -12,12 +12,12 @@ function base_url($path = '') {
     return $base . '/' . ltrim($path, '/');
 }
 
-// Hàm lấy đường dẫn tới tài nguyên tĩnh (CSS, JS, images)
+/** Hàm lấy URL của các tài nguyên như hình ảnh, css, js */
 function asset($path) {
     return base_url('public/' . ltrim($path, '/'));
 }
 
-// Hàm chuyển hướng đến một URL khác /controller/action/parameter1/parameter2
+/** Hàm chuyển hướng đến một URL khác /controller/action/parameter1/parameter2 */
 function navigate($url) {
     $url = BASE_URL . $url;
     header("Location: " . $url);
