@@ -103,6 +103,7 @@
     padding: 20px 24px;
     display: flex;
     align-items: center;
+    transition: transform 0.2s; 
 }
 
 .card-header-tl {
@@ -110,4 +111,8 @@
     font-weight: 500;
     color: #333;
     flex: 1;
+}
+.card-dt:hover, 
+.card-tl:hover {
+    transform: scale(1.03);
 }
