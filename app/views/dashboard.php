@@ -21,7 +21,7 @@ use function App\Includes\asset;
     <section class="hero">
         <h1>Ôn tập và thi hiệu quả</h1>
         <p>Trải nghiệm phương pháp học tập tương tác với hàng ngàn bài tập, đề thi được cập nhật liên tục. Nâng cao kiến thức và đạt điểm số cao trong các kỳ thi.</p>
-        <a href="dangnhap.php" class="cta-button">Bắt đầu ngay</a>
+        <a href="Auth/login" class="cta-button">Bắt đầu ngay</a>
     </section>
     
     <section class="features">
