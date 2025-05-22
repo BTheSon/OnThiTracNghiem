@@ -40,7 +40,7 @@
   - `view/"vai trò"/partials` :  chứa thành phần con của layout như `menu.php` sidebarmenu được hiển thị bởi biển `$sidebar` trong file `layout/main_layout.php` chứa mã html được xử lí từ controller 
   - `view/"vai trò"/pages` : chứa các trang hiển thị chính, được hiển thị bởi biến `$content` trong file layout chung `layout/main_layout.php`
 - __Các file cơ sở__:
-```
+```cmd
 D:.
 │   .htaccess
 │   index.php
@@ -155,7 +155,7 @@ D:.
 - `$content` là file chính hiển thị nội dung của trang, thường là file trong thư mục `pages` của view
 - `$sidebar` là file hiển thị các thành phần phụ như menu, thường là file trong thư mục `partials` của view
 - `$css_file` và `$js_file` là các biến chứa mã html để nhúng file css và js vào layout 
-  ```
+  ```php
   <?=$data['css_file']?>
   tương đương
   <?php echo "<link rel='stylesheet' href='public/css/style.css'>"; ?>
