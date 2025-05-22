@@ -20,6 +20,16 @@ class LopHocModel extends Model
         return $this->db->fetchAll($sql);
     }
     
+    public function getIdByMaLop(string $maLop): int
+    {
+        $sql = "SELECT id FROM {$this->table} WHERE ma_lop = ?";
+        $result = $this->db->fetch($sql, [$maLop]);
+        if ($result === false || !isset($result['id'])) {
+            return 0;
+        }
+        return (int)$result['id'];
+    }
+
     /**
      * Lấy lớp học theo ID
      */

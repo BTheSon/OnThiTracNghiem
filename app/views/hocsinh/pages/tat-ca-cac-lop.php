@@ -1,17 +1,23 @@
 <div class="content">
     <div class="section-title">Lớp học:</div>
     <div class="class-cards">
-        <a href="#" class="card">
-            <div class="card-header">Giải Tích</div>
-        </a>
-        <a href="#" class="card">
-            <div class="card-header">Giải Tích</div>
-        </a>
+        <?php foreach($data['info_classes'] as $classes): ?>
+            <a href="<?=$classes['id']?>" class="card">
+                <div class="card-header"><?=$classes['ten_lop']?></div>
+            </a>
+        <?php endforeach;?>
     </div>
 
-    <div class ="button-add" >
-        <a href="#" class="add-button" >
-            Tham gia lớp học
-        </a>
+    <div class="button-add">
+        <button class="add-button" onclick="showForm()">Tham gia lớp học</button>
+    </div>
+    <div class="overlay" id="formOverlay" style="display: none;">
+        <div class="form-container">
+            <span class="close-button" onclick="hideForm()">×</span>
+            <h2>Tham gia lớp học</h2>
+            <input type="text" id="classCode" placeholder="Nhập mã lớp">
+            <button onclick="joinClass()">Tham gia</button>
+            <div class="error-message" id="errorMessage"></div>
+        </div>
     </div>
 </div>
