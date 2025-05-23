@@ -57,7 +57,7 @@ body {
     height: 40px;
     background-color: #ccc;
     border-radius: 50%;
-    background-image: url('https://i.pravatar.cc/40');
+    background-image: url('../image/avt.png');
     background-size: cover;
     background-position: center;
 }
