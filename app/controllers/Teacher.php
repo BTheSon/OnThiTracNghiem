@@ -83,7 +83,7 @@ class Teacher extends Controller
      * ]
      */
     public function class_management(string $idClass): void {
-        
+
         $this->hocSinhLopModel->getStudentsByClass($idClass);
         $students = $this->hocSinhLopModel->getStudentsByClass($idClass);
         $class = $this->model->getById($idClass);
@@ -114,4 +114,16 @@ class Teacher extends Controller
                         ]
                     ]);
     }
+
+    private function create_session_class(string $idClass): void {
+        $_SESSION['id_class'] = $idClass;
+        $_SESSION['class_name'] = $this->model->getById($idClass)['ten_lop'];
+    
+    }
+
+    private function destroy_session_class(): void {
+        unset($_SESSION['id_class']);
+        unset($_SESSION['class_name']);
+    }
+
 }
