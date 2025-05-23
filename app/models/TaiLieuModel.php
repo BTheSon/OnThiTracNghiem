@@ -14,27 +14,27 @@ class TaiLieuModel extends Model
     /**
      * Lấy tất cả tài liệu của lớp học
      */
-    public function getByClass(int $lopHocId): array
-    {
-        $sql = "SELECT tl.*, nd.ho_ten as nguoi_dang
-                FROM {$this->table} tl
-                JOIN NguoiDung nd ON tl.nguoi_dang_id = nd.id
-                WHERE tl.lh_id = ?
-                ORDER BY tl.ngay_dang DESC";
-        return $this->db->fetchAll($sql, [$lopHocId]);
-    }
-    
-    /**
-     * Lấy tài liệu theo ID
-     */
-    public function getById(int $id): mixed
-    {
-        $sql = "SELECT tl.*, nd.ho_ten as nguoi_dang
-                FROM {$this->table} tl
-                JOIN NguoiDung nd ON tl.nguoi_dang_id = nd.id
-                WHERE tl.id = ?";
-        return $this->db->fetch($sql, [$id]);
-    }
+        public function getByClass(int $lopHocId): array
+        {
+            $sql = "SELECT tl.*, nd.ho_ten as nguoi_dang
+                    FROM {$this->table} tl
+                    JOIN NguoiDung nd ON tl.nguoi_dang_id = nd.id
+                    WHERE tl.lh_id = ?
+                    ORDER BY tl.ngay_dang DESC";
+            return $this->db->fetchAll($sql, [$lopHocId]);
+        }
+        
+        /**
+         * Lấy tài liệu theo ID
+         */
+        public function getById(int $id): mixed
+        {
+            $sql = "SELECT tl.*, nd.ho_ten as nguoi_dang
+                    FROM {$this->table} tl
+                    JOIN NguoiDung nd ON tl.nguoi_dang_id = nd.id
+                    WHERE tl.id = ?";
+            return $this->db->fetch($sql, [$id]);
+        }
     
     /**
      * Tạo tài liệu mới
