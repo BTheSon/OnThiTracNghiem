@@ -6,16 +6,8 @@
                 <option value="Giải Tích">Giải tích</option>
             </select>
         </div>
-        <div class="add-tai-lieu">
-            <button class="add-button-tai-lieu">Thêm tài liệu</button>
-        </div>
-        <div class="add-cau-hoi">
-            <button class="add-button-cau-hoi">Thêm câu hỏi</button>
-        </div>
-        <div class="add-bai-thi">
-            <button class="add-button-bai-thi">Thêm bài thi</button>
-        </div>
-    </div>
+       
+
     <div class="title-card">Tài liệu đã giao</div>
     <div class="tai-lieu-cards">
         <div class="card-tl">
