@@ -97,4 +97,10 @@ class Auth extends Controller
             $this->view('auth/dangky.php');
         }
     }
+    public function logout(): void {
+        // Destroy the session
+        session_destroy();
+        // Redirect to login page
+        navigate('/auth/login');
+    }
 }
