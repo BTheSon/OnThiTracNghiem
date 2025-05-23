@@ -3,7 +3,7 @@ document.getElementById('uploadForm').addEventListener('submit', function(e) {
 
     const formData = new FormData(e.target);
 
-    fetch('/upload.php', {
+    fetch('document/upload', {
         method: 'POST',
         body: formData
     })
