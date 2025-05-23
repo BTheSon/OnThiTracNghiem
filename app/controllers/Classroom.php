@@ -16,19 +16,9 @@ class Classroom extends Controller
 
         // Kiểm tra xem người dùng đã đăng nhập chưa
         if (!isset($_SESSION['user_id'])) {
-            // Kiểm tra xem request có phải là AJAX không
-            $isAjax = !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
-            
-            if ($isAjax) {
-                // Trả về JSON cho AJAX request
-                header('Content-Type: application/json; charset=utf-8');
+            // Nếu chưa đăng nhập, chuyển hướng đến trang đăng nhập
                 echo json_encode(['success' => false, 'message' => 'Bạn chưa đăng nhập']);
                 exit();
-            } else {
-                // Chuyển hướng đến trang đăng nhập cho non-AJAX request
-                navigate('/auth/login'); // Hàm navigate được giả định là chuyển hướng
-                exit();
-            }
         }
     }
 
