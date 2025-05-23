@@ -25,9 +25,7 @@ class Teacher extends Controller
     }
 
     public function home(): void {
-        
         $allClass = $this->model->getByTeacherId($_SESSION['user_id']);
-        
 
         $this->view('layouts/main_layout.php', 
                     [// layout partials
@@ -81,11 +79,25 @@ class Teacher extends Controller
      *  'email' => 1,
      *  'anh' => 1
      * ]
-     * 
      */
     public function class_management(string $idClass): void {
         $this->hocSinhLopModel->getStudentsByClass($idClass);
-        $result = $this->hocSinhLopModel->getStudentsByClass($idClass);
+        $students = $this->hocSinhLopModel->getStudentsByClass($idClass);
+        /** @var HocSinhThiModel $baithi */
+        $baithi = $this->model('HocSinhThiModel');
+
+        
+        foreach($students as &$student) {
+            $diemtb = $baithi->getAveragePointByStudentAndClass($idClass, $student['hs_id']);
+            if (empty($diemtb) || empty($diemtb['diem_tb_hs'])) {
+                $student['diem_tb_hs'] = 0;
+            } else {
+                $student['diem_tb_hs'] = $diemtb['diem_tb_hs'];
+            }
+        }
+        
+        // $result['diem_tb_hs'] = "1";
+        
 
         $this->view('layouts/main_layout.php', 
                     [
@@ -93,7 +105,7 @@ class Teacher extends Controller
                         'content' => 'giaovien/pages/quan-ly-lop.php'
                     ],
                     [
-                        'info_students' => $result,
+                        'info_students' => $students,
                         'CSS_FILE' => [
                             'public/css/giaovien.css'
                         ]

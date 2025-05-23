@@ -80,4 +80,29 @@ class HocSinhThiModel extends Model
         $sql = "SELECT * FROM {$this->table} WHERE id = ?";
         return $this->db->fetch($sql, [$id]);
     }
+
+    /**
+     * Lấy điểm của học sinh và id lớp học
+     */
+    public function getPointByStudentAndClass(int $lhId, int $hsId):mixed 
+    {
+        $sql = "SELECT hst.diem
+                FROM {$this->table} hst
+                JOIN DeThi dt ON hst.de_thi_id = dt.id
+                WHERE hst.hs_id = ? AND dt.lh_id = ?";
+        return $this->db->fetchAll($sql, [$hsId, $lhId]);
+    }
+
+    /**
+     * Lấy điểm trung bình các bài thi của học sinh theo lớp học
+     */
+    public function getAveragePointByStudentAndClass(int $lhId, int $hsId): mixed
+    {
+        $sql = "SELECT AVG(hst.diem) AS diem_tb_hs
+                FROM {$this->table} hst
+                JOIN DeThi dt ON hst.de_thi_id = dt.id
+                WHERE hst.hs_id = ? AND dt.lh_id = ?";
+        return $this->db->fetch($sql, [$hsId, $lhId]);
+    }
+
 }
