@@ -1,6 +1,34 @@
-<div class="container-option">
+<!-- 
+    $data = [
+        info_students => [
+            0 => [
+                'hs_id' => 1,
+                'lh_id' => 1,
+                'ho_ten' => 'Nguyen Van A',
+                'email' => 'nguyenvana@example.com',
+                'anh' => 'path/to/image.jpg',
+                'diem_tb_hs' => 8.5
+            ],
+            1 => [
+                'hs_id' => 2,
+                'lh_id' => 1,
+                'ho_ten' => 'Nguyen Van B',
+                'email' => 'nguyenvanb@example.com',
+                'anh' => 'path/to/image.jpg',
+                'diem_tb_hs' => 7.5
+            ]
+        ],
+        info_classes => [
+            'id' => 1,
+            'ma_lop' => 'Lop 1',
+            'ten_lop' => 'Lop 1',
+            'mo_ta' => 'Mo ta lop 1'
+        ]
+    ]
+-->
 
-    <div class="ma-lop"> Mã Lớp</div>
+<div class="container-option">
+    <div class="ma-lop"> Mã Lớp <br> <?=$data['info_classes']['ma_lop'] ?></div>
     <div class="tim-kiem">Tìm kiếm học sinh</div>
     <div class="thong-ke"> Thống kê lớp học</div>
 </div>
@@ -18,7 +46,7 @@
         </thead>
         <tbody>
             <?php foreach($data['info_students'] as $index => $student): ?>
-                <?php echo'<script>console.log('.json_encode($data['info_students']).')</script>';?>
+                <?php echo'<script>console.log('.json_encode($data).')</script>';?>
                 <tr>
                     <td><?= $index + 1 ?></td>
                     <td><?= $student['ho_ten'] ?></td>

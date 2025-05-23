@@ -71,23 +71,27 @@ class Teacher extends Controller
     }
     /**
      * data[infor_students] = [
-     *  'hs_id' => 1,
-     *  'lh_id' => 'Nguyễn Văn A',
-     *  'id' => '1',
-     *  'ngay_tham_gia' => 'hs',
-     *  'ho_ten' => 1,
-     *  'email' => 1,
-     *  'anh' => 1
+     *      [
+     *       'hs_id' => 1,
+     *       'lh_id' => 'Nguyễn Văn A',
+     *       'id' => '1',
+     *       'ngay_tham_gia' => 'hs',
+     *       'ho_ten' => 1,
+     *       'email' => 1,
+     *       'anh' => 1
+     *      ],
      * ]
      */
     public function class_management(string $idClass): void {
         
         $this->hocSinhLopModel->getStudentsByClass($idClass);
         $students = $this->hocSinhLopModel->getStudentsByClass($idClass);
+        $class = $this->model->getById($idClass);
+
         /** @var HocSinhThiModel $baithi */
         $baithi = $this->model('HocSinhThiModel');
-
         
+        // duyệt và tính điểm trung bình cho từng học sinh
         foreach($students as &$student) {
             $diemtb = $baithi->getAveragePointByStudentAndClass($idClass, $student['hs_id']);
             if (empty($diemtb) || empty($diemtb['diem_tb_hs'])) {
@@ -104,6 +108,7 @@ class Teacher extends Controller
                     ],
                     [
                         'info_students' => $students,
+                        'info_classes' => $class,
                         'CSS_FILE' => [
                             'public/css/giaovien.css'
                         ]
