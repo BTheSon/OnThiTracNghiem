@@ -1,10 +1,13 @@
-<div class="content">
+<div class="container-option">
+
     <div class="ma-lop"> Mã Lớp</div>
     <div class="tim-kiem">Tìm kiếm học sinh</div>
     <div class="thong-ke"> Thống kê lớp học</div>
 </div>
+
+<p>Danh sách học sinh:</p>
 <div class="ds-lop">
-    <!-- đây là để đổ dữ liệu lớp học -->
+    
 </div>
 
 <ul class="options">
