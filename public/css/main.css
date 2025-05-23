@@ -144,10 +144,10 @@ body {
 
 /* Thẻ card lớp học */
 .card {
-    width: 180px;
+    width: 300px;
     height: 180px;
     border-radius: 10px;
-    background: linear-gradient(to bottom, #909ff1 0%, #ffffff 60%);
+    background: linear-gradient(to bottom, #d2d8f6 0%, #ffffff 60%);
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
     cursor: pointer;
     transition: transform 0.2s;
@@ -155,6 +155,7 @@ body {
     flex-direction: column;
     justify-content: flex-end;
     overflow: hidden;
+    text-decoration: none;
 }
 
 .card:hover {
@@ -163,12 +164,14 @@ body {
 
 /* Phần đầu của card */
 .card-header {
-
+    text-align: center;
     padding: 12px;
     font-weight: bold;
     color: #333;
     border-top: 1px solid #eee;
     border-radius: 0 0 10px 10px;
+
+
 }
 
 /* NÚT THÊM LỚP HỌC CỦA HỌC SINH */

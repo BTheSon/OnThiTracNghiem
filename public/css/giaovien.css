@@ -36,6 +36,174 @@
     display: inline-block;
 }
 
+/* List CHỌN trong LỚP HỌC */
+.dropdown-container {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-trigger {
+    background: #fff;
+    color: #333;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.dropdown-trigger:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+    background: #f8f9fa;
+}
+
+.dropdown-trigger::after {
+    content: '';
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 5px;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid #666;
+    transition: transform 0.3s ease;
+}
+
+.dropdown-container:hover .dropdown-trigger::after {
+    transform: rotate(180deg);
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 110%;
+    left: 0;
+    background: #fff;
+    min-width: 220px;
+    border-radius: 12px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.dropdown-container:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-menu::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 30px;
+    width: 12px;
+    height: 12px;
+    background: #fff;
+    transform: rotate(45deg);
+    box-shadow: -2px -2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.options {
+    list-style: none;
+    margin: 0;
+    padding: 8px 0;
+}
+
+.option {
+    margin: 0;
+}
+
+.option a {
+    display: block;
+    padding: 15px 20px;
+    color: #333;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    border-left: 3px solid transparent;
+}
+
+.option a:hover {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border-left-color: #fff;
+    transform: translateX(5px);
+}
+
+.option:not(:last-child) {
+    border-bottom: 1px solid #f0f0f0;
+}
+
+/* Icon styles */
+.option a i {
+    margin-right: 12px;
+    width: 16px;
+    text-align: center;
+    color: #666;
+    transition: color 0.2s ease;
+}
+
+.option a:hover i {
+    color: white;
+}
+
+/* Animation for menu items */
+.option {
+    animation: slideIn 0.3s ease forwards;
+    opacity: 0;
+    transform: translateX(-20px);
+}
+
+.dropdown-container:hover .option:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.dropdown-container:hover .option:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.dropdown-container:hover .option:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+@keyframes slideIn {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .dropdown-trigger {
+        padding: 12px 25px;
+        font-size: 15px;
+    }
+
+    .dropdown-menu {
+        min-width: 200px;
+    }
+
+    .option a {
+        padding: 12px 18px;
+        font-size: 14px;
+    }
+}
+
+/* PAGE QUẢN LÝ TÀI LIỆU */
 /* PAGE QUẢN LÝ  */
 .select-title {
     font-weight: bold;
@@ -44,7 +212,7 @@
 }
 
 .menu-add {
-    display: flex;
+
     gap: 16px;
     align-items: center;
     margin-bottom: 20px;
@@ -58,26 +226,7 @@
     background-color: #f9f9f9;
 }
 
-.add-button-tai-lieu,
-.add-button-cau-hoi,
-.add-button-bai-thi {
-    background-color: #a8e6a3;
-    color: #206030;
-    border: none;
-    border-radius: 24px;
-    padding: 10px 24px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background 0.2s;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
-}
 
-.add-button-tai-lieu:hover,
-.add-button-cau-hoi:hover,
-.add-button-bai-thi:hover {
-    background-color: #7ed957;
-}
 
 .title-card {
     font-size: 20px;
@@ -103,7 +252,7 @@
     padding: 20px 24px;
     display: flex;
     align-items: center;
-    transition: transform 0.2s; 
+    transition: transform 0.2s;
 }
 
 .card-header-tl {
@@ -112,7 +261,8 @@
     color: #333;
     flex: 1;
 }
-.card-dt:hover, 
+
+.card-dt:hover,
 .card-tl:hover {
     transform: scale(1.03);
 }
