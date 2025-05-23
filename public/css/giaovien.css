@@ -38,8 +38,11 @@
 
 /* List CHỌN trong LỚP HỌC */
 .dropdown-container {
-    position: relative;
+    position: fixed;
+    right: 50px;
+    bottom: 20px;
     display: inline-block;
+
 }
 
 .dropdown-trigger {
@@ -83,10 +86,10 @@
 
 .dropdown-menu {
     position: absolute;
-    top: 110%;
+    bottom: 110%;
     left: 0;
     background: #fff;
-    min-width: 220px;
+    min-width: 180px;
     border-radius: 12px;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
     opacity: 0;

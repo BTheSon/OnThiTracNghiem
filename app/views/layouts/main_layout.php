@@ -21,7 +21,9 @@
                 <div class="user-description"><?=$_SESSION['user_role']?></div>
             </div>
             <div class="avatar"></div>
-            <button class="logout" id="logout-btn" onclick="window.location.href='auth/logout'">Đăng xuất</button>
+            <button class="logout" id="logout-btn" onclick="window.location.href='auth/logout'">
+                <i class="fa-solid fa-right-from-bracket"></i>
+            </button>
         </div>
     </div>
     <div class="side-menu">

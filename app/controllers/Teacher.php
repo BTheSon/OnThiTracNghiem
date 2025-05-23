@@ -84,7 +84,6 @@ class Teacher extends Controller
      * 
      */
     public function class_management(string $idClass): void {
-        $this->hocSinhLopModel->getStudentsByClass($idClass);
         $result = $this->hocSinhLopModel->getStudentsByClass($idClass);
 
         $this->view('layouts/main_layout.php', 
