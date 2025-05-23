@@ -10,14 +10,31 @@
     
 </div>
 
-<ul class="options">
-    <li class="option">
-        <a href="">Tạo bài thi</a>
-    </li>
-    <li class="option">
-        <a href="">Thêm tài liệu</a>
-    </li>
-    <li class="option">
-        <a href="">Thêm câu hỏi</a>
-    </li>
-</ul>
+<div class="dropdown-container">
+        <div class="dropdown-trigger">
+            <i class="fas fa-plus"></i>
+            Tạo
+        </div>
+        <div class="dropdown-menu">
+            <ul class="options">
+                <li class="option">
+                    <a href="">
+                        <i class="fas fa-file-alt"></i>
+                        Tạo bài thi
+                    </a>
+                </li>
+                <li class="option">
+                    <a href="">
+                        <i class="fas fa-folder-plus"></i>
+                        Thêm tài liệu
+                    </a>
+                </li>
+                <li class="option">
+                    <a href="">
+                        <i class="fas fa-question-circle"></i>
+                        Thêm câu hỏi
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
