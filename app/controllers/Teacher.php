@@ -81,6 +81,7 @@ class Teacher extends Controller
      * ]
      */
     public function class_management(string $idClass): void {
+        
         $this->hocSinhLopModel->getStudentsByClass($idClass);
         $students = $this->hocSinhLopModel->getStudentsByClass($idClass);
         /** @var HocSinhThiModel $baithi */
@@ -95,9 +96,6 @@ class Teacher extends Controller
                 $student['diem_tb_hs'] = $diemtb['diem_tb_hs'];
             }
         }
-        
-        // $result['diem_tb_hs'] = "1";
-        
 
         $this->view('layouts/main_layout.php', 
                     [

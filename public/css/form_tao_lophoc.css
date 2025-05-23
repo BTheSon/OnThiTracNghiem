@@ -10,17 +10,21 @@ form {
 
 }
 
+form h3 {
+    text-align: center;
+    margin-bottom: 24px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #333;
+}
+
 form div {
     margin-bottom: 18px;
     display: flex;
     flex-direction: column;
 }
 
-label {
-    margin-bottom: 6px;
-    font-weight: 500;
-    color: #333;
-}
+
 
 input[type="text"],
 select,
@@ -31,6 +35,9 @@ textarea {
     font-size: 1rem;
     transition: border-color 0.2s;
     background: #fafbfc;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 input[type="text"]:focus,
@@ -56,6 +63,10 @@ button[type="submit"] {
     font-weight: 600;
     cursor: pointer;
     transition: background 0.2s;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
 }
 
 button[type="submit"]:hover {
