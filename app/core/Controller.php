@@ -35,9 +35,21 @@ class Controller
     protected function view(string $layout, array $layoutPartials = [], array $data = []): void {
         $layoutPath = $this->getLayoutPath($layout);
 
+        // Nếu layout không tồn tại, hiển thị trực tiếp partial content (nếu có)
         if (!file_exists($layoutPath)) {
-            throw new Exception("Layout file not found: " . $layoutPath);
+            if (isset($layoutPartials['content'])) {
+                $contentPath = BASE_VIEWS_DIR . '/' . $layoutPartials['content'];
+                $contentPath = $this->normalizePath($contentPath);
+                if (file_exists($contentPath)) {
+                    echo $this->getHtml($contentPath, $data);
+                    return;
+                }
+            }
+            // Nếu không có content hoặc content không tồn tại, hiển thị thông báo mặc định
+            echo "<!-- Layout and content not found -->";
+            return;
         }
+
         // Kiểm tra xem layoutPartials có phải mảng rổng không
         if (empty($layoutPartials)) {
             require $layoutPath;
