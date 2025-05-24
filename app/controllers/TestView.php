@@ -9,4 +9,10 @@ class TestView extends Controller{
 
         $this->view($viewName);
     }
+
+    public function test(): void {
+        $this->view('', [
+            'content' => 'tests/test.php',
+        ]   );
+    }
 }

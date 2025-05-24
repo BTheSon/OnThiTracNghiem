@@ -19,20 +19,36 @@ class Controller
      * layout: tên file layout
      * layoutPartials = [
      *     'sidebar' => 'hocsinh/partials/menu.php',
-     *      'content' => 'hocsinh/menu.php',]
+     *     'content' => 'hocsinh/menu.php',
+     * ]
      * data: [
      *     'CSS_FILE' => [
-     *        'public/css/cssDangNhap.css',
-     *       'public/css/cssDangNhap2.css'
+     *         'public/css/cssDangNhap.css',
+     *         'public/css/cssDangNhap2.css'
      *     ],
-     *    'JS_FILE' => [
-     *       'public/js/jsDangNhap.js',
-     *       'public/js/jsDangNhap2.js'
-     *    ],
-     *    'error' => 'Cần phải nhập email và mật khẩu.'
+     *     'JS_FILE' => [
+     *         'public/js/jsDangNhap.js',
+     *         'public/js/jsDangNhap2.js'
+     *     ],
+     *     'error' => 'Cần phải nhập email và mật khẩu.'
      * ]
      */
     protected function view(string $layout, array $layoutPartials = [], array $data = []): void {
+        // Kiểm tra nếu $layout rỗng
+        if (empty($layout)) {
+            if (isset($layoutPartials['content'])) {
+                $contentPath = BASE_VIEWS_DIR . '/' . $layoutPartials['content'];
+                $contentPath = $this->normalizePath($contentPath);
+                if (file_exists($contentPath)) {
+                    echo $this->getHtml($contentPath, $data);
+                    return;
+                }
+            }
+            // Nếu không có layout và content, hiển thị thông báo
+            echo "<!-- Không tìm thấy layout hoặc nội dung -->";
+            return;
+        }
+
         $layoutPath = $this->getLayoutPath($layout);
 
         // Nếu layout không tồn tại, hiển thị trực tiếp partial content (nếu có)
@@ -46,15 +62,16 @@ class Controller
                 }
             }
             // Nếu không có content hoặc content không tồn tại, hiển thị thông báo mặc định
-            echo "<!-- Layout and content not found -->";
+            echo "<!-- Không tìm thấy layout hoặc nội dung -->";
             return;
         }
 
-        // Kiểm tra xem layoutPartials có phải mảng rổng không
+        // Nếu không có layoutPartials, hiển thị layout trực tiếp
         if (empty($layoutPartials)) {
             require $layoutPath;
             return;
         }
+
         $partials = $this->loadPartials($layoutPartials, $data);
         $data['css_file'] = $this->buildCssLinks($data);
         $data['js_file'] = $this->buildJsLinks($data);
@@ -62,12 +79,13 @@ class Controller
         $content = $this->getContentPartial($partials, $layoutPartials);
 
         extract($partials);
+        extract(['content' => $content]); // Đảm bảo biến $content luôn tồn tại
 
-        // Biến $partials, $content, $data sẽ được sử dụng trong layout
         require $layoutPath;
     }
+
     //========= ======
-    // Cấc hàm helper
+    // Các hàm helper
     //============ ===
     private function getLayoutPath(string $layout): string {
         $layoutPath = BASE_VIEWS_DIR . '/' . $layout;
@@ -99,8 +117,7 @@ class Controller
         return '';
     }
 
-    private function buildJsLinks(array $data): string
-    {
+    private function buildJsLinks(array $data): string {
         if (isset($data['JS_FILE']) && is_array($data['JS_FILE'])) {
             $jsLinks = [];
             foreach ($data['JS_FILE'] as $jsFile) {
@@ -115,7 +132,7 @@ class Controller
         if (isset($partials['content']) && !empty($partials['content'])) {
             return $partials['content'];
         }
-        throw new Exception("nội dung partial  không tìm thấy hoặc rỗng:". ($layoutPartials['content'] ?? ''));
+        throw new Exception("Nội dung partial không tìm thấy hoặc rỗng: " . ($layoutPartials['content'] ?? ''));
     }
 
     private function getHtml($view, $data = []): string {

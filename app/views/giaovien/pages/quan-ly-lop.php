@@ -59,30 +59,49 @@
 </div>
 
 <div class="dropdown-container">
-        <div class="dropdown-trigger">
-            <i class="fas fa-plus"></i>
-            Tạo
-        </div>
-        <div class="dropdown-menu">
-            <ul class="options">
-                <li class="option">
-                    <a href="">
-                        <i class="fas fa-file-alt"></i>
-                        Tạo bài thi
-                    </a>
-                </li>
-                <li class="option">
-                    <a href="">
-                        <i class="fas fa-folder-plus"></i>
-                        Thêm tài liệu
-                    </a>
-                </li>
-                <li class="option">
-                    <a href="">
-                        <i class="fas fa-question-circle"></i>
-                        Thêm câu hỏi
-                    </a>
-                </li>
-            </ul>
-        </div>
+    <div class="dropdown-trigger">
+        <i class="fas fa-plus"></i>
+        Tạo
     </div>
+    <div class="dropdown-menu">
+        <ul class="options">
+            <li class="option">
+                <a onclick="loadForm('TestView/test')">
+                    <i class="fas fa-file-alt"></i>
+                    Tạo bài thi
+                </a>
+            </li>
+            <li class="option">
+                <a href="">
+                    <i class="fas fa-folder-plus"></i>
+                    Thêm tài liệu
+                </a>
+            </li>
+            <li class="option">
+                <a href="">
+                    <i class="fas fa-question-circle"></i>
+                    Thêm câu hỏi
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div id="form-container" style="  position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;">
+    <!-- <form id="uploadForm" method="post">
+        <label for="tai_lieu_file">Chọn file tài liệu:</label>
+        <input type="file" name="tai_lieu_file" id="tai_lieu_file" required>
+        <input type="text" name="tieu_de" id="tieu_de" placeholder="Tiêu đề" required>
+        <input type="text" name="mo_ta" id="mo_ta" placeholder="Mô tả">
+        <button type="submit">Tải lên</button>
+    </form> -->
+</div>
