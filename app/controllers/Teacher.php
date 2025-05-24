@@ -22,6 +22,7 @@ class Teacher extends Controller
     
     public function index(): void {
         $this->home();
+        $this->destroy_session_class();
     }
 
     public function home(): void {
@@ -83,7 +84,7 @@ class Teacher extends Controller
      * ]
      */
     public function class_management(string $idClass): void {
-
+        $this->create_session_class($idClass);
         $this->hocSinhLopModel->getStudentsByClass($idClass);
         $students = $this->hocSinhLopModel->getStudentsByClass($idClass);
         $class = $this->model->getById($idClass);
@@ -114,18 +115,19 @@ class Teacher extends Controller
                         ],
                         'JS_FILE' => [
                             'public/js/load-form.js'
+                            // 'public/js/form-add-tl.js'
                         ]
                     ]);
     }
 
     private function create_session_class(string $idClass): void {
-        $_SESSION['id_class'] = $idClass;
+        $_SESSION['class_id'] = $idClass;
         $_SESSION['class_name'] = $this->model->getById($idClass)['ten_lop'];
     
     }
 
     private function destroy_session_class(): void {
-        unset($_SESSION['id_class']);
+        unset($_SESSION['class_id']);
         unset($_SESSION['class_name']);
     }
 

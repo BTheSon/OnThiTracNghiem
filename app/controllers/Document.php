@@ -3,6 +3,8 @@ namespace App\Controllers;
 use App\Core\Controller;
 use App\Models\TaiLieuModel;
 
+use function App\Includes\navigate;
+
 class Document extends Controller
 {
     private TaiLieuModel $documentModel;
@@ -10,29 +12,48 @@ class Document extends Controller
         $this->documentModel = new TaiLieuModel();
     }
 
-    public function upload(): void
-    {
-        // xác thực quyền truy cập
+    public function form() {
         if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'gv') {
-            echo json_encode(['success' => false, 'message' => 'Bạn không có quyền truy cập vào tài liệu.']);
-            exit();
+            navigate('/auth/login');
+            exit(); 
         }
 
+        if (!isset($_SESSION['class_id'])) {
+            navigate('/teacher/home');
+            exit();
+        }
+        $this->view('',
+            [
+                'content' => 'giaovien/pages/them-tai-lieu.php',
+            ],[
+                'JS_FILE' =>['public/js/form-add-tl.js']
+            ]
+        );
+    }
+
+    public function upload(): void
+    {
         // Thiết lập các header cho phản hồi
         header('Content-Type: application/json; charset=utf-8');
         header('Access-Control-Allow-Origin: *');
         header('Access-Control-Allow-Methods: POST');
         header('Access-Control-Allow-Headers: Content-Type, Accept');
-
+        // xác thực quyền truy cập
+        if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'gv' || !isset($_SESSION['class_id'])) {
+            // nếu người dùng không phải là giáo viên hoặc không có quyền truy cập vào lớp học  
+            echo json_encode(['success' => false, 'message' => 'Bạn không có quyền truy cập vào tài liệu.']);
+            exit();
+        }
+        
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // lấy file từ form
-            $file = $_FILES['file'];
-            $classId = $_POST['class_id'];
-            $tieude = $_POST['tieude'];
-            $mota = $_POST['mota'];
+            $file = $_FILES['tai_lieu_file'];
+            $classId = $_SESSION['class_id'];
+            $tieude = $_POST['tieu_de'];
+            $mota = $_POST['mo_ta'];
             
-            $fileName = $_FILES['file']['name'];
-            $fileTmpName = $_FILES['file']['tmp_name'];
+            $fileName = $file['name'];
+            $fileTmpName = $file['tmp_name'];
             // kiểm tra xem file có hợp lệ không, định dạng file word, pdf, excel, hình ảnh
             // thêm file vào thư mục uploads
             $fileType = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));

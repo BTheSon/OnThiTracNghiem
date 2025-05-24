@@ -80,7 +80,7 @@
                 </a>
             </li>
             <li class="option">
-                <a href="">
+                <a onclick="loadForm('document/form')">
                     <i class="fas fa-folder-plus"></i>
                     Thêm tài liệu
                 </a>

@@ -39,6 +39,8 @@ class Controller
             if (isset($layoutPartials['content'])) {
                 $contentPath = BASE_VIEWS_DIR . '/' . $layoutPartials['content'];
                 $contentPath = $this->normalizePath($contentPath);
+                $data['css_file'] = $this->buildCssLinks($data);
+                $data['js_file'] = $this->buildJsLinks($data);
                 if (file_exists($contentPath)) {
                     echo $this->getHtml($contentPath, $data);
                     return;

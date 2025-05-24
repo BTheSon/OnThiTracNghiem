@@ -1,17 +1,23 @@
-document.getElementById('uploadForm').addEventListener('submit', function (e) {
-    e.preventDefault();
+/**
+ * xóa đi vì scrpit đã được chuyển vào file load-form.js
+ */
 
-    const formData = new FormData(e.target);
+// console.log("ada");
 
-    fetch('document/upload', {
-        method: 'POST',
-        body: formData
-    })
-        .then(res => res.json())
-        .then(data => {
-            alert(data.message);
-        })
-        .catch(err => {
-            console.error('Lỗi upload:', err);
-        });
-});
+// document.getElementById('uploadForm').addEventListener('submit', function (e) {
+//     e.preventDefault();
+
+//     const formData = new FormData(e.target);
+
+//     fetch('document/upload', {
+//         method: 'POST',
+//         body: formData
+//     })
+//         .then(res => res.json())
+//         .then(data => {
+//             alert(data.message);
+//         })
+//         .catch(err => {
+//             console.error('Lỗi upload:', err);
+//         });
+// });
