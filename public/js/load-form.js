@@ -1,5 +1,5 @@
 console.log('load-form.js loaded');
-async function loadForm(url) {
+function loadForm(url) {
     // tải html từ url bàng feactch
     fetch(url)
         .then(response => {
