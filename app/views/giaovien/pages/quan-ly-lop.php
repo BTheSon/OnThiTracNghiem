@@ -29,11 +29,19 @@
 
 <div class="container-option">
     <div class="ma-lop"> Mã Lớp <br> <?=$data['info_classes']['ma_lop'] ?></div>
-    <div class="tim-kiem">Tìm kiếm học sinh</div>
-    <div class="thong-ke"> Thống kê lớp học</div>
+    <div class="search-student">
+        <input type="text" id="search-student-input" placeholder="Tìm kiếm học sinh theo tên...">
+        <button type="button" id="search-student-btn">
+            <i class="fas fa-search"></i>
+        </button>
+    </div>
+    <button class="thong-ke">
+        Thống kê lớp học
+        <i class="fa-solid fa-chart-line"></i>
+    </button>
 </div>
 
-<p>Danh sách học sinh:</p>
+<p class="header-dsHs">Danh sách học sinh:</p>
 <div class="ds-lop">
     <table border="1">
         <thead>

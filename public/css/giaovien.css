@@ -1,39 +1,48 @@
 /* PAGE QUẢN LÝ LỚP */
+.container-option {
+    justify-content: space-between;
+}
+
 .ma-lop {
-    border: 1px solid #ccc;
-    padding: 8px 12px;
-    border-radius: 4px;
-    background-color: #f9f9f9;
-    font-weight: bold;
-    font-size: 16px;
-    text-align: center;
-    width: 120px;
-    display: inline-block;
-}
-
-.tim-kiem {
-    border: 1px solid #ccc;
-    padding: 8px 12px;
-    border-radius: 4px;
-    background-color: #f9f9f9;
-    font-weight: bold;
-    font-size: 16px;
-    text-align: center;
-    width: 120px;
-    display: inline-block;
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 8px 16px;
+    box-shadow: 0 2px 8px rgba(32, 96, 48, 0.08);
+    font-weight: 500;
+    color: #415982;
 
 }
 
+.search-student,
 .thong-ke {
-    border: 1px solid #ccc;
-    padding: 8px 12px;
-    border-radius: 4px;
-    background-color: #f9f9f9;
-    font-weight: bold;
-    font-size: 16px;
-    text-align: center;
-    width: 120px;
-    display: inline-block;
+    flex: 0 0 auto;
+}
+
+.container-option>.ma-lop {
+    margin-right: auto;
+}
+
+.container-option>.search-student,
+.container-option>.thong-ke {
+    margin-left: 0;
+}
+
+@media (max-width: 768px) {
+    .container-option {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+
+    .container-option>.ma-lop,
+    .container-option>.search-student,
+    .container-option>.thong-ke {
+        margin: 0;
+    }
 }
 
 /* List CHỌN trong LỚP HỌC */
@@ -203,6 +212,117 @@
     .option a {
         padding: 12px 18px;
         font-size: 14px;
+    }
+}
+
+.container-option {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.header-dsHs {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 20px 0 12px 0;
+    color: #206030;
+}
+
+.ds-lop {
+    width: 100%;
+    overflow-x: auto;
+    margin-bottom: 32px;
+}
+
+.ds-lop table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    table-layout: fixed;
+}
+
+.ds-lop th,
+.ds-lop td {
+    padding: 12px 16px;
+    text-align: center;
+    font-size: 15px;
+}
+
+.ds-lop th {
+    background: #f0f4f8;
+    color: #206030;
+    font-weight: 700;
+}
+
+.ds-lop tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
+.ds-lop tr:hover {
+    background: #e6f7ff;
+    transition: background 0.2s;
+}
+
+/* Set column widths: STT (small), Họ tên (large), Email (large), Điểm (small) */
+.ds-lop th:nth-child(1),
+.ds-lop td:nth-child(1) {
+    width: 60px;
+    min-width: 50px;
+    max-width: 70px;
+}
+
+.ds-lop th:nth-child(2),
+.ds-lop td:nth-child(2) {
+    width: 220px;
+    min-width: 180px;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.ds-lop th:nth-child(3),
+.ds-lop td:nth-child(3) {
+    width: 260px;
+    min-width: 200px;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.ds-lop th:nth-child(4),
+.ds-lop td:nth-child(4) {
+    width: 110px;
+    min-width: 80px;
+    max-width: 120px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .container-option {
+        flex-direction: column;
+        gap: 12px;
+        align-items: stretch;
+    }
+
+    .ds-lop th,
+    .ds-lop td {
+        padding: 10px 8px;
+        font-size: 14px;
+    }
+
+    .ds-lop th:nth-child(2),
+    .ds-lop td:nth-child(2),
+    .ds-lop th:nth-child(3),
+    .ds-lop td:nth-child(3) {
+        font-size: 15px;
+    }
+
+    .ds-lop th:nth-child(4),
+    .ds-lop td:nth-child(4) {
+        font-size: 13px;
     }
 }
 
