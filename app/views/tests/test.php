@@ -1,9 +1,11 @@
 
-<div id="form-container" style="
-    display: flex;
-    align-items: center;
-    justify-content: center;">
-    <p style="background-color: white; padding: 20px; border-radius: 10px;">
-        Thén quay lại nyc
-    </p>
-</div>
+<p style="
+    background-color: red; 
+    padding: 20px; 
+    border-radius: 10px;
+    width: 400px;
+    height: 500px;
+    color: white;
+    ">
+    Thén quay lại nyc
+</p>

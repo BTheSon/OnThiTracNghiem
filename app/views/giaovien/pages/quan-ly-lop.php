@@ -86,22 +86,15 @@
         </ul>
     </div>
 </div>
-
-<div id="form-container" style="  position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;">
-    <!-- <form id="uploadForm" method="post">
-        <label for="tai_lieu_file">Chọn file tài liệu:</label>
-        <input type="file" name="tai_lieu_file" id="tai_lieu_file" required>
-        <input type="text" name="tieu_de" id="tieu_de" placeholder="Tiêu đề" required>
-        <input type="text" name="mo_ta" id="mo_ta" placeholder="Mô tả">
-        <button type="submit">Tải lên</button>
-    </form> -->
+<div class="overlay" id="formOverlay" style="display: none;">
+    <div id="form-container" class="form-container">
+        <span class="close-button" onclick="hideForm()">
+            <i class="fa-solid fa-circle-xmark"></i>
+        </span>
+        <!-- 
+            Form load vào đây
+            kích thước form trên màng hình phụ thuộc vào view được load vào bên trong
+        -->
+        <div id="form-content"></div> 
+    </div>
 </div>
