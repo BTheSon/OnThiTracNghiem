@@ -111,11 +111,12 @@ class Teacher extends Controller
                         'info_students' => $students,
                         'info_classes' => $class,
                         'CSS_FILE' => [
-                            'public/css/giaovien.css'
+                            'public/css/giaovien.css',
+                            'public/css/gv-taoCauHoi.css'
+                            
                         ],
                         'JS_FILE' => [
                             'public/js/load-form.js'
-                            // 'public/js/form-add-tl.js'
                         ]
                     ]);
     }

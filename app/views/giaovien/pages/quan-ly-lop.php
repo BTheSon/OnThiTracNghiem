@@ -86,7 +86,7 @@
                 </a>
             </li>
             <li class="option">
-                <a href="">
+                <a onclick="loadForm('Question/form-create')">
                     <i class="fas fa-question-circle"></i>
                     Thêm câu hỏi
                 </a>
