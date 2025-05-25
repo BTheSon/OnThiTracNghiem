@@ -426,3 +426,42 @@
     border: none;
     color: #333;
 }
+
+
+/* Hiển thị danh sách câu hỏi đã nạp */
+        
+.question-container {
+    background-color: #fff;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.question {
+    padding: 15px;
+    cursor: pointer;
+    font-weight: bold;
+    background-color: #b3e0ff;
+    color: #333;
+    border-radius: 8px;
+}
+.question:hover {
+    background-color: #99c7e6;
+}
+.answers {
+    display: none;
+    padding: 15px;
+    border-top: 1px solid #ddd;
+}
+.answers.show {
+    display: block;
+}
+.answer {
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 4px;
+    background-color: #f8f9fa;
+}
+.answer[data-correct="true"] {
+    background-color: #28a745;
+    color: white;
+}

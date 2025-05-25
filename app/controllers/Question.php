@@ -30,14 +30,28 @@ class Question extends Controller
      */
 
     public function list() {
+        // Lấy danh sách câu hỏi của giáo viên
+        $cauHoiList = $this->cauHoiModel->getByUser($_SESSION['user_id']);
+        // // lấy danh sách đáp án của các câu hỏi
+        $dapAnList = [];
+        foreach ($cauHoiList as $cauHoi) {
+            $dapAnList[$cauHoi['id']] = $this->dapAnModel->getByCauHoi($cauHoi['id']);
+        }
+
+        
+        // Truyền dữ liệu vào view
         $this->view('layouts/main_layout.php',[
             'sidebar' => 'giaovien/partials/menu.php',
             'content' => 'giaovien/pages/list-cau-hoi.php',
+        ],[
+            'cau_hoi_list' => $cauHoiList,
+            'dap_an_list' => $dapAnList,
+            'CSS_FILE' => ['public/css/giaovien.css']
+
         ]);
     }
 
-    public function form_create()
-    {
+    public function form_create(){
         $this->view('',[
             'content' => 'giaovien/pages/tao-cau-hoi.php'
         ]);
