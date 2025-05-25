@@ -74,13 +74,13 @@
     <div class="dropdown-menu">
         <ul class="options">
             <li class="option">
-                <a onclick="loadForm('TestView/test')">
+                <a onclick="loadForm('TestView/test', 'public/js/form-add-tl.js')">
                     <i class="fas fa-file-alt"></i>
                     Tạo bài thi
                 </a>
             </li>
             <li class="option">
-                <a onclick="loadForm('document/form')">
+                <a onclick="loadForm('document/form', 'public/js/form-add-tl.js')">
                     <i class="fas fa-folder-plus"></i>
                     Thêm tài liệu
                 </a>
