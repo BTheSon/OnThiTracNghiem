@@ -5,14 +5,21 @@ use App\Core\Controller;
 
 class Question extends Controller
 {
-    public function index()
-    {
+    public function index() {
         // Load the view for managing questions
-        $this->view('giaovien/pages/quan-ly-cau-hoi');
+        $this->list();
     }
     /**
      * hiển thị form thêm câu hỏi vào ngân hàng
      */
+
+    public function list() {
+        $this->view('layouts/main_layout.php',[
+            'sidebar' => 'giaovien/partials/menu.php',
+            'content' => 'giaovien/pages/list-cau-hoi.php',
+        ]);
+    }
+
     public function form_create()
     {
         $this->view('',[

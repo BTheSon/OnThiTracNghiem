@@ -185,6 +185,7 @@ body {
 /* Toàn bộ content bên phải */
 
 #main-content {
+    padding-left: 20px;
     margin-left: 200px;
     /* Phải bằng chiều rộng menu */
     margin-top: 60px;

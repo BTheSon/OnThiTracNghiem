@@ -16,21 +16,17 @@ class Controller
     }
     
     /**
-     * layout: tên file layout
-     * layoutPartials = [
-     *     'sidebar' => 'hocsinh/partials/menu.php',
-     *     'content' => 'hocsinh/menu.php',
+     * @param string $layout: tên file layout, ví dụ: 'layouts/main_layout.php'
+     * @param array $layoutPartials: mảng các phần của layout, ví dụ:
+     * [
+     *     'sidebar' => 'partials/sidebar.php',
+     *     'content' => 'partials/content.php',
      * ]
-     * data: [
-     *     'CSS_FILE' => [
-     *         'public/css/cssDangNhap.css',
-     *         'public/css/cssDangNhap2.css'
-     *     ],
-     *     'JS_FILE' => [
-     *         'public/js/jsDangNhap.js',
-     *         'public/js/jsDangNhap2.js'
-     *     ],
-     *     'error' => 'Cần phải nhập email và mật khẩu.'
+     * @param array $data: dữ liệu để truyền vào view, ví dụ:
+     * [
+     *     'title' => 'Trang chủ',
+     *     'CSS_FILE' => ['public/css/style.css'],
+     *     'JS_FILE' => ['public/js/script.js']
      * ]
      */
     protected function view(string $layout, array $layoutPartials = [], array $data = []): void {
