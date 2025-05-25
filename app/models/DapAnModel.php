@@ -52,7 +52,26 @@ class DapAnModel extends Model
         
         return (int)$this->db->fetch("SELECT LAST_INSERT_ID()")['LAST_INSERT_ID()'];
     }
-    
+    /**
+     * tạo nhiều đáp án cùg lúc
+     */
+    public function multitpleCreate(array $answers): int
+    {
+        $sql = "INSERT INTO {$this->table} (cau_hoi_id, noi_dung, da_dung) VALUES ";
+        $params = [];
+        $values = [];
+        
+        foreach ($answers as $answer) {
+            $values[] = "(?, ?, ?)";
+            $params[] = $answer['cau_hoi_id'];
+            $params[] = $answer['noi_dung'];
+            $params[] = $answer['da_dung'] ?? false;
+        }
+        
+        $sql .= implode(', ', $values);
+        return $this->db->execute($sql, $params);
+    }
+
     /**
      * Cập nhật đáp án
      */
