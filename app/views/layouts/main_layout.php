@@ -14,7 +14,9 @@
     
     <div class="header">
         <div class="menu-icon" id = "toggle-menu">☰</div>
-        <div class="title">QUIZ</div>
+        <div class="title">
+            <i class='fa-solid'>QUIZ</i>    
+        </div>
         <div class="user-profile">
             <div class="user-info">
                 <div class="user-title"><?=$_SESSION['user_name']?></div>
