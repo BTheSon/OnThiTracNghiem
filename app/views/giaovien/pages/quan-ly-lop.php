@@ -74,7 +74,7 @@
     <div class="dropdown-menu">
         <ul class="options">
             <li class="option">
-                <a onclick="loadForm('TestView/test', 'public/js/form-add-tl.js')">
+                <a onclick="loadForm('exam/form-create', 'public/js/form-create-exam.js')">
                     <i class="fas fa-file-alt"></i>
                     Tạo bài thi
                 </a>

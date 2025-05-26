@@ -425,6 +425,7 @@
     background: transparent;
     border: none;
     color: #333;
+    z-index: 999999;
 }
 
 

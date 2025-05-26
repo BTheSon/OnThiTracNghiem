@@ -25,7 +25,6 @@
                                 <option value="1">Mức 1 - Dễ</option>
                                 <option value="2">Mức 2 - Trung bình</option>
                                 <option value="3">Mức 3 - Khó</option>
-                                <option value="4">Mức 4 - Rất khó</option>
                             </select>
                         </div>
                     </div>
