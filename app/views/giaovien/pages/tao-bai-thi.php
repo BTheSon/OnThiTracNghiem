@@ -272,7 +272,7 @@
 
   <div class="form-container">
     <h2>Tạo đề thi</h2>
-    <form method="POST" action="/exams/create" id="create-exam-form">
+    <form method="POST" action="exam/create" id="create-exam-form">
       <!-- Thông tin bài thi -->
       <div class="exam-info">
         <div class="form-group">
@@ -305,9 +305,9 @@
         <div class="filter-container">
           <select name="filter_difficulty" id="filter-difficulty">
             <option value="all">Lọc theo độ khó: Tất cả</option>
-            <option value="1">Dễ</option>
-            <option value="2">Trung bình</option>
-            <option value="3">Khó</option>
+            <option value="dễ">Dễ</option>
+            <option value="trung bình">Trung bình</option>
+            <option value="khó">Khó</option>
           </select>
         </div>
 
@@ -345,55 +345,46 @@
             </tr>
           </thead>
           <tbody id="question-table-body">
+            <?php foreach ($data['questions'] as $index => $question): ?>
+              <?php
+                    $difficultyText = '';
+                    $difficultyClass = '';
+                    switch ($question['do_kho']) {
+                      case 1:
+                        $difficultyText = 'Dễ';
+                        $difficultyClass = 'difficulty-easy';
+                        break;
+                      case 2:
+                        $difficultyText = 'Trung bình';
+                        $difficultyClass = 'difficulty-medium';
+                        break;
+                      case 3:
+                        $difficultyText = 'Khó';
+                        $difficultyClass = 'difficulty-hard';
+                        break;
+                      default:
+                        $difficultyText = 'N/A';
+                    }
+                  ?>
+              <tr data-difficulty="<?= $difficultyText  ?>">
+                <td><input type="checkbox" name="question_ids[]" value="<?= $question['id'] ?>"></td>
+                <td><?= $index + 1 ?></td>
+                <td><?= htmlspecialchars($question['noi_dung']) ?></td>
+                <td>
+                  
+                  <span class="difficulty-badge <?= $difficultyClass ?>">
+                    <?= htmlspecialchars($difficultyText) ?>
+                  </span>
+                </td>
+            <?php endforeach; ?>
             <!-- Dữ liệu mẫu với nhiều câu hỏi hơn -->
-            <tr data-difficulty="dễ">
+            <!-- <tr data-difficulty="dễ">
               <td><input type="checkbox" name="question_ids[]" value="question_1"></td>
               <td>1</td>
               <td>1 + 1 = ?</td>
               <td><span class="difficulty-badge difficulty-easy">Dễ</span></td>
-            </tr>
-            <tr data-difficulty="dễ">
-              <td><input type="checkbox" name="question_ids[]" value="question_2"></td>
-              <td>2</td>
-              <td>Thủ đô của Việt Nam là gì?</td>
-              <td><span class="difficulty-badge difficulty-easy">Dễ</span></td>
-            </tr>
-            <tr data-difficulty="trung bình">
-              <td><input type="checkbox" name="question_ids[]" value="question_3"></td>
-              <td>3</td>
-              <td>Giải phương trình bậc hai ax² + bx + c = 0</td>
-              <td><span class="difficulty-badge difficulty-medium">Trung bình</span></td>
-            </tr>
-            <tr data-difficulty="trung bình">
-              <td><input type="checkbox" name="question_ids[]" value="question_4"></td>
-              <td>4</td>
-              <td>Tính diện tích hình tròn có bán kính r</td>
-              <td><span class="difficulty-badge difficulty-medium">Trung bình</span></td>
-            </tr>
-            <tr data-difficulty="khó">
-              <td><input type="checkbox" name="question_ids[]" value="question_5"></td>
-              <td>5</td>
-              <td>Tính đạo hàm của hàm số y = sin(x)</td>
-              <td><span class="difficulty-badge difficulty-hard">Khó</span></td>
-            </tr>
-            <tr data-difficulty="khó">
-              <td><input type="checkbox" name="question_ids[]" value="question_6"></td>
-              <td>6</td>
-              <td>Giải tích phân ∫x²dx từ 0 đến 2</td>
-              <td><span class="difficulty-badge difficulty-hard">Khó</span></td>
-            </tr>
-            <tr data-difficulty="dễ">
-              <td><input type="checkbox" name="question_ids[]" value="question_7"></td>
-              <td>7</td>
-              <td>2 × 3 = ?</td>
-              <td><span class="difficulty-badge difficulty-easy">Dễ</span></td>
-            </tr>
-            <tr data-difficulty="trung bình">
-              <td><input type="checkbox" name="question_ids[]" value="question_8"></td>
-              <td>8</td>
-              <td>Tính chu vi hình chữ nhật có chiều dài a, chiều rộng b</td>
-              <td><span class="difficulty-badge difficulty-medium">Trung bình</span></td>
-            </tr>
+            </tr> -->
+            
           </tbody>
         </table>
         <div class="no-results" id="no-results" style="display: none;">
