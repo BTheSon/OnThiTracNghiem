@@ -22,8 +22,7 @@ class Document extends Controller
             navigate('/teacher/home');
             exit();
         }
-        $this->view('',
-            [
+        $this->view('', [
                 'content' => 'giaovien/pages/them-tai-lieu.php',
             ],[
                 'JS_FILE' =>['public/js/form-add-tl.js']
@@ -69,6 +68,8 @@ class Document extends Controller
                 }
                 
                 if (move_uploaded_file($fileTmpName, $uploadFilePath)) {
+                    // uploadFilePath là dường dẫn tương đối
+                    $uploadFilePath = RELATIVE_STORAGE_PATH . '/documents/' . $newFileName;
                     // lưu thông tin tài liệu vào cơ sở dữ liệu
                     $data = [
                         'nguoi_dang_id' => $_SESSION['user_id'],
@@ -122,6 +123,74 @@ class Document extends Controller
             }
         } else {
             echo json_encode(['success' => false, 'message' => 'Tài liệu không tồn tại.']);
+        }
+    }
+    public function list(): void
+    {
+        // xác thực quyền truy cập
+        if (!isset($_SESSION['user_id'])) {
+            navigate('/auth/login');
+            exit();
+        }
+        switch ($_SESSION['user_role']) {
+            case 'gv':
+                $this->teacher_list_documents();
+                break;
+            case 'hs':
+                $this->student_list_documents();
+                break;
+            default:
+                navigate('/auth/login');
+                exit();
+        }
+    }
+
+    // chưa test
+    private function student_list_documents(): void
+    {
+        if (!isset($_SESSION['class_id'])) {
+            navigate('/student/home');
+            exit();
+        }
+
+        $documents = $this->documentModel->getByClass($_SESSION['class_id']);
+        if ($documents) {
+            $this->view('',
+                [
+                    'content' => 'hocvien/pages/xem-tai-lieu.php',
+                    'documents' => $documents,
+                ],[
+                    'JS_FILE' => ['public/js/view-document.js']
+                ]
+            );
+        } else {
+            navigate('/student/documents');
+        }
+    }
+
+    private function teacher_list_documents(): void
+    {
+        if (!isset($_SESSION['class_id'])) {
+            navigate('/student/home');
+            exit();
+        }
+
+        $documents = $this->documentModel->getByClass($_SESSION['class_id']);
+        if ($documents) {
+            $this->view('layouts/quanly_layout.php', 
+                    [
+                        'sidebar' => 'giaovien/partials/menu.php',
+                        'navbar' => 'giaovien/partials/quanly_navbar.php',
+                        'content' => 'giaovien/pages/xem-tai-lieu.php'
+                    ],
+                    [
+                        'documents' => $documents,
+                        'CSS_FILE' => [
+                            'public/css/giaovien.css'
+                        ]
+                    ]);
+        } else {
+            navigate('/student/documents');
         }
     }
 }

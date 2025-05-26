@@ -35,8 +35,7 @@
     <main id="main-content" >
 
         <div class="content-buttons">
-            <a href="/questions">Ngân hàng câu hỏi</a>
-            <a href="/documents">Danh sách tài liệu</a>
+            <?=$navbar?>
         </div>
         <div class="content-placeholder">
             <?=$content?>

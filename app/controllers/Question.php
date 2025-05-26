@@ -40,9 +40,10 @@ class Question extends Controller
 
         
         // Truyền dữ liệu vào view
-        $this->view('layouts/main_layout.php',[
+        $this->view('layouts/quanly_layout.php',[
             'sidebar' => 'giaovien/partials/menu.php',
             'content' => 'giaovien/pages/list-cau-hoi.php',
+            'navbar' => 'giaovien/partials/quanly_navbar.php'
         ],[
             'cau_hoi_list' => $cauHoiList,
             'dap_an_list' => $dapAnList,

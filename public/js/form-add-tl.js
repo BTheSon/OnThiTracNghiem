@@ -10,6 +10,7 @@ document.addEventListener('submit', function(e) {
             .then(res => res.json())
             .then(data => {
                 alert(data.message);
+                window.location.reload();
             })
             .catch(err => {
                 console.error('Lỗi upload:', err);

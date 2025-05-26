@@ -45,6 +45,7 @@ class Teacher extends Controller
         $this->view('layouts/quanly_layout.php', 
                     [
                         'sidebar' => 'giaovien/partials/menu.php',
+                        'navbar' => 'giaovien/partials/quanly_navbar.php',
                         'content' => 'giaovien/pages/quan-ly.php'
                     ],
                     [
