@@ -25,6 +25,8 @@ class Teacher extends Controller
         $this->destroy_session_class();
     }
 
+    
+
     public function home(): void {
         $allClass = $this->model->getByTeacherId($_SESSION['user_id']);
 

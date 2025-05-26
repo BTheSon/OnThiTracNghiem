@@ -30,6 +30,11 @@ class Question extends Controller
      */
 
     public function list() {
+        // Kiểm tra quyền truy cập
+        if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'gv') {
+            navigate('auth/login');
+            exit();
+        }
         // Lấy danh sách câu hỏi của giáo viên
         $cauHoiList = $this->cauHoiModel->getByUser($_SESSION['user_id']);
         // // lấy danh sách đáp án của các câu hỏi
@@ -38,7 +43,6 @@ class Question extends Controller
             $dapAnList[$cauHoi['id']] = $this->dapAnModel->getByCauHoi($cauHoi['id']);
         }
 
-        
         // Truyền dữ liệu vào view
         $this->view('layouts/quanly_layout.php',[
             'sidebar' => 'giaovien/partials/menu.php',

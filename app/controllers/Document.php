@@ -170,12 +170,8 @@ class Document extends Controller
 
     private function teacher_list_documents(): void
     {
-        if (!isset($_SESSION['class_id'])) {
-            navigate('/student/home');
-            exit();
-        }
 
-        $documents = $this->documentModel->getByClass($_SESSION['class_id']);
+        $documents = $this->documentModel->getByTeacherId($_SESSION['user_id']);
         if ($documents) {
             $this->view('layouts/quanly_layout.php', 
                     [

@@ -8,15 +8,18 @@
         <div class="answers">
             
             <!-- lặp từng đáp án lưu trong câu hỏi theo key là id của đáp án -->
+            <ul>
+
+            </ul>
             <?php
             $dapAn = $data['dap_an_list'][$cauhoi['id']];
             foreach($dapAn as $dapAnItem):
             ?>
-                <div class="answer" 
+                <li class="answer" 
                     data-answer-id="<?=$dapAnItem['id']?>" 
                     data-correct="<?=$dapAnItem['da_dung'] ? 'true' : 'false'?>">
-                    A. <?=$dapAnItem['noi_dung']?>
-                </div>
+                    <?=$dapAnItem['noi_dung']?>
+                </li>
             <?php endforeach;?>
         </div>
     </div>
