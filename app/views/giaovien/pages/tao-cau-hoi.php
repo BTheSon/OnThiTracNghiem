@@ -7,7 +7,7 @@
         </div>
         
         <div class="quiz-form-body">
-            <form method="post" id="addQuestionForm">
+            <form action="question/add" method="post" id="addQuestionForm">
                 <!-- Thông tin cơ bản -->
                 <div class="quiz-step">
                     <div class="quiz-step-title">
@@ -42,7 +42,7 @@
                         <i class="fas fa-question"></i> Câu hỏi
                     </label>
                     <textarea name="noi_dung" id="questionContent" class="quiz-textarea" required 
-                              placeholder="Nhập nội dung câu hỏi..."></textarea>
+                                placeholder="Nhập nội dung câu hỏi..."></textarea>
                     <div class="quiz-help-text">Viết câu hỏi rõ ràng và dễ hiểu</div>
                 </div>
 
@@ -59,21 +59,21 @@
                                 <i class="fas fa-circle"></i> Đáp án A
                             </label>
                             <input type="text" name="dap_an_1" id="answerOption1" class="quiz-text-input" required 
-                                   placeholder="Đáp án A...">
+                                    placeholder="Đáp án A...">
                         </div>
                         <div>
                             <label for="answerOption2" class="quiz-label">
                                 <i class="fas fa-circle"></i> Đáp án B
                             </label>
                             <input type="text" name="dap_an_2" id="answerOption2" class="quiz-text-input" required 
-                                   placeholder="Đáp án B...">
+                                    placeholder="Đáp án B...">
                         </div>
                         <div>
                             <label for="answerOption3" class="quiz-label">
                                 <i class="fas fa-circle"></i> Đáp án C
                             </label>
                             <input type="text" name="dap_an_3" id="answerOption3" class="quiz-text-input" required 
-                                   placeholder="Đáp án C...">
+                                    placeholder="Đáp án C...">
                         </div>
                     </div>
                 </div>

@@ -22,9 +22,12 @@ define('BASE_CONTROLLERS_DIR', BASE_DIR . '/app/controllers');
 // Đường dẫn này sẽ được sử dụng để tạo các liên kết trong ứng dụng 
 define('BASE_URL', (isset($_SERVER['HTTPS']) ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'] . SUB_DIR_NAME);
 
+/** đường dấn tương đối với thư mục dự án */
+define('RELATIVE_STORAGE_PATH', '/storages');
 
 /*** Đường dẫn tới folder chứa các file lưu trữ như hình ảnh, tài liệu */
-define('BASE_STORAGE_DIR', BASE_DIR . '/storages');
+define('BASE_STORAGE_DIR', BASE_DIR . RELATIVE_STORAGE_PATH);
+
 
 /** định nghĩa các type của file mà giáo viên có thể tải lên */
 define('ALLOWED_FILE_TYPES', [
