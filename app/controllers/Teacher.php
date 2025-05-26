@@ -42,7 +42,7 @@ class Teacher extends Controller
     }
 
     public function manager(): void {
-        $this->view('layouts/main_layout.php', 
+        $this->view('layouts/quanly_layout.php', 
                     [
                         'sidebar' => 'giaovien/partials/menu.php',
                         'content' => 'giaovien/pages/quan-ly.php'
