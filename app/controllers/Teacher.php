@@ -88,8 +88,13 @@ class Teacher extends Controller
      */
     public function class_management(string $idClass): void {
         $this->create_session_class($idClass);
-        $this->hocSinhLopModel->getStudentsByClass($idClass);
-        $students = $this->hocSinhLopModel->getStudentsByClass($idClass);
+        if (isset($_GET['search']) && !empty($_GET['search'])) {
+            $search = $_GET['search'];
+            $students = $this->hocSinhLopModel->getStudentsByClassAndName($idClass, $search);
+        } else {
+            $students = $this->hocSinhLopModel->getStudentsByClass($idClass);
+        }
+
         $class = $this->model->getById($idClass);
 
         /** @var HocSinhThiModel $baithi */

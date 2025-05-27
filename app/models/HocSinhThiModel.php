@@ -46,6 +46,19 @@ class HocSinhThiModel extends Model
                 ORDER BY hst.ket_thuc DESC";
         return $this->db->fetchAll($sql, [$studentId]);
     }
+    /**
+     * lấy thông tin bài thi của học sinh theo id học sinh và id lớp học
+     */
+    public function getResultsByStudentAndClass(int $studentId, int $classId): array
+    {
+        $sql = "SELECT hst.*, dt.tieu_de, dt.tong_diem, dt.tg_phut, lh.ten_lop
+                FROM {$this->table} hst
+                JOIN DeThi dt ON hst.de_thi_id = dt.id
+                JOIN LopHoc lh ON dt.lh_id = lh.id
+                WHERE hst.hs_id = ? AND lh.id = ?
+                ORDER BY hst.ket_thuc DESC";
+        return $this->db->fetchAll($sql, [$studentId, $classId]);
+    }
     
     /**
      * Tạo bản ghi học sinh làm bài thi

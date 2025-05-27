@@ -21,6 +21,17 @@ class HocSinhLopModel extends Model
                 WHERE hsl.lh_id = ?";
         return $this->db->fetchAll($sql, [$lopHocId]);
     }
+
+    /**
+     * lấy danh sách học sinh trong lớp theo tên
+     */
+    public function getStudentsByClassAndName(int $lopHocId, string $name): array    {
+        $sql = "SELECT hsl.*, nd.ho_ten, nd.email, nd.anh 
+                FROM {$this->table} hsl
+                JOIN NguoiDung nd ON hsl.hs_id = nd.id
+                WHERE hsl.lh_id = ? AND nd.ho_ten LIKE ?";
+        return $this->db->fetchAll($sql, [$lopHocId, '%' . $name . '%']);
+    }
     
     /**
      * Lấy danh sách lớp học của học sinh

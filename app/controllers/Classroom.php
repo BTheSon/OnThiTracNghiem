@@ -3,6 +3,8 @@ namespace App\Controllers;
 use App\Core\Controller;
 use App\Models\LopHocModel;
 use App\Models\HocSinhLopModel;
+use App\Models\HocSinhThiModel;
+use App\Models\NguoiDungModel;
 
 use function App\Includes\navigate;
 
@@ -10,10 +12,14 @@ class Classroom extends Controller
 {
     private LopHocModel $lopHocModel;
     private HocSinhLopModel $hocSinhLopModel;
+    private HocSinhThiModel $hocSinhThiModel;
+    private NguoiDungModel $nguoiDungModel;
+
     public function __construct() {
         $this->lopHocModel = $this->model('LopHocModel');
         $this->hocSinhLopModel = $this->model('HocSinhLopModel');
-
+        $this->hocSinhThiModel = $this->model('HocSinhThiModel');
+        $this->nguoiDungModel = $this->model('NguoiDungModel');
         // Kiểm tra xem người dùng đã đăng nhập chưa
         if (!isset($_SESSION['user_id'])) {
             // Kiểm tra xem request có phải là AJAX không
@@ -126,5 +132,39 @@ class Classroom extends Controller
             echo json_encode(['success' => false, 'message'=>'Có lỗi xảy ra trong quá trình tham gia lớp học.']);
             exit();
         }
+    }
+
+    public function view_student_exams (string $student_id): void {
+        // xem danh sách bài kiểm tra của học sinh trả về html
+        $id_gv = $_SESSION['user_id'];
+
+        $result = $this->hocSinhThiModel->getResultsByStudent($student_id);
+        $userInfo = $this->nguoiDungModel->getById($student_id);
+
+    
+        $this->view('layouts/main_layout.php', 
+                    [// layout partials
+                        'sidebar' => 'giaovien/partials/menu.php',
+                        'content' => 'giaovien/pages/xem-baikt-hs.php'
+                    ],
+                    [// data
+                        'student_exam'=> $result,
+                        'student_info' => [
+                            'id' => $userInfo['id'],
+                            'ho_ten' => $userInfo['ho_ten'],
+                            'email' => $userInfo['email'],
+                            'anh' => $userInfo['anh']
+                        ],
+                        'averageScore' => $this->hocSinhThiModel
+                                                ->getAveragePointByStudentAndClass(
+                                                        $userInfo['id'], 
+                                                        $_SESSION['class_id']
+                                                    )['diem_tb_hs'] ?? null,
+                        'CSS_FILE' => [
+                            'public/css/giaovien.css',
+                            'public/css/gv-xem-bai-kt.css'
+                        ]
+                        ]);
+
     }
 }

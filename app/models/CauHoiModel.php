@@ -21,15 +21,6 @@ class CauHoiModel extends Model
     }
     
     /**
-     * Lấy tất cả câu hỏi theo môn học
-     */
-    public function getBySubject(string $subject): array
-    {
-        $sql = "SELECT * FROM {$this->table} WHERE mon_hoc = ? ORDER BY ngay_tao DESC";
-        return $this->db->fetchAll($sql, [$subject]);
-    }
-    
-    /**
      * Lấy câu hỏi theo ID
      */
     public function getById(int $id): mixed
@@ -43,11 +34,11 @@ class CauHoiModel extends Model
      */
     public function create(array $data): int
     {
-        $sql = "INSERT INTO {$this->table} (nguoi_tao_id, mon_hoc, noi_dung, hinh, am_thanh, cong_thuc) 
+        $sql = "INSERT INTO {$this->table} (nguoi_tao_id, do_kho, noi_dung, hinh, am_thanh, cong_thuc) 
                 VALUES (?, ?, ?, ?, ?, ?)";
         $this->db->execute($sql, [
             $data['nguoi_tao_id'],
-            $data['mon_hoc'],
+            $data['do_kho'],
             $data['noi_dung'],
             $data['hinh'] ?? null,
             $data['am_thanh'] ?? null,

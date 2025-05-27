@@ -58,7 +58,7 @@ CREATE TABLE TaiLieu (
 CREATE TABLE CauHoi (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nguoi_tao_id INT,
-    mon_hoc VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+    do_kho INT,
     noi_dung TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
     hinh VARCHAR(255),
     am_thanh VARCHAR(255),
