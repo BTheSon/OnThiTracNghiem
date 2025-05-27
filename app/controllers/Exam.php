@@ -64,7 +64,7 @@ class Exam extends Controller
                 'tieu_de' => $examTitle,
                 'mo_ta' => $examDescription,
                 'ngay_thi' => $examStartTime,
-                'tong_diem' => 0, // Tổng điểm sẽ được tính sau khi thêm câu hỏi
+                'tong_diem' => 10, // Tổng điểm sẽ được tính sau khi thêm câu hỏi
                 'tg_phut' => $examDuration,
             ];
 
