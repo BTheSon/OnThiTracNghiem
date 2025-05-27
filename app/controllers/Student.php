@@ -67,4 +67,19 @@ class Student extends Controller
                         ]
                     ]);
     }
+    public function class_test(): void {
+        $this->view('layouts/main_layout.php', 
+                    [
+                        'sidebar' => 'hocsinh/partials/menu.php',
+                        'content' => 'hocsinh/pages/lop-hoc.php'
+                    ],
+                    [
+                        'CSS_FILE' => [
+                            'public/css/hocsinh.css'
+                        ],
+                        'JS_FILE' => [
+                            'public/js/class-test.js'
+                        ]
+                    ]);
+    }
 }

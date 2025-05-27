@@ -2,7 +2,7 @@
     <div class="section-title">Lớp học:</div>
     <div class="class-cards">
         <?php foreach($data['info_classes'] as $classes): ?>
-            <a href="<?=$classes['id']?>" class="card">
+            <a href="student/class-test" class="card">
                 <div class="card-header"><?=$classes['ten_lop']?></div>
             </a>
         <?php endforeach;?>
