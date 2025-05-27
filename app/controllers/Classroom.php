@@ -141,7 +141,7 @@ class Classroom extends Controller
         $result = $this->hocSinhThiModel->getResultsByStudent($student_id);
         $userInfo = $this->nguoiDungModel->getById($student_id);
 
-        
+    
         $this->view('layouts/main_layout.php', 
                     [// layout partials
                         'sidebar' => 'giaovien/partials/menu.php',

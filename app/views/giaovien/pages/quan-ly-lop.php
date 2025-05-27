@@ -30,10 +30,12 @@
 <div class="container-option">
     <div class="ma-lop"> Mã Lớp <br> <?=$data['info_classes']['ma_lop'] ?></div>
     <div class="search-student">
-        <input type="text" id="search-student-input" placeholder="Tìm kiếm học sinh theo tên...">
-        <button type="button" id="search-student-btn">
-            <i class="fas fa-search"></i>
-        </button>
+        <form action="teacher/class-management/<?= $data['info_classes']['id'] ?>" method="get" class="search-student-form">
+            <input type="text" id="search-student-input" name="search" placeholder="Tìm kiếm học sinh theo tên..." class="search-input">
+            <button type="submit" id="search-student-btn" class="search-btn">
+                <i class="fas fa-search"></i>
+            </button>
+        </form>
     </div>
     <button class="thong-ke">
         Thống kê lớp học
