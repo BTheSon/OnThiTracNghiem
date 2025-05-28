@@ -86,6 +86,7 @@ CREATE TABLE DeThi (
     tg_phut INT,
     tong_diem FLOAT,
     ngay_thi DATETIME,
+    ngay_dong DATETIME,
     ngay_tao DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (nguoi_tao_id) REFERENCES NguoiDung(id),
     FOREIGN KEY (lh_id) REFERENCES LopHoc(id)
