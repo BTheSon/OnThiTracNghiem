@@ -2,13 +2,14 @@
 namespace App\Controllers;
 use App\Core\Controller;
 use App\Models\HocSinhLopModel;
+use App\Models\TaiLieuModel;
 
 use function App\Includes\navigate;
 
 class Student extends Controller
 {
     private HocSinhLopModel $hocSinhLopModel;
-    
+    private TaiLieuModel $taiLieuModel;
     public function __construct() {
         // Kiểm tra xem người dùng đã đăng nhập chưa
         if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'hs') {
@@ -17,6 +18,7 @@ class Student extends Controller
             exit();
         }
         $this->hocSinhLopModel = $this->model('HocSinhLopModel');
+        $this->taiLieuModel = $this->model('TaiLieuModel');
     }
     
     public function index(): void {
@@ -67,13 +69,19 @@ class Student extends Controller
                         ]
                     ]);
     }
-    public function class_test(): void {
+    public function class_preview(string $idClass): void {
+
+        $classes = $this->hocSinhLopModel->getClassInfoByClassAndStudent($idClass, $_SESSION['user_id']);
+        $document = $this->taiLieuModel->getByClass($idClass);
+
         $this->view('layouts/main_layout.php', 
                     [
                         'sidebar' => 'hocsinh/partials/menu.php',
                         'content' => 'hocsinh/pages/lop-hoc.php'
                     ],
                     [
+                        'classes' => $classes,
+                        'documents' => $document,
                         'CSS_FILE' => [
                             'public/css/hocsinh.css'
                         ],

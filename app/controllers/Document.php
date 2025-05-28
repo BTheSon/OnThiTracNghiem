@@ -98,20 +98,24 @@ class Document extends Controller
 
     public function download(int $id): void
     {
-        // xác thực quyền truy cập
+        // Xác thực quyền truy cập
         if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'hs') {
-            echo json_encode(['success' => false, 'message' => 'Bạn không có quyền truy cập vào tài liệu.']);
+            navigate('/auth/login');
             exit();
         }
 
-        // lấy thông tin tài liệu từ cơ sở dữ liệu
+        // Lấy thông tin tài liệu từ cơ sở dữ liệu
         $document = $this->documentModel->getById($id);
         if ($document) {
-            $filePath = $document['file_dir'];
+            $filePath = BASE_DIR . $document['file_dir'];
+            $fileExt =pathinfo($filePath, PATHINFO_EXTENSION);
+            $fileName = $document['tieu_de'] . '.' . $fileExt;
+
             if (file_exists($filePath)) {
+                // Thiết lập header để tải file
                 header('Content-Description: File Transfer');
                 header('Content-Type: application/octet-stream');
-                header('Content-Disposition: attachment; filename=' . basename($filePath));
+                header('Content-Disposition: attachment; filename="' . trim($fileName, " ")  . '"');
                 header('Expires: 0');
                 header('Cache-Control: must-revalidate');
                 header('Pragma: public');
@@ -119,10 +123,12 @@ class Document extends Controller
                 readfile($filePath);
                 exit();
             } else {
-                echo json_encode(['success' => false, 'message' => 'Tệp tin không tồn tại.']);
+                echo 'không tìm thấy file ở server';
+                exit();
             }
         } else {
-            echo json_encode(['success' => false, 'message' => 'Tài liệu không tồn tại.']);
+            echo 'Tài liệu không tồn tại.';
+            exit();
         }
     }
     public function list(): void
@@ -189,4 +195,4 @@ class Document extends Controller
             navigate('/student/documents');
         }
     }
-}
+};
