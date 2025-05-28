@@ -1,12 +1,5 @@
   <style>
     
-    /* Container chính */
-    .form-container {
-      max-width: 800px; /* Giới hạn chiều rộng */
-      background-color: #ffffff;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
 
     .form-container h2 {
       font-size: 24px;
@@ -29,7 +22,7 @@
 
     .exam-info input,
     .exam-info textarea {
-      width: 100%;
+      width: calc(100% - 2vw);
       padding: 10px;
       border: 1px solid #d1d5db;
       border-radius: 5px;
@@ -66,7 +59,7 @@
     }
 
     .search-container input {
-      width: 100%;
+      width: calc(100% - 4vw);
       padding: 10px 10px 10px 35px;
       border: 1px solid #d1d5db;
       border-radius: 5px;
@@ -270,7 +263,7 @@
     }
   </style>
 
-  <div class="form-container">
+
     <h2>Tạo đề thi</h2>
     <form method="POST" action="exam/create" id="create-exam-form">
       <!-- Thông tin bài thi -->
@@ -286,6 +279,10 @@
         <div class="form-group">
           <label for="exam-start-time">Thời gian làm bài</label>
           <input type="datetime-local" id="exam-start-time" name="exam_start_time" required>
+        </div>
+        <div class="form-group">
+          <label for="exam-start-time">Thời gian khóa bài</label>
+          <input type="datetime-local" id="exam-start-time" name="exam_lock_time" required>
         </div>
         <div class="form-group">
           <label for="exam-duration">Số phút thi</label>
@@ -395,4 +392,4 @@
       <!-- Nút submit -->
       <button type="submit" class="btn submit-btn">Tạo đề thi</button>
     </form>
-  </div>
+

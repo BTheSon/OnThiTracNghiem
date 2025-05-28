@@ -49,6 +49,7 @@ class Exam extends Controller
             $examTitle       = trim($_POST['exam_title'] ?? '');
             $examDescription = trim($_POST['exam_description'] ?? '');
             $examStartTime   = trim($_POST['exam_start_time'] ?? '');
+            $examLockTime    = trim($_POST['exam_lock_time'] ?? '');
             $examDuration    = intval($_POST['exam_duration'] ?? 0);
             $questionIds     = $_POST['question_ids'] ?? [];
 
@@ -64,6 +65,7 @@ class Exam extends Controller
                 'tieu_de' => $examTitle,
                 'mo_ta' => $examDescription,
                 'ngay_thi' => $examStartTime,
+                'ngay_khoa' => $examLockTime,
                 'tong_diem' => 10, // Tổng điểm sẽ được tính sau khi thêm câu hỏi
                 'tg_phut' => $examDuration,
             ];
