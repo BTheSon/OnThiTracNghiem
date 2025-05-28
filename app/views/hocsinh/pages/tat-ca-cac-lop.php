@@ -6,7 +6,7 @@
         <a href="student/class-preview/<?=$classes['lh_id']?>" class="card">
             <div class="card-mota"><?=$classes['mo_ta']?></div>
             <div class="card-header"><?=$classes['ten_lop']?></div>
-            <div class="card-teacher"><?=$classes['ten_lop']?></div>
+            <div class="card-teacher"><?=$classes['ten_gv']?></div>
         </a>
     <?php endforeach;?>
 </div>

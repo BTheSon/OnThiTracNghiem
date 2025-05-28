@@ -19,6 +19,27 @@ class DeThiModel extends Model
         return $this->db->fetchAll($sql, [$lopHocId]);
     }
     
+    public function getExamByStudent(int $hs_id) : ?array {
+        $sql = "SELECT 
+            dt.id AS de_thi_id,
+            dt.tieu_de,
+            dt.ngay_thi,
+            dt.ngay_dong,
+            dt.tg_phut,
+            dt.mo_ta,
+            lh.ten_lop,
+            CASE 
+                WHEN NOW() > dt.ngay_dong THEN 1 ELSE 0
+                END AS qua_han
+        FROM DeThi dt
+        JOIN LopHoc lh ON dt.lh_id = lh.id
+        JOIN HocSinhLop hsl ON lh.id = hsl.lh_id
+        WHERE hsl.hs_id = ? -- <-- Truyền ID học sinh vào đây
+        ORDER BY dt.ngay_thi DESC
+        ";
+        return $this->db->fetchAll($sql, [$hs_id]) ?? null;
+    }
+    
     /**
      * Lấy đề thi theo ID
      */

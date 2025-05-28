@@ -263,7 +263,25 @@
     background: linear-gradient(90deg, #1d4ed8 60%, #2563eb 100%);
     box-shadow: 0 4px 18px rgba(37, 99, 235, 0.15);
 }
-
+.no-exam-icon {
+    font-size: 50px;
+    color: #999;
+    margin-bottom: 10px;
+}
+.no-exam-decor {
+    text-align: center;
+    margin-top: 20px;
+}
+.no-exam-image {
+    width: 150px;
+    height: auto;
+    margin-bottom: 10px;
+}
+.no-exam-message {
+    font-size: 16px;
+    color: #555;
+}
+/* tìm kề kt */
 .search-section {
     flex: 1 1 300px;
     min-width: 260px;

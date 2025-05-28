@@ -56,9 +56,10 @@ class HocSinhLopModel extends Model
      */
     public function getClassesByStudent(int $studentId): array
     {
-        $sql = "SELECT hsl.*, lh.ma_lop, lh.ten_lop, lh.mo_ta
+        $sql = "SELECT hsl.*, lh.ma_lop, lh.ten_lop, lh.mo_ta, gv.ho_ten as ten_gv
                 FROM {$this->table} hsl
                 JOIN LopHoc lh ON hsl.lh_id = lh.id
+                INNER JOIN NguoiDung gv ON lh.gv_id = gv.id
                 WHERE hsl.hs_id = ?";
         return $this->db->fetchAll($sql, [$studentId]);
     }
