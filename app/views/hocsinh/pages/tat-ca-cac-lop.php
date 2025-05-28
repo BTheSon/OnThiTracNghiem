@@ -3,9 +3,10 @@
 </div>
 <div class="class-cards">
     <?php foreach($data['info_classes'] as $classes): ?>
-        <a href="teacher/class-management/<?=$classes['id']?>" class="card">
+        <a href="student/class-preview/<?=$classes['lh_id']?>" class="card">
             <div class="card-mota"><?=$classes['mo_ta']?></div>
             <div class="card-header"><?=$classes['ten_lop']?></div>
+            <div class="card-teacher"><?=$classes['ten_lop']?></div>
         </a>
     <?php endforeach;?>
 </div>

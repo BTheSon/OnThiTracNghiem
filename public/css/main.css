@@ -221,42 +221,79 @@ body {
 
 /* Thẻ card lớp học */
 .card {
-    width: 300px;
-    height: 180px;
-    border-radius: 10px;
-    background: linear-gradient(to bottom, #d2d8f6 0%, #ffffff 60%);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-    transition: transform 0.2s;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    overflow: hidden;
-    text-decoration: none;
-}
+            width: 300px;
+            height: 180px;
+            border-radius: 12px;
+            background: #ffffff;
+            box-shadow: 0 2px 8px rgba(179, 224, 255, 0.3), 0 1px 4px rgba(0, 0, 0, 0.04);
+            cursor: pointer;
+            transition: all 0.2s ease-out;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            overflow: hidden;
+            text-decoration: none;
+            border: 1px solid #b3e0ff;
+            position: relative;
+        }
 
-.card:hover {
-    transform: scale(1.03);
-}
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: #b3e0ff;
+        }
 
-/* Phần đầu của card */
-.card-header {
-    text-align: center;
-    padding: 12px;
-    font-weight: bold;
-    color: #333;
-    border-top: 1px solid #eee;
-    border-radius: 0 0 10px 10px;
+        .card:hover {
+            transform: translateY(-2px);
+            background: #ffffff;
+            box-shadow: 0 4px 16px rgba(179, 224, 255, 0.4), 0 2px 8px rgba(179, 224, 255, 0.2);
+            border: 1px solid #99d6ff;
+        }
 
+        .card:active {
+            transform: translateY(0);
+            background: #f8fcff;
+            transition: all 0.1s ease-out;
+        }
 
-}
+        .card-mota {
+            font-size: 13px;
+            font-weight: 400;
+            color: #5f6368;
+            margin: 16px 20px 8px 20px;
+            line-height: 1.4;
+            text-transform: none;
+        }
 
-.card-mota {
-    font-size: 14px;
-    color: #666;
-    padding: 0 12px 12px 12px;
-    text-align: center;
-}
+        .card-header {
+            font-size: 20px;
+            font-weight: 500;
+            color: #3c4043;
+            margin: 0px 20px 4px 20px;
+            line-height: 1.2;
+            text-transform: capitalize;
+        }
+
+        .card-teacher {
+            font-size: 12px;
+            font-weight: 400;
+            color: #70757a;
+            margin: 0px 20px 20px 20px;
+            line-height: 1.2;
+        }
+
+        /* Demo với nhiều card */
+        .demo-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            width: 100%;
+        }
 
 /* NÚT THÊM LỚP HỌC CỦA HỌC SINH */
 .button-add {
