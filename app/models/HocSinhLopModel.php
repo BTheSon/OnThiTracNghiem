@@ -32,6 +32,25 @@ class HocSinhLopModel extends Model
                 WHERE hsl.lh_id = ? AND nd.ho_ten LIKE ?";
         return $this->db->fetchAll($sql, [$lopHocId, '%' . $name . '%']);
     }
+
+    /**
+     * Lấy thông tin lớp học của học sinh theo id lớp và id học sinh
+     */
+    public function getClassInfoByClassAndStudent(int $lopHocId, int $studentId): ?array
+    {
+        $sql = "SELECT 
+                SELECT hsl.*, 
+                lh.ma_lop, 
+                lh.ten_lop, 
+                lh.mo_ta, 
+                gv.ho_ten AS ten_gv
+            FROM {$this->table} hsl
+            INNER JOIN LopHoc lh ON hsl.lh_id = lh.id
+            INNER JOIN NguoiDung gv ON lh.gv_id = gv.id
+            WHERE hsl.lh_id = ? AND hsl.hs_id = ?
+            LIMIT 1";
+        return $this->db->fetch($sql, [$lopHocId, $studentId]);
+    }
     
     /**
      * Lấy danh sách lớp học của học sinh
