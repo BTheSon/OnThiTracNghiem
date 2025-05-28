@@ -38,8 +38,7 @@ class HocSinhLopModel extends Model
      */
     public function getClassInfoByClassAndStudent(int $lopHocId, int $studentId): ?array
     {
-        $sql = "SELECT 
-                SELECT hsl.*, 
+        $sql = "SELECT hsl.*, 
                 lh.ma_lop, 
                 lh.ten_lop, 
                 lh.mo_ta, 
@@ -49,7 +48,7 @@ class HocSinhLopModel extends Model
             INNER JOIN NguoiDung gv ON lh.gv_id = gv.id
             WHERE hsl.lh_id = ? AND hsl.hs_id = ?
             LIMIT 1";
-        return $this->db->fetch($sql, [$lopHocId, $studentId]);
+        return $this->db->fetch($sql, [$lopHocId, $studentId]) ?? null;
     }
     
     /**
