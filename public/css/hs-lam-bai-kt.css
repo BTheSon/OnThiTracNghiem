@@ -1,0 +1,138 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+.container {
+    display: flex;
+    max-width: 1200px;
+    margin: 20px auto;
+    gap: 20px;
+}
+.question-area {
+    flex: 3;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.question-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #333;
+}
+.option {
+    display: block;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.option:hover {
+    background-color: #e9ecef;
+}
+.option input {
+    margin-right: 10px;
+}
+.option.selected {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
+}
+.sidebar {
+    flex: 1;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.timer {
+    font-size: 16px;
+    font-weight: bold;
+    color: #dc3545;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.question-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.grid-item {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #f8f9fa;
+}
+.grid-item.active {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
+}
+.grid-item.answered {
+    background-color: #28a745;
+    color: #fff;
+    border-color: #28a745;
+}
+.submit-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+.submit-btn:hover {
+    background-color: #0056b3;
+}
+.answered-count {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: #333;
+}
+.media-block {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-align: center;
+}
+.media-block img {
+    max-width: 100%;
+    height: auto;
+    max-height: 300px;
+}
+.media-block math-field {
+    width: 100%;
+    border: none;
+    font-size: 16px;
+    text-align: center;
+}
+.media-error {
+    color: #dc3545;
+    font-size: 14px;
+}
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+    .sidebar {
+        order: -1;
+    }
+    .question-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}

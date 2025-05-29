@@ -1,6 +1,7 @@
 <?php
 namespace App\Controllers;
 use App\Core\Controller;
+use App\Models\DeThiModel;
 use App\Models\HocSinhLopModel;
 use App\Models\TaiLieuModel;
 
@@ -10,6 +11,7 @@ class Student extends Controller
 {
     private HocSinhLopModel $hocSinhLopModel;
     private TaiLieuModel $taiLieuModel;
+    private DeThiModel $deThiModel;
     public function __construct() {
         // Kiểm tra xem người dùng đã đăng nhập chưa
         if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'hs') {
@@ -19,6 +21,7 @@ class Student extends Controller
         }
         $this->hocSinhLopModel = $this->model('HocSinhLopModel');
         $this->taiLieuModel = $this->model('TaiLieuModel');
+        $this->deThiModel = $this->model('DeThiModel');
     }
     
     public function index(): void {
@@ -58,12 +61,14 @@ class Student extends Controller
     }
 
     public function assigned_tests(): void {
+        $exams = $this->deThiModel->getExamByStudent($_SESSION['user_id']);
         $this->view('layouts/main_layout.php', 
                     [
                         'sidebar' => 'hocsinh/partials/menu.php',
                         'content' => 'hocsinh/pages/de-kiem-tra.php'
                     ],
                     [
+                        'exams' => $exams,
                         'CSS_FILE' => [
                             'public/css/hocsinh.css'
                         ]

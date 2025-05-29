@@ -263,7 +263,25 @@
     background: linear-gradient(90deg, #1d4ed8 60%, #2563eb 100%);
     box-shadow: 0 4px 18px rgba(37, 99, 235, 0.15);
 }
-
+.no-exam-icon {
+    font-size: 50px;
+    color: #999;
+    margin-bottom: 10px;
+}
+.no-exam-decor {
+    text-align: center;
+    margin-top: 20px;
+}
+.no-exam-image {
+    width: 150px;
+    height: auto;
+    margin-bottom: 10px;
+}
+.no-exam-message {
+    font-size: 16px;
+    color: #555;
+}
+/* tìm kề kt */
 .search-section {
     flex: 1 1 300px;
     min-width: 260px;
@@ -322,23 +340,42 @@
 #search-btn:hover {
     background: #16a34a;
 }
-
 .history-exam {
-    margin-top: 14px;
-    min-height: 60px;
-    background: #f8fafc;
-    border-radius: 9px;
-    padding: 14px;
-    box-shadow: 0 1px 6px rgba(44, 62, 80, 0.05);
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #ffffff;
 }
-
+.history-item {
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.history-item:hover {
+    background-color: #e9ecef;
+}
+.history-item:last-child {
+    margin-bottom: 0;
+}
+.exam-title {
+    font-size: 16px;
+    color: #007bff;
+    margin-bottom: 5px;
+}
+.exam-class,
+.exam-teacher,
+.exam-score {
+    font-size: 14px;
+    color: #007bff;
+    margin-bottom: 3px;
+}
 .empty-state {
-    color: #888;
-    font-size: 1rem;
     text-align: center;
-    padding: 18px 0;
+    padding: 20px;
+    color: #007bff;
 }
-
 
 /* Overlay và Form tham gia lớp học*/
 .overlay {

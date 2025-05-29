@@ -118,4 +118,10 @@ class HocSinhThiModel extends Model
         return $this->db->fetch($sql, [$hsId, $lhId]);
     }
 
+    public function getIdDeThiById($id): int {
+        $sql = "SELECT de_thi_id 
+                FROM {$this->table}
+                WHERE id = ?";
+        return (int)$this->db->fetch($sql, [$id]) ?? 0;
+    }
 }

@@ -76,7 +76,7 @@ class Question extends Controller
             // tạo data
             $data = [
                 'nguoi_tao_id' => $_SESSION['user_id'], // ID của người tạo câu hỏi
-                'mon_hoc' => 'undefine', // Môn học của câu hỏi
+                'do_kho' => $do_kho, // Môn học của câu hỏi
                 'noi_dung' => $noi_dung,
                 'hinh' => null, // Nếu có hình ảnh thì sẽ xử lý sau
                 'am_thanh' => null, // Nếu có âm thanh thì sẽ xử lý sau
