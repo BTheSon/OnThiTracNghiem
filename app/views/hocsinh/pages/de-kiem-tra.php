@@ -9,10 +9,10 @@
             <?php foreach($data['exams'] as $examItem):?>
                 <div class="exam-header">
                     <div class="tieu-de">
-                        <span id="ten-bai-kt"> <?=$examItem['tieu_de'] ?> </span>
+                        <span id="ten-bai-kt">Bài kiểm tra: <?=$examItem['tieu_de'] ?> </span>
                     </div>
                     <div class="mo-ta">
-                        <span id="mo-ta-kt"><?=$examItem['mo_ta'] ?></span>
+                        <span id="mo-ta-kt">Mô tả: <?=$examItem['mo_ta'] ?></span>
                     </div>
                 </div>
                 
@@ -26,7 +26,7 @@
                     <div class="info-item">
                         <div class="info-label">
                             Tên lớp:  
-                            <b><?=$examItem['ten_lop'] ?></b>
+                            <b> <?=$examItem['ten_lop'] ?></b>
                         </div>
                     </div>
                 </div>
@@ -43,12 +43,38 @@
         <div class="search-box">
             <input type="text" id="search" placeholder="Nhập tên đề kiểm tra, môn học hoặc lớp...">
             <button id="search-btn">Tìm kiếm</button>
-        </div>
+        </div>  
 
         <div class="history-exam">
-            <div class="empty-state">
-                <!-- đổ dữ liệu vào đây nếu có lịch sử làm bài kiểm tra -->
+            <div class="history-item" onclick="handleItemClick('math-test-1')">
+                <div class="exam-title">
+                    <strong>Bài kiểm tra Toán học - Đề số 1</strong>
+                </div>
+                <div class="exam-class">
+                    <span>Lớp 10A1</span>
+                </div>
+                <div class="exam-teacher">
+                    <span>Thầy Nguyễn Văn A</span>
+                </div>
+                <div class="exam-score">
+                    <span>8.5/10</span>
+                </div>
             </div>
+            <div class="history-item" onclick="handleItemClick('physics-test-2')">
+                <div class="exam-title">
+                    <strong>Bài kiểm tra Vật lý - Đề số 2</strong>
+                </div>
+                <div class="exam-class">
+                    <span>Lớp 10B1</span>
+                </div>
+                <div class="exam-teacher">
+                    <span>Cô Trần Thị B</span>
+                </div>
+                <div class="exam-score">
+                    <span>bạn chưa làm</span>
+                </div>
+            </div>
+            <!-- Additional dummy items can be added here -->
         </div>
     </div>
 </div>
