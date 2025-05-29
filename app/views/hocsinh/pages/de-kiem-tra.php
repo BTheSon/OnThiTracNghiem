@@ -31,7 +31,7 @@
                     </div>
                 </div>
                 <div class="lam-bai-btn">
-                    <button id="start-exam-btn">Bắt đầu làm bài</button>
+                    <button id="start-exam-btn" onclick="window.location.href = 'exam/on-exam/<?=$examItem['de_thi_id'] ?>'">Bắt đầu làm bài</button>
                 </div>
             <?php endforeach;?>
         <?php endif;?>

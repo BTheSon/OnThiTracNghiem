@@ -4,7 +4,10 @@ namespace App\Controllers;
 use App\Core\Controller;
 use App\Models\CauHoiDeThiModel;
 use App\Models\CauHoiModel;
+use App\Models\DapAnModel;
 use App\Models\DeThiModel;
+use App\Models\HocSinhThiModel;
+use Exception;
 
 use function App\Includes\navigate;
 class Exam extends Controller
@@ -12,24 +15,32 @@ class Exam extends Controller
     private CauHoiModel $cauHoiModel;
     private DeThiModel $deThiModel;
     private CauHoiDeThiModel $cauHoiDeThiModel;
+    private HocSinhThiModel $hocSinhThiModel;
+    private DapAnModel $dapAnModel;
 
-    public function __construct()
-    {
-        if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'gv') {
+    public function __construct() {
+        if (empty($_SESSION['user_id'])) {
             navigate('/auth/login');
             exit();
         }
         $this->cauHoiModel = new CauHoiModel();
         $this->deThiModel = new DeThiModel();
         $this->cauHoiDeThiModel = new CauHoiDeThiModel();
+        $this->hocSinhThiModel = new HocSinhThiModel();
+        $this->dapAnModel = new DapAnModel();
     }
-    public function form_create()
-    {
+    public function form_create(): void{
 
         if (!isset($_SESSION['class_id'])) {
             navigate('/teacher/home');
             exit();
         }
+        
+        if (empty($_SESSION['user_role']) || $_SESSION['user_role'] !== 'gv') {
+            navigate('/teacher/home');
+            exit();
+        }
+        
         $questions = $this->cauHoiModel->getByUser($_SESSION['user_id']);
         $this->view('', [
                 'content' => 'giaovien/pages/tao-bai-thi.php',
@@ -40,7 +51,7 @@ class Exam extends Controller
         );
     }
 
-    public function create(){
+    public function create(): void {
         if (!isset($_SESSION['class_id'])) {
             navigate('/teacher/home');
             exit();
@@ -91,6 +102,103 @@ class Exam extends Controller
             exit();
         }
     }
+    /**
+     * làm bài thi
+     */
+    public function on_exam(int $dethi_id) {
+        if (empty($_SESSION['user_role']) || $_SESSION['user_role'] !== 'hs') {
+            navigate('/auth/login');
+        }
+        // id 
+        $idExamHS = $this->hocSinhThiModel->create([
+            'de_thi_id' => $dethi_id,
+            'hs_id' => $_SESSION['user_id']
+        ]);
 
+        if ($idExamHS === 0) {
+            throw new Exception('Học sinh thi không thể tạo');
+        }
+
+        $dethi_id = $this->hocSinhThiModel->getIdDeThiById($idExamHS);
+        if ($dethi_id === 0) {
+            throw new Exception('Không tìm thấy id đề theo id học sinh thi: ' . $idExamHS );
+        }
+
+        $_SESSION['exam_info'] = [
+            'hst_id' => $idExamHS,
+            'dethi_id' => $dethi_id
+        ];
+
+        $this->view('layouts/lambai_layout.php',[
+                        'content' => 'hocsinh/pages/lam-bai.php'
+                    ],[
+                        'CSS_FILE' => ['public/css/hs-lam-bai-kt.css'],
+                        'JS_FILE' => ['public/js/lam-bai.js'],
+                    ]);
+    }
+
+    /**
+     * lấy câu hỏi trong bài thi bài thi với examid trong session
+     */
+    public function questions(): void {
+        // xác thực người dùng
+        if (empty($_SESSION['user_role']) || $_SESSION['user_role'] !== 'hs') {
+            navigate('/auth/login');
+            exit();
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $dethi_id = $_SESSION['exam_info']['dethi_id'];
+            
+            $questions = $this->cauHoiDeThiModel->getQuestionsByExam($dethi_id);
+            $dethi = $this->deThiModel->getById($_SESSION['exam_info']['dethi_id']);
+            
+            $data = [
+                "status" => "success",
+                "data" => [
+                    "hst_id" => $_SESSION['exam_info']['hst_id'] ?? null,
+                    "tieu_de" => $dethi['tieu_de'] ?? null,
+                    "tg_phut" => $dethi['tg_phut'] ?? null,
+                    "bat_dau" => $dethi['ngay_thi'] ?? null,
+                    "ket_thuc" => $dethi['ngay_dong'] ?? null,
+                    "cau_hoi" => array_map(function($q) {
+                        return [
+                            "id" => $q['id'],
+                            "noi_dung" => $q['noi_dung'],
+                            "hinh" => $q['hinh'] ?? null,
+                            "am_thanh" => $q['am_thanh'] ?? null,
+                            "cong_thuc" => $q['cong_thuc'] ?? null,
+                            "dap_an" => array_map(function($a) {
+                                $answer = [
+                                    "id" => $a['id'],
+                                    "noi_dung" => $a['noi_dung']
+                                ];
+                                return $answer;
+                            }, $this->dapAnModel->getByCauHoi($q['ch_id']))
+                        ];
+                    }, $questions)
+                ]
+                ];
+
+            header('Content-Type: application/json; charset=utf-8');
+            header('Access-Control-Allow-Origin: *');
+            header('Access-Control-Allow-Methods: POST');
+            header('Access-Control-Allow-Headers: Content-Type, Accept'); 
+            
+            echo json_encode($data);
+            exit();
+        } else {
+            throw new Exception('phải là phương thức post');
+        }
+    } 
+    public function submit() {
+        
+        header('Content-Type: application/json; charset=utf-8');
+        header('Access-Control-Allow-Origin: *'); // Cho phép tất cả domain (có thể giới hạn domain cụ thể)
+        header('Access-Control-Allow-Methods: POST');
+        header('Access-Control-Allow-Headers: Content-Type, Accept'); 
+        echo json_encode($_POST);
+        exit();
+    }
     
 }

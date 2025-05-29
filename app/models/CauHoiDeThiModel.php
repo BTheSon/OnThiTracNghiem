@@ -15,7 +15,7 @@ class CauHoiDeThiModel extends Model
      */
     public function getQuestionsByExam(int $deThiId): array
     {
-        $sql = "SELECT chdt.*, ch.noi_dung, ch.mon_hoc, ch.hinh, ch.am_thanh, ch.cong_thuc
+        $sql = "SELECT chdt.*, ch.noi_dung, ch.do_kho, ch.hinh, ch.am_thanh, ch.cong_thuc, ch.id as ch_id
                 FROM {$this->table} chdt
                 JOIN CauHoi ch ON chdt.cau_id = ch.id
                 WHERE chdt.de_id = ?";
