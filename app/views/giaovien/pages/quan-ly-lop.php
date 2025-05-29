@@ -61,7 +61,10 @@
                     <td><?= $index + 1 ?></td>
                     <td><?= $student['ho_ten'] ?></td>
                     <td><?= $student['email'] ?></td>
-                    <td><?= $student['diem_tb_hs'] ?></td>
+                    <td><button>
+                        <?= $student['diem_tb_hs'] ? number_format($student['diem_tb_hs'], 2) : 'Chưa có điểm' ?>
+                       <i class="fa-duotone fa-solid fa-envelope-open-text" style="--fa-primary-color: #74C0FC; --fa-secondary-color: #74C0FC;"></i>
+                    </button></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>

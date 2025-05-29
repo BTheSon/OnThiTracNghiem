@@ -89,6 +89,7 @@ class Auth extends Controller
             $_SESSION['user_id'] = $userId;
             $_SESSION['user_name'] = $ho_ten;
             $_SESSION['user_role'] = $role;
+            $_SESSION['user_email'] = $email;
 
             // Redirect to dashboard
             echo "<script>alert('Đăng ký thành công!');</script>";
@@ -102,5 +103,62 @@ class Auth extends Controller
         session_destroy();
         // Redirect to login page
         navigate('/auth/login');
+    }
+
+    public function changePassword(): void {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $oldPassword = $_POST['old_password'] ?? '';
+            $newPassword = $_POST['new_password'] ?? '';
+            $confirmPassword = $_POST['confirm_password'] ?? '';
+
+            // Validate input
+            if (empty($oldPassword) || empty($newPassword) || empty($confirmPassword)) {
+                $this->view('auth/doimk', [], ['error' => 'All fields are required.']);
+                return;
+            }
+
+            // Check if old password is correct
+            $user = $this->model->getById($_SESSION['user_id']);
+            if (!$user || !password_verify($oldPassword, $user['mk'])) {
+                $this->view('auth/doimk', [], ['error' => 'Old password is incorrect.']);
+                return;
+            }
+
+            // Check if new passwords match
+            if ($newPassword !== $confirmPassword) {
+                $this->view('auth/doimk', [], ['error' => 'New passwords do not match.']);
+                return;
+            }
+
+            // Update password
+            $hashedNewPassword = password_hash($newPassword, PASSWORD_BCRYPT);
+            $this->model->updatePassword($_SESSION['user_id'], $hashedNewPassword);
+
+            echo "<script>alert('Mật khẩu đã được đổi thành công!');</script>";
+            navigate('/auth/login');
+        } else {
+            $this->view('auth/doimk');
+        }
+    }
+
+    public function changeName(): void {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $newName = $_POST['new_name'] ?? '';
+
+            // Validate input
+            if (empty($newName)) {
+                $this->view('auth/doiten', [], ['error' => 'Tên mới không được để trống.']);
+                return;
+            }
+
+            // Update name in the database
+            $this->model->updateName($_SESSION['user_id'], $newName);
+            $_SESSION['user_name'] = $newName;
+
+            echo "<script>alert('Tên đã được đổi thành công!');</script>";
+            navigate('/auth/login');
+        } else {
+            $this->view('auth/doiten');
+        }
     }
 }

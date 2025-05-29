@@ -17,16 +17,44 @@
         <div class="title">
             <i class='fa-solid'>QUIZ</i>    
         </div>
-        <div class="user-profile">
-            <div class="user-info">
-                <div class="user-title"><?=$_SESSION['user_name']?></div>
-                <div class="user-description"><?=$_SESSION['user_role']?></div>
-            </div>
-            <div class="avatar"></div>
-            <button class="logout" id="logout-btn" onclick="window.location.href='auth/logout'">
-                <i class="fa-solid fa-right-from-bracket"></i>
-            </button>
+     
+        <!-- Avatar -->
+        <div id="avatar" class="avatar"></div>
+
+        <!-- Profile Popup -->
+        <div id="profilePopup" class="profile-popup">
+            <p><strong>Username:</strong> <span id="username"><?=$_SESSION['user_name']?></span></p>
+            <p><strong>Email:</strong> <span id="email"><?=$_SESSION['user_role']?></span></p>
+            <button onclick="ChangeName()">Đổi tên</button>
+            <button onclick="changePassword()">Đổi mật khẩu</button>
+            <button onclick="logout()">Đăng xuất</button>
         </div>
+        <script>
+            const avatar = document.getElementById('avatar');
+            const popup = document.getElementById('profilePopup');
+            popup.style.display = 'none';
+            avatar.addEventListener('click', function(e) {
+            e.stopPropagation();
+            popup.style.display = (popup.style.display === 'none' || popup.style.display === '') ? 'block' : 'none';
+            // Hiển thị popup đổ xuống về phía bên trái avatar
+            const rect = avatar.getBoundingClientRect();
+            popup.style.position = 'absolute';
+            popup.style.top = (rect.bottom + window.scrollY) + 'px';
+            // Đặt popup sát bên trái avatar
+            popup.style.left = (rect.left + window.scrollX - popup.offsetWidth + avatar.offsetWidth) + 'px';
+            });
+            document.addEventListener('click', function(e) {
+            if (!popup.contains(e.target)) {
+                popup.style.display = 'none';
+            }
+            });
+
+
+
+
+        </script>
+        
+
     </div>
     <div class="side-menu">
         <?=$sidebar?>
@@ -35,7 +63,9 @@
     <main id="main-content" >
         <?=$content?>
     </main>
+
     <?=$data['js_file']?>
+   
 </body>
 
 </html>
