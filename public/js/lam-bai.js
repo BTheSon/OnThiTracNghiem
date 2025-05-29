@@ -242,3 +242,8 @@ function submitTest() {
 document.addEventListener('DOMContentLoaded', () => {
     fetchTestData();
 });
+
+document.addEventListener('beforeunload', () => {
+    submitTest();
+});
+
