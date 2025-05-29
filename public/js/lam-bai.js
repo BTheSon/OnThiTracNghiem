@@ -230,7 +230,7 @@ function submitTest() {
         alert('Bài thi đã được nộp!');
         return response.json();
     }).then(data => {
-        console.log(data);
+        alert(data.message);
         window.location.href = 'student/assigned-tests';
     })
     .catch(error => {

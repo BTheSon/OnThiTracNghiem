@@ -212,20 +212,24 @@ class Exam extends Controller
             echo json_encode(['status' => 'error', 'message' => 'No answers submitted.']);
             exit();
         }
+
         header('Content-Type: application/json; charset=utf-8');
         header('Access-Control-Allow-Origin: *'); // Cho phép tất cả domain (có thể giới hạn domain cụ thể)
         header('Access-Control-Allow-Methods: POST');
         header('Access-Control-Allow-Headers: Content-Type, Accept'); 
 
-
-        
+        $finalPoint = $this->calculatePoint($input);
+        echo json_encode(['status' => 'success', 'message' => "u got {$finalPoint} point yaa"]);
+        // xử lí lưu vào hocsinhthi
+        $hst_id = $_SESSION['exam_info']['hst_id'];
+        $this->hocSinhThiModel->updateResult($hst_id, $finalPoint);
         exit();
     }
 
     private function calculatePoint(array $questions) :float  {
-        $totleQuestion = $this->cauHoiDeThiModel->countQuestions((int)$_SESSION['dethi_id']);
-
-        return  .0;
+        $totalQuestion = $this->cauHoiDeThiModel->countQuestions((int)$_SESSION['exam_info']['dethi_id']);
+        $countCorrectQuestion = $this->cauHoiDeThiModel->countCorrectQuestion($questions);
+        return  (float)$countCorrectQuestion / $totalQuestion * 10.0;
     }
     
 }

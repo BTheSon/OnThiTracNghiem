@@ -51,4 +51,28 @@ class CauHoiDeThiModel extends Model
         $result = $this->db->fetch($sql, [$deThiId]);
         return (int)$result['count'];
     }
+
+    public function countCorrectQuestion(array $answers): int {
+        if (empty($answers)) return 0;
+    
+        $unionParts = [];
+        $params = [];
+        
+        foreach ($answers as $cauHoiId => $dapAnId) {
+            $unionParts[] = "
+                SELECT 1 as found
+                FROM CauHoiDeThi chdt
+                JOIN CauHoi ch ON chdt.cau_id = ch.id
+                JOIN DapAn da ON da.cau_hoi_id = ch.id
+                WHERE chdt.id = ? AND da.id = ? AND da.da_dung = 1
+            ";
+            $params[] = $cauHoiId;
+            $params[] = $dapAnId;
+        }
+        
+        $unionQuery = implode(' UNION ALL ', $unionParts);
+        $sql = "SELECT COUNT(*) as so_dap_an_dung FROM ($unionQuery) subquery";
+        $t = $this->db->fetch($sql, $params)['so_dap_an_dung'];
+        return (int)$t ?? 0;
+    }
 }
