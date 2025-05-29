@@ -97,6 +97,7 @@ class Exam extends Controller
             echo "<script>
                 alert('Exam created successfully!');
             </script>";
+            navigate("/teacher/class-management/{$_SESSION['class_id']}");
         } else {
             navigate('/teacher/home');
             exit();
@@ -193,12 +194,45 @@ class Exam extends Controller
     } 
     public function submit() {
         
+        // Kiểm tra phương thức request
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            echo json_encode(['status' => 'error', 'message' => 'Invalid request method.']);
+            exit();
+        }
+
+        // Kiểm tra thông tin bài thi trong session
+        if (empty($_SESSION['exam_info']['hst_id']) || empty($_SESSION['exam_info']['dethi_id'])) {
+            echo json_encode(['status' => 'error', 'message' => 'Exam session not found.']);
+            exit();
+        }
+
+        // Lấy dữ liệu gửi lên
+        $input = json_decode($_POST['questions'], true);
+        if (!is_array($input) || empty($input)) {
+            echo json_encode(['status' => 'error', 'message' => 'No answers submitted.']);
+            exit();
+        }
         header('Content-Type: application/json; charset=utf-8');
         header('Access-Control-Allow-Origin: *'); // Cho phép tất cả domain (có thể giới hạn domain cụ thể)
         header('Access-Control-Allow-Methods: POST');
         header('Access-Control-Allow-Headers: Content-Type, Accept'); 
-        echo json_encode($_POST);
+
+
+        
         exit();
+    }
+
+    private function calculatePoint(array $questions) :float  {
+        $totleQuestion = $this->cauHoiDeThiModel->countQuestions((int)$_SESSION['dethi_id']);
+
+        return  .0;
     }
     
 }
+
+
+// Array
+// (
+//     [hst_id] => 16
+//     [questions] => {"1":49,"2":47}
+// )
