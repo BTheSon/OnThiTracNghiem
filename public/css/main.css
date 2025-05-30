@@ -325,9 +325,8 @@ body {
     color: #e0f7ff;
 }
 
-/* FORM ĐỔI TÊN VÀ ĐỔI MẬT KHẨU */
-/* ==== FORM ĐỔI MẬT KHẨU ==== */
-form {
+/* FORM ĐỔI TÊN */
+form.form-change-name {
     max-width: 350px;
     margin: 32px auto;
     padding: 28px 24px;
@@ -339,14 +338,14 @@ form {
     gap: 16px;
 }
 
-form label {
+form.form-change-name label {
     font-size: 15px;
     color: #333;
     margin-bottom: 6px;
     font-weight: 500;
 }
 
-form input[type="password"] {
+form.form-change-name input[type="text"] {
     padding: 10px 12px;
     border: 1px solid #b3e0ff;
     border-radius: 6px;
@@ -357,12 +356,12 @@ form input[type="password"] {
     margin-bottom: 8px;
 }
 
-form input[type="password"]:focus {
+form.form-change-name input[type="text"]:focus {
     border-color: #007acc;
     background: #e6f4ff;
 }
 
-form button[type="submit"] {
+form.form-change-name button[type="submit"] {
     background: #007acc;
     color: #fff;
     padding: 10px 0;
@@ -375,11 +374,31 @@ form button[type="submit"] {
     margin-top: 8px;
 }
 
-form button[type="submit"]:hover {
+form.form-change-name button[type="submit"]:hover {
     background: #005f99;
 }
 
-form input[type="text"] {
+/* FORM ĐỔI MẬT KHẨU */
+form.form-change-password {
+    max-width: 350px;
+    margin: 32px auto;
+    padding: 28px 24px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+form.form-change-password label {
+    font-size: 15px;
+    color: #333;
+    margin-bottom: 6px;
+    font-weight: 500;
+}
+
+form.form-change-password input[type="password"] {
     padding: 10px 12px;
     border: 1px solid #b3e0ff;
     border-radius: 6px;
@@ -390,7 +409,24 @@ form input[type="text"] {
     margin-bottom: 8px;
 }
 
-form input[type="text"]:focus {
+form.form-change-password input[type="password"]:focus {
     border-color: #007acc;
     background: #e6f4ff;
+}
+
+form.form-change-password button[type="submit"] {
+    background: #007acc;
+    color: #fff;
+    padding: 10px 0;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 8px;
+}
+
+form.form-change-password button[type="submit"]:hover {
+    background: #005f99;
 }
