@@ -26,7 +26,7 @@
             <p><strong>Username:</strong> <span id="username"><?=$_SESSION['user_name']?></span></p>
             <p><strong>Email:</strong> <span id="email"><?=$_SESSION['user_role']?></span></p>
             <button onclick="window.location.href = 'user/change-name'">Đổi tên</button>
-            <button onclick = "window.location.href = 'user/change-password'">Đổi mật khẩu</button>
+            <button onclick = "window.location.href = 'auth/change-password'">Đổi mật khẩu</button>
             <button onclick="window.location.href = 'auth/logout'">Đăng xuất</button>
         </div>
         <script>

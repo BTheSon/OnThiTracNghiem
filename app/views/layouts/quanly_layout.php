@@ -24,7 +24,7 @@
             <p><strong>Username:</strong> <span id="username"><?=$_SESSION['user_name']?></span></p>
             <p><strong>Email:</strong> <span id="email"><?=$_SESSION['user_role']?></span></p>
             <button onclick="window.location.href = 'user/change-name'">Đổi tên</button>
-            <button onclick = "window.location.href = 'user/change-password'">Đổi mật khẩu</button>
+            <button onclick = "window.location.href = 'auth/change-password'">Đổi mật khẩu</button>
             <button onclick="window.location.href = 'auth/logout'">Đăng xuất</button>
         </div>
         <script>
@@ -32,24 +32,20 @@
             const popup = document.getElementById('profilePopup');
             popup.style.display = 'none';
             avatar.addEventListener('click', function(e) {
-            e.stopPropagation();
-            popup.style.display = (popup.style.display === 'none' || popup.style.display === '') ? 'block' : 'none';
-            // Hiển thị popup đổ xuống về phía bên trái avatar
-            const rect = avatar.getBoundingClientRect();
-            popup.style.position = 'absolute';
-            popup.style.top = (rect.bottom + window.scrollY) + 'px';
-            // Đặt popup sát bên trái avatar
-            popup.style.left = (rect.left + window.scrollX - popup.offsetWidth + avatar.offsetWidth) + 'px';
+                e.stopPropagation();
+                popup.style.display = (popup.style.display === 'none' || popup.style.display === '') ? 'block' : 'none';
+                // Hiển thị popup đổ xuống về phía bên trái avatar
+                const rect = avatar.getBoundingClientRect();
+                popup.style.position = 'absolute';
+                popup.style.top = (rect.bottom + window.scrollY) + 'px';
+                // Đặt popup sát bên trái avatar
+                popup.style.left = (rect.left + window.scrollX - popup.offsetWidth + avatar.offsetWidth) + 'px';
             });
             document.addEventListener('click', function(e) {
             if (!popup.contains(e.target)) {
                 popup.style.display = 'none';
             }
             });
-
-
-
-
         </script>
     </div>
     <div class="side-menu">
