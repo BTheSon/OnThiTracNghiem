@@ -28,3 +28,8 @@ function navigate($url) {
 function normalizePath($path): string {
     return str_replace(['\\', '//'], '/', $path);
 }
+
+function return_json(array $data): void {
+    echo json_encode($data);
+    exit();
+}
