@@ -37,6 +37,7 @@ class Auth extends Controller
                 $_SESSION['user_name'] = $user['ho_ten'];
                 $_SESSION['user_role'] = $user['vai_tro'];
                 $_SESSION['user_email'] = $email;
+                $_SESSION['user_avt_url'] = $user['anh'];
 
                 // Redirect to dashboard
                 if ($user['vai_tro'] == 'hs') {
@@ -84,6 +85,7 @@ class Auth extends Controller
                 'email' => $email,
                 'mk' => $hashedPassword,
                 'vai_tro' => $role,
+                'anh' => DEFAULT_AVT_URL
             ]);
 
             // Set session variables
@@ -91,7 +93,7 @@ class Auth extends Controller
             $_SESSION['user_name'] = $ho_ten;
             $_SESSION['user_role'] = $role;
             $_SESSION['user_email'] = $email;
-
+            $_SESSION['user_avt_url'] = DEFAULT_AVT_URL;
             // Redirect to dashboard
             echo "<script>alert('Đăng ký thành công!');</script>";
             navigate('/auth/login');

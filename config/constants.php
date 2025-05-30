@@ -40,3 +40,5 @@ define('ALLOWED_FILE_TYPES', [
     'jpeg',
     'png'
 ]);
+
+define('DEFAULT_AVT_URL', 'public/image/avt.png');

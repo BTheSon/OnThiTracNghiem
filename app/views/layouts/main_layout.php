@@ -20,7 +20,14 @@
 
         <!-- Avatar -->
         <div style="display:flex; flex-direction: row-reverse;">
-            <div id="avatar" class="avatar"></div>
+            <?php
+            if (empty($_SESSION['user_avt_url'])) {
+                $avt_url = DEFAULT_AVT_URL;
+            } else {   
+                $avt_url = ltrim($_SESSION['user_avt_url'], '/');  // /storages/avt/img.png => storages/avt/img.png => 
+            }
+            ?>
+            <div id="avatar" class="avatar" style="background-image: url('<?=$avt_url?>');"></div>
             <div class = 'troll'>
                 <p>
                     <strong>Email:</strong> 
@@ -39,7 +46,7 @@
                 <strong>Vai trò:</strong> 
                 <span id="email"><?=$_SESSION['user_role']?></span>
             </p>
-            <button onclick="window.location.href = 'user/change-name'">Đổi ảnh đại diện</button>
+            <button onclick="window.location.href = 'user/change-avatar'">Đổi ảnh đại diện</button>
             <button onclick="window.location.href = 'user/change-name'">Đổi tên</button>
             <button onclick = "window.location.href = 'auth/change-password'">Đổi mật khẩu</button>
             <button onclick="window.location.href = 'auth/logout'">Đăng xuất</button>

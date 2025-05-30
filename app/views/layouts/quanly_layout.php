@@ -17,7 +17,7 @@
         <div class="title">
             <i class='fa-solid'>QUIZ</i>    
         </div>
-        
+
         <!-- Avatar -->
         <div style="display:flex; flex-direction: row-reverse;">
             <div id="avatar" class="avatar"></div>
@@ -39,7 +39,7 @@
                 <strong>Vai trò:</strong> 
                 <span id="email"><?=$_SESSION['user_role']?></span>
             </p>
-            <button onclick="window.location.href = 'user/change-name'">Đổi ảnh đại diện</button>
+            <button onclick="window.location.href = 'user/change-avatar'">Đổi ảnh đại diện</button>
             <button onclick="window.location.href = 'user/change-name'">Đổi tên</button>
             <button onclick = "window.location.href = 'auth/change-password'">Đổi mật khẩu</button>
             <button onclick="window.location.href = 'auth/logout'">Đăng xuất</button>
