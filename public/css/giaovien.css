@@ -469,12 +469,13 @@
     padding: 15px;
     cursor: pointer;
     font-weight: bold;
-    background-color: #b3e0ff;
-    color: #333;
+    background-color: #007acc;
+    color: white;
     border-radius: 8px;
+    transition: background-color 0.3s ease;;
 }
 .question:hover {
-    background-color: #99c7e6;
+    background-color: rgb(122, 190, 236);
 }
 .answers {
     display: none;
