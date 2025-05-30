@@ -124,4 +124,10 @@ class HocSinhThiModel extends Model
                 WHERE id = ?";
         return (int)$this->db->fetch($sql, [$id]) ?? 0;
     }
+
+    public function existDeThi($deThiId) : bool {
+        $sql = "SELECT 1 FROM {$this->table} WHERE de_thi_id = ? LIMIT 1";
+        $result = $this->db->fetch($sql, [$deThiId]);
+        return $result !== false && $result !== null;
+    }
 }
