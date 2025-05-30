@@ -36,6 +36,7 @@ class Auth extends Controller
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['user_name'] = $user['ho_ten'];
                 $_SESSION['user_role'] = $user['vai_tro'];
+                $_SESSION['user_email'] = $email;
 
                 // Redirect to dashboard
                 if ($user['vai_tro'] == 'hs') {

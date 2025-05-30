@@ -74,6 +74,16 @@ body {
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
 }
 
+.troll p {
+    margin: 0 0 12px 0;
+    font-size: 15px;
+    color: #333;
+}
+
+.troll p strong {
+    color: #555;
+}
+
 .profile-popup {
     display: none;
     position: absolute;
