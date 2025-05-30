@@ -1,18 +1,3 @@
-<?php
-    $url = $_SESSION['user_role'] === 'gv'? 'teacher' : 'student'
-?>
-<a href="<?=$url?>" 
-    style="
-        position: absolute; 
-        top: 10px; 
-        left: 10px; 
-        text-decoration: none; 
-        padding: 8px 16px; 
-        background: #005f99; 
-        color: #fff; 
-        border-radius: 4px;">
-        quay lại</a>
-
 <form method="POST" class="form-change-password">
     <label for="old_password">Mật khẩu cũ:</label>
     <input type="password" id="old_password" name="old_password" required class="form-control"><br>
