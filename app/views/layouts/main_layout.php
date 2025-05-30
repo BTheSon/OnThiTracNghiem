@@ -17,7 +17,7 @@
         <div class="title">
             <i class='fa-solid'>QUIZ</i>    
         </div>
-     
+
         <!-- Avatar -->
         <div id="avatar" class="avatar"></div>
 
@@ -25,9 +25,9 @@
         <div id="profilePopup" class="profile-popup">
             <p><strong>Username:</strong> <span id="username"><?=$_SESSION['user_name']?></span></p>
             <p><strong>Email:</strong> <span id="email"><?=$_SESSION['user_role']?></span></p>
-            <button onclick="ChangeName()">Đổi tên</button>
-            <button onclick="changePassword()">Đổi mật khẩu</button>
-            <button onclick="logout()">Đăng xuất</button>
+            <button onclick="window.location.href = 'user/change-name'">Đổi tên</button>
+            <button onclick = "window.location.href = 'user/change-password'">Đổi mật khẩu</button>
+            <button onclick="window.location.href = 'auth/logout'">Đăng xuất</button>
         </div>
         <script>
             const avatar = document.getElementById('avatar');
