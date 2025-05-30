@@ -7,7 +7,7 @@
         <h3>Thông tin học sinh</h3>
         <p><strong>Họ và tên:</strong> <?php echo htmlspecialchars($data['student_info']['ho_ten'] ?? 'Không xác định'); ?></p>
         <p><strong>Email:</strong> <?php echo htmlspecialchars($data['student_info']['email'] ?? 'Không xác định'); ?></p>
-        <p class="average-score"><strong>Điểm trung bình:</strong> <?php echo isset($data['averageScore']) ? number_format($data['averageScore'], 1) : 'Chưa có'; ?></p>
+        <p class="average-score"><strong>Điểm trung bình:</strong> <?php echo !empty($data['averageScore']) ? number_format($data['averageScore'], 1) : 'Chưa có'; ?></p>
     </div>
 
     <!-- Danh sách bài thi -->
@@ -34,7 +34,7 @@
                         <td class="<?php echo $exam['diem'] !== null ? 'status-done' : 'status-pending'; ?>">
                             <?php echo $exam['diem'] !== null ? 'Đã làm' : 'Chưa làm'; ?>
                         </td>
-                        <td><?php echo $exam['diem'] !== null ? number_format($exam['diem'], 1) . '/' . number_format($exam['tong_diem'], 1) : '-'; ?></td>
+                        <td><?php echo $exam['diem'] !== null ? number_format($exam['diem'], 1) . '/' . '10.0' : '-'; ?></td>
                     </tr>
                 <?php endforeach; ?>
             <?php else: ?>

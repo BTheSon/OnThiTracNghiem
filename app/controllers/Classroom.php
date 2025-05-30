@@ -157,8 +157,8 @@ class Classroom extends Controller
                         ],
                         'averageScore' => $this->hocSinhThiModel
                                                 ->getAveragePointByStudentAndClass(
-                                                        $userInfo['id'], 
-                                                        $_SESSION['class_id']
+                                                    $_SESSION['class_id'],
+                                                    $userInfo['id']
                                                     )['diem_tb_hs'] ?? null,
                         'CSS_FILE' => [
                             'public/css/giaovien.css',

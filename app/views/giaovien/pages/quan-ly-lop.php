@@ -51,7 +51,7 @@
                 <th>STT</th>
                 <th>Họ tên</th>
                 <th>Email</th>
-                <th>Điểm trung bình các bài thi</th>
+                <th>Chi tiết</th>
             </tr>
         </thead>
         <tbody>
@@ -61,10 +61,9 @@
                     <td><?= $index + 1 ?></td>
                     <td><?= $student['ho_ten'] ?></td>
                     <td><?= $student['email'] ?></td>
-                    <td><button>
-                        <?= $student['diem_tb_hs'] ? number_format($student['diem_tb_hs'], 2) : 'Chưa có điểm' ?>
-                       <i class="fa-duotone fa-solid fa-envelope-open-text" style="--fa-primary-color: #74C0FC; --fa-secondary-color: #74C0FC;"></i>
-                    </button></td>
+                    <td>
+                        <i class="fa-duotone fa-solid fa-envelope-open-text" style="--fa-primary-color: #74C0FC; --fa-secondary-color: #74C0FC;"></i>
+                    </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
