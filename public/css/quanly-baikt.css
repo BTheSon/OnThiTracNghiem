@@ -1,0 +1,66 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f8ff;
+    color: #333;
+    margin: 20px;
+}
+
+/* Bảng danh sách */
+.table-exam-list {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 0 10px rgba(0, 128, 255, 0.2);
+    background-color: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Tiêu đề bảng */
+.table-exam-list thead {
+    background-color: #007acc;
+    color: #fff;
+}
+
+.table-exam-list thead th {
+    text-align: left;
+    padding: 12px;
+    font-size: 16px;
+}
+
+/* Dòng nội dung */
+.table-exam-list tbody td {
+    padding: 12px;
+    border-top: 1px solid #ddd;
+}
+
+/* Hiệu ứng hover */
+.table-exam-list tbody tr:hover {
+    background-color: #e6f7ff;
+}
+
+/* Dòng không có dữ liệu */
+.table-exam-list tbody tr td[colspan="5"] {
+    text-align: center;
+    font-style: italic;
+    color: #666;
+}
+
+/* Nút hành động */
+.delete-exam {
+    color: #007acc;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.2s ease;
+}
+
+.delete-exam:hover {
+    color: #d9534f;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.table-exam-list th:nth-child(1) { width: 5%; }     /* ID */
+.table-exam-list th:nth-child(2) { width: 18%; }    /* Tên bài kiểm tra */
+.table-exam-list th:nth-child(3) { width: 32%; }    /* Mô tả */
+.table-exam-list th:nth-child(4) { width: 15%; }    /* Tên lớp */
+.table-exam-list th:nth-child(5) { width: 20%; }    /* Ngày tạo */
+.table-exam-list th:nth-child(6) { width: 10%; }    /* Hành động */

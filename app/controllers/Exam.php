@@ -10,6 +10,8 @@ use App\Models\HocSinhThiModel;
 use Exception;
 
 use function App\Includes\navigate;
+use function App\Includes\return_json;
+
 class Exam extends Controller
 {
     private CauHoiModel $cauHoiModel;
@@ -29,6 +31,37 @@ class Exam extends Controller
         $this->hocSinhThiModel = new HocSinhThiModel();
         $this->dapAnModel = new DapAnModel();
     }
+
+    /**
+     * hiển thị danh sách các bài thi của tạo bởi giáo viên
+     */
+    public function list() {
+        if (empty($_SESSION['user_role']) || $_SESSION['user_role'] !== 'gv') 
+            navigate('auth/login');
+
+        $data = $this->deThiModel->getByCreator((int)$_SESSION['user_id']);
+        if ($data) {
+            $this->view('layouts/quanly_layout.php', 
+                    [
+                        'sidebar' => 'giaovien/partials/menu.php',
+                        'navbar' => 'giaovien/partials/quanly_navbar.php',
+                        'content' => 'giaovien/pages/quanly_baikt.php'
+                    ],
+                    [
+                        'exams' => $data,
+                        'CSS_FILE' => [
+                            'public/css/giaovien.css',
+                            'public/css/quanly-baikt.css'
+                        ],
+                        'JS_FILE' => [
+                            'public/js/quanly_baikt.js'
+                        ]
+                    ]);
+        } else {
+            navigate('/teacher/class-management');
+        }
+    }
+
     public function form_create(): void{
 
         if (!isset($_SESSION['class_id'])) {
@@ -103,6 +136,47 @@ class Exam extends Controller
             exit();
         }
     }
+
+    public function update(): void {
+        
+    }
+
+    public function delete($dethi_id): void {
+        if ($_SESSION['user_role'] !== 'gv') {
+            navigate('/teacher/home');
+        }
+
+        header('Content-Type: application/json; charset=utf-8');
+        header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Methods: POST');
+        header('Access-Control-Allow-Headers: Content-Type, Accept'); 
+            
+
+        if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
+            if ($this->hocSinhThiModel->countHsJoinExam($dethi_id) > 0) {
+                return_json([
+                    'success' => false,
+                    'message' => 'đã có học sinh tham gia bài thi, không được phép xóa'
+                ]);
+            }
+
+            $this->cauHoiDeThiModel->removeAllFromExam($dethi_id);
+            $numRowDelete = $this->deThiModel->delete($dethi_id);
+
+            return_json([
+                'success' => true,
+                'message' => 'xóa đề thi thành công'
+            ]);
+        } else {
+            return_json([
+                'success' => false,
+                'message' => 'sai phương thức gửi dữ liệu'
+            ]);
+        }
+
+
+    }
+
     /**
      * làm bài thi
      */

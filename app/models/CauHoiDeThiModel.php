@@ -41,6 +41,11 @@ class CauHoiDeThiModel extends Model
         $sql = "DELETE FROM {$this->table} WHERE de_id = ? AND cau_id = ?";
         return $this->db->execute($sql, [$deThiId, $cauHoiId]);
     }
+
+    public function removeAllFromExam(int $deThiId): int {
+        $sql = "DELETE FROM {$this->table} WHERE de_id = ?";
+        return $this->db->execute($sql, [$deThiId]);
+    }
     
     /**
      * Đếm số lượng câu hỏi trong đề thi

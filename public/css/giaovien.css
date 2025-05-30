@@ -270,7 +270,7 @@
     background: #fff;
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 2px 8px rgba(84, 84, 84, 0.04);
     table-layout: fixed;
 }
 
@@ -283,7 +283,7 @@
 
 .ds-lop th {
     background: #f0f4f8;
-    color: #206030;
+    color: #0056b3;
     font-weight: 700;
 }
 

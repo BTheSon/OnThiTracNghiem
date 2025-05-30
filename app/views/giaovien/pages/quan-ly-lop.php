@@ -57,7 +57,7 @@
         <tbody>
             <?php foreach($data['info_students'] as $index => $student): ?>
                 <?php echo'<script>console.log('.json_encode($data).')</script>';?>
-                <tr onclick="window.location.href='classroom/view-student-exams/<?= $student['hs_id'] ?>'">
+                <tr onclick="window.location.href='classroom/view-student-exams/<?= $student['hs_id'] ?>'" style="cursor: pointer;">
                     <td><?= $index + 1 ?></td>
                     <td><?= $student['ho_ten'] ?></td>
                     <td><?= $student['email'] ?></td>
