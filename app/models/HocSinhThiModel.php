@@ -122,7 +122,8 @@ class HocSinhThiModel extends Model
         $sql = "SELECT de_thi_id 
                 FROM {$this->table}
                 WHERE id = ?";
-        return (int)$this->db->fetch($sql, [$id]) ?? 0;
+        $result = $this->db->fetch($sql, [$id]);
+        return isset($result['de_thi_id']) ? (int)$result['de_thi_id'] : 0;
     }
     /**
      * đếm số học sinh đã tham gia bài
