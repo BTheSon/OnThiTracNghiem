@@ -4,6 +4,7 @@ namespace App\Core;
 use PDO;
 use PDOException;   
 use PDOStatement;
+use RuntimeException;
 
 class DB
 {
@@ -63,7 +64,7 @@ class DB
             $stmt->execute($params);
             return $stmt;
         } catch (PDOException $e) {
-            die("Query failed: " . $e->getMessage());
+            throw new RuntimeException('SQL Error! : ' . $e->getMessage());
         }
     }
 
