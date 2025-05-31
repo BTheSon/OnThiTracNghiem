@@ -1,0 +1,76 @@
+    /* Styling for document item */
+.document-item {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for card effect */
+    padding: 20px;
+    margin: 15px 0; /* Spacing between items */
+    max-width: 600px; /* Limit width for readability */
+    width: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover animation */
+    position: relative;
+    overflow: hidden;
+}
+
+/* Hover effect */
+.document-item:hover {
+    transform: translateY(-5px); /* Slight lift on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+}
+
+/* Title styling */
+.document-item h3 {
+    margin: 0 0 10px 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+    line-height: 1.4;
+}
+
+/* Description styling */
+.document-item p:nth-child(2) {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    color: #555;
+    line-height: 1.5;
+}
+
+/* Date styling */
+.document-item p:nth-child(3) {
+    margin: 0;
+    font-size: 14px;
+    color: #888;
+    font-style: italic;
+}
+
+/* Add a subtle border accent */
+.document-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background-color: #007BFF; /* Blue accent bar */
+    border-radius: 10px 0 0 10px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .document-item {
+        max-width: 100%;
+        padding: 15px;
+    }
+
+    .document-item h3 {
+        font-size: 18px;
+    }
+
+    .document-item p:nth-child(2) {
+        font-size: 14px;
+    }
+
+    .document-item p:nth-child(3) {
+        font-size: 12px;
+    }
+}

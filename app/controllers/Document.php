@@ -188,7 +188,8 @@ class Document extends Controller
                     [
                         'documents' => $documents,
                         'CSS_FILE' => [
-                            'public/css/giaovien.css'
+                            'public/css/giaovien.css',
+                            'public/css/gv-xem-tai-lieu.css'
                         ]
                     ]);
         } else {
