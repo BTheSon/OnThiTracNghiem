@@ -90,6 +90,7 @@ function selectOption(optionId) {
 function renderGrid() {
     const grid = document.getElementById('question-grid');
     grid.innerHTML = '';
+    let index = 0;
     testData.forEach(question => {
         const gridItem = document.createElement('div');
         gridItem.className = 'grid-item';
@@ -99,7 +100,7 @@ function renderGrid() {
         if (question.answer !== null) {
             gridItem.classList.add('answered');
         }
-        gridItem.innerText = question.id;
+        gridItem.innerText = ++index;
         gridItem.onclick = () => {
             currentQuestion = question.id;
             renderQuestion();
