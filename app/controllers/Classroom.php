@@ -167,4 +167,8 @@ class Classroom extends Controller
                         ]);
 
     }
+
+    public function statistics() : void {
+        
+    }
 }

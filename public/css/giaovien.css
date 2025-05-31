@@ -17,12 +17,19 @@
 
 }
 
-
-
-.search-student,
 .thong-ke {
-    flex: 0 0 auto;
+    padding: 8px 12px;
+    background-color: #007BFF;
+    border: 1px solid #007BFF;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
 }
+.thong-ke:hover {
+    background-color: #0056b3;
+}
+
+
 
 .container-option>.ma-lop {
     margin-right: auto;
