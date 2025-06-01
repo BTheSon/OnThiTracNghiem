@@ -6,3 +6,6 @@
     <button class="delete-btn" onclick="if(confirm('Bạn có chắc muốn xóa tài liệu này?')) { window.location.href = 'document/delete/';  }">Xóa tài liệu</button>
 </div>
 <?php endforeach; ?>
+<?php if (empty($data['documents'])): ?>
+    <p>Không có tài liệu.</p>
+<?php endif; ?>

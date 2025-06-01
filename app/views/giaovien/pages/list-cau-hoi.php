@@ -26,7 +26,7 @@
 <button class="upload-btn" onclick="toggleUploadForm()">Tải lên file</button>
 <div class="backdrop" id="backdrop"></div>
 <div id="uploadForm" class="uploadFile_form">
-    <form action="upload.php" method="post" enctype="multipart/form-data">
+    <form method="post" enctype="multipart/form-data">
         <div class="instructions">
             <h3>Hướng dẫn định dạng file CSV</h3>
             <p>File CSV cần có các cột sau (theo đúng thứ tự):</p>

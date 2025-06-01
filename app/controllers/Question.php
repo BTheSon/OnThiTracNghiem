@@ -156,7 +156,7 @@ class Question extends Controller
                     $this->dapAnModel->multitpleCreate($answers);
                 }
             } catch (RuntimeException $e) {
-                return_json(['status' => 'error', 'message' => 'không thể tạo ']);
+                return_json(['status' => 'error', 'message' => $e->getMessage()]);
             }
 
             // Xóa file tạm

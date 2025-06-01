@@ -65,7 +65,7 @@ class DapAnModel extends Model
             $values[] = "(?, ?, ?)";
             $params[] = $answer['cau_hoi_id'];
             $params[] = $answer['noi_dung'];
-            $params[] = $answer['da_dung'] ?? false;
+            $params[] = isset($answer['da_dung']) ? (int)$answer['da_dung'] : 0; // Ép kiểu thành số nguyên
         }
         
         $sql .= implode(', ', $values);

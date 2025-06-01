@@ -169,6 +169,16 @@ class Classroom extends Controller
     }
 
     public function statistics() : void {
-        
+        $this->view('layouts/main_layout.php', 
+                    [// layout partials
+                        'sidebar' => 'giaovien/partials/menu.php',
+                        'content' => 'giaovien/pages/thong-ke.php'
+                    ],
+                    [// data
+                        'CSS_FILE' => [
+                            'public/css/giaovien.css',
+                            'public/css/gv-xem-bai-kt.css'
+                        ]
+                        ]);
     }
 }

@@ -40,26 +40,23 @@ class Exam extends Controller
             navigate('auth/login');
 
         $data = $this->deThiModel->getByCreator((int)$_SESSION['user_id']);
-        if ($data) {
-            $this->view('layouts/quanly_layout.php', 
-                    [
-                        'sidebar' => 'giaovien/partials/menu.php',
-                        'navbar' => 'giaovien/partials/quanly_navbar.php',
-                        'content' => 'giaovien/pages/quanly_baikt.php'
+        $this->view('layouts/quanly_layout.php', 
+                [
+                    'sidebar' => 'giaovien/partials/menu.php',
+                    'navbar' => 'giaovien/partials/quanly_navbar.php',
+                    'content' => 'giaovien/pages/quanly_baikt.php'
+                ],
+                [
+                    'exams' => $data,
+                    'CSS_FILE' => [
+                        'public/css/giaovien.css',
+                        'public/css/quanly-baikt.css'
                     ],
-                    [
-                        'exams' => $data,
-                        'CSS_FILE' => [
-                            'public/css/giaovien.css',
-                            'public/css/quanly-baikt.css'
-                        ],
-                        'JS_FILE' => [
-                            'public/js/quanly_baikt.js'
-                        ]
-                    ]);
-        } else {
-            navigate('/teacher/class-management');
-        }
+                    'JS_FILE' => [
+                        'public/js/quanly_baikt.js'
+                    ]
+                ]);
+        
     }
 
     public function form_create(): void{

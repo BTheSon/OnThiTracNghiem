@@ -124,3 +124,54 @@ CREATE TABLE TraLoiBaiThi (
     FOREIGN KEY (cau_hoi_id) REFERENCES CauHoi(id),
     FOREIGN KEY (da_id) REFERENCES DapAn(id)
 ) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- NguoiDung
+CREATE INDEX idx_nguoidung_vaitro ON NguoiDung(vai_tro);
+
+-- LopHoc
+CREATE INDEX idx_lophoc_gv_id ON LopHoc(gv_id);
+CREATE INDEX idx_lophoc_ngaytao ON LopHoc(ngay_tao);
+
+-- HocSinhLop
+CREATE INDEX idx_hocsinhlop_lh_id ON HocSinhLop(lh_id);
+CREATE INDEX idx_hocsinhlop_hs_id ON HocSinhLop(hs_id);
+
+-- ThongBao
+CREATE INDEX idx_thongbao_lh_id ON ThongBao(lh_id);
+CREATE INDEX idx_thongbao_nguoi_gui_id ON ThongBao(nguoi_gui_id);
+CREATE INDEX idx_thongbao_ngaytao ON ThongBao(ngay_tao);
+
+-- TaiLieu
+CREATE INDEX idx_tailieu_nguoi_dang_id ON TaiLieu(nguoi_dang_id);
+CREATE INDEX idx_tailieu_lh_id ON TaiLieu(lh_id);
+CREATE INDEX idx_tailieu_ngay_dang ON TaiLieu(ngay_dang);
+
+-- CauHoi
+CREATE INDEX idx_cauhoi_nguoi_tao_id ON CauHoi(nguoi_tao_id);
+CREATE INDEX idx_cauhoi_do_kho ON CauHoi(do_kho);
+CREATE INDEX idx_cauhoi_ngay_tao ON CauHoi(ngay_tao);
+
+-- DapAn
+CREATE INDEX idx_dapan_cau_hoi_id ON DapAn(cau_hoi_id);
+
+-- DeThi
+CREATE INDEX idx_dethi_nguoi_tao_id ON DeThi(nguoi_tao_id);
+CREATE INDEX idx_dethi_lh_id ON DeThi(lh_id);
+CREATE INDEX idx_dethi_ngay_thi ON DeThi(ngay_thi);
+CREATE INDEX idx_dethi_ngay_dong ON DeThi(ngay_dong);
+CREATE INDEX idx_dethi_ngay_tao ON DeThi(ngay_tao);
+
+-- CauHoiDeThi
+CREATE INDEX idx_cauhoidethi_de_id ON CauHoiDeThi(de_id);
+CREATE INDEX idx_cauhoidethi_cau_id ON CauHoiDeThi(cau_id);
+
+-- HocSinhThi
+CREATE INDEX idx_hocsinthi_de_thi_id ON HocSinhThi(de_thi_id);
+CREATE INDEX idx_hocsinthi_hs_id ON HocSinhThi(hs_id);
+CREATE INDEX idx_hocsinthi_bat_dau ON HocSinhThi(bat_dau);
+CREATE INDEX idx_hocsinthi_ket_thuc ON HocSinhThi(ket_thuc);
+
+-- TraLoiBaiThi
+CREATE INDEX idx_traloibaithi_hs_thi_id ON TraLoiBaiThi(hs_thi_id);
+CREATE INDEX idx_traloibaithi_cau_hoi_id ON TraLoiBaiThi(cau_hoi_id);
+CREATE INDEX idx_traloibaithi_da_id ON TraLoiBaiThi(da_id);
