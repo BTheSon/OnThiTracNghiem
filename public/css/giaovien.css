@@ -57,7 +57,7 @@
 
 /* List CHỌN trong LỚP HỌC */
 .dropdown-container {
-    position: fixed;
+    position: absolute;
     right: 50px;
     bottom: 20px;
     display: inline-block;

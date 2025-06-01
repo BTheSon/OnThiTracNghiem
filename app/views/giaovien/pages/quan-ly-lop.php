@@ -63,7 +63,170 @@
 </script>
 
 <style>
+    .main-content-wrapper {
+        display: flex;
+        flex-wrap: wrap; /* Allows columns to wrap on smaller screens */
+        justify-content: center; /* Centers the columns */
+        gap: 2rem; /* Space between columns */
+        padding: 2rem; /* Overall padding around the content */
+        align-items: flex-start; /* Align items to the top */
+    }
+    #notification-container {
+        flex: 1; /* Allows it to grow and shrink */
+        min-width: 320px; /* Minimum width for notification column */
+        max-width: 45%; /* Max width for left column */
+        padding: 1.5rem;
+        background-color: #f0f2f5; /* Match body background or slightly lighter */
+        border-radius: 12px;
+        max-height: 85vh; /* Giới hạn chiều cao tối đa của container */
+        overflow-y: auto; /* Thêm thanh cuộn dọc khi nội dung vượt quá chiều cao */
+        box-shadow: inset 0 0 10px rgba(0,0,0,0.05); /* Thêm bóng đổ nhẹ vào bên trong */
+    }
 
+    /* Custom Scrollbar Styles for WebKit browsers (Chrome, Safari, Edge) */
+    #notification-container::-webkit-scrollbar {
+        width: 8px; /* Chiều rộng của thanh cuộn */
+    }
+
+    #notification-container::-webkit-scrollbar-track {
+        background: #e0e0e0; /* Màu nền của rãnh cuộn */
+        border-radius: 10px;
+    }
+
+    #notification-container::-webkit-scrollbar-thumb {
+        background: #888; /* Màu của "cục" cuộn */
+        border-radius: 10px;
+    }
+
+    #notification-container::-webkit-scrollbar-thumb:hover {
+        background: #555; /* Màu của "cục" cuộn khi hover */
+    }
+    /* Styles for the Statistics Container (Right Column) */
+    .thong-ke-container {
+        flex: 2; /* Allows it to take more space */
+        min-width: 450px; /* Minimum width for stats column */
+        max-width: 55%; /* Max width for right column */
+        background-color: #ffffff; /* White background for the whole right column */
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        padding: 1.5rem; /* Padding inside this container */
+    }
+
+    /* Styles for the Notification Creation Form */
+    .notification-form-card {
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        padding: 1.5rem;
+        margin-bottom: 2rem; /* Space below the form */
+        border: 1px solid #e0e0e0;
+    }
+
+    .notification-form-card h2 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #1e293b;
+        margin-bottom: 1.5rem;
+        text-align: center;
+    }
+
+    .notification-form-card label {
+        display: block;
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: #475569;
+        margin-bottom: 0.5rem;
+    }
+
+    .notification-form-card input[type="text"],
+    .notification-form-card textarea {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        font-size: 1rem;
+        color: #334155;
+        margin-bottom: 1rem;
+        box-sizing: border-box; /* Include padding in width */
+    }
+
+    .notification-form-card textarea {
+        min-height: 100px;
+        resize: vertical; /* Allow vertical resizing */
+    }
+
+    .notification-form-card button {
+        background-color: #4285F4;
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border-radius: 6px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+        width: 100%; /* Full width button */
+    }
+
+    .notification-form-card button:hover {
+        background-color: #3367D6;
+    }
+
+    /* Styles for the Google Classroom-like Item Card (Notifications) */
+    .classroom-item-card {
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        border: 1px solid #e0e0e0;
+        margin-bottom: 1.5rem; /* Space between cards */
+    }
+
+    .item-header {
+        background-color: #4285F4; /* Google Blue - can be dynamic per class */
+        color: white;
+        padding: 1rem 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .item-header h2 {
+        font-size: 1.3rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .item-header .icon {
+        font-size: 1.5rem;
+        color: white;
+    }
+
+    .item-time {
+        font-size: 0.8rem;
+        font-weight: 500;
+        opacity: 0.9;
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+    }
+
+    .item-content {
+        padding: 1.5rem;
+        background-color: #ffffff;
+        color: #334155;
+    }
+
+    .item-content p {
+        font-size: 1rem;
+        color: #475569;
+        line-height: 1.6;
+    }
+
+    /* style list student */
     .container {
     max-width: 900px;
     margin: auto;
@@ -140,35 +303,71 @@
     </button>
 </div>
 
-<div class="container">
-    <div id="piechart"></div>
-</div>
+<div class="main-content-wrapper">
+    <div id="notification-container">
+        <div class="notification-form-card">
+            <h2><i class="fas fa-plus-circle mr-2 text-blue-500"></i>Tạo Thông Báo Mới</h2>
+            <form id="notification-form">
+                <div class="mb-4">
+                    <label for="notification-title">Tiêu đề:</label>
+                    <input type="text" id="notification-title" placeholder="Nhập tiêu đề thông báo" required>
+                </div>
+                <div class="mb-4">
+                    <label for="notification-description">Mô tả:</label>
+                    <textarea id="notification-description" placeholder="Nhập nội dung mô tả thông báo" required></textarea>
+                </div>
+                <button type="submit">Gửi Thông Báo</button>
+            </form>
+        </div>
 
-<p class="header-dsHs">Danh sách học sinh:</p>
-<div class="ds-lop">
-    <table border="1">
-        <thead>
-            <tr>
-                <th>STT</th>
-                <th>Họ tên</th>
-                <th>Email</th>
-                <th>Chi tiết</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach($data['info_students'] as $index => $student): ?>
-                <?php echo'<script>console.log('.json_encode($data).')</script>';?>
-                <tr onclick="window.location.href='classroom/view-student-exams/<?= $student['hs_id'] ?>'" style="cursor: pointer;">
-                    <td><?= $index + 1 ?></td>
-                    <td><?= $student['ho_ten'] ?></td>
-                    <td><?= $student['email'] ?></td>
-                    <td>
-                        <i class="fa-duotone fa-solid fa-envelope-open-text" style="--fa-primary-color: #74C0FC; --fa-secondary-color: #74C0FC;"></i>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
+        <div id="notification-list">
+            <div class="classroom-item-card">
+                <div class="item-header">
+                    <h2 class="text-white">
+                        <i class="fas fa-bullhorn icon"></i>Lịch Thi Cuối Kỳ Đã Được Cập Nhật
+                    </h2>
+                    <span class="item-time">
+                        <i class="far fa-calendar-alt mr-1"></i>Ngày 01/06/2025
+                    </span>
+                </div>
+                <div class="item-content">
+                    <p>Các bạn học sinh lớp Lập Trình Web Nâng Cao chú ý: Lịch thi cuối kỳ đã được công bố chính thức. Vui lòng truy cập cổng thông tin sinh viên để xem chi tiết và chuẩn bị tốt nhất cho kỳ thi sắp tới.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="thong-ke-container">
+        <div class="container">
+            <div id="piechart"></div>
+        </div>
+        
+        <p class="header-dsHs">Danh sách học sinh:</p>
+        <div class="ds-lop">
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Họ tên</th>
+                        <th>Email</th>
+                        <th>Chi tiết</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach($data['info_students'] as $index => $student): ?>
+                        <?php echo'<script>console.log('.json_encode($data).')</script>';?>
+                        <tr onclick="window.location.href='classroom/view-student-exams/<?= $student['hs_id'] ?>'" style="cursor: pointer;">
+                            <td><?= $index + 1 ?></td>
+                            <td><?= $student['ho_ten'] ?></td>
+                            <td><?= $student['email'] ?></td>
+                            <td>
+                                <i class="fa-duotone fa-solid fa-envelope-open-text" style="--fa-primary-color: #74C0FC; --fa-secondary-color: #74C0FC;"></i>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 
 <div class="dropdown-container">
