@@ -160,40 +160,32 @@ class Document extends Controller
         }
 
         $documents = $this->documentModel->getByClass($_SESSION['class_id']);
-        if ($documents) {
-            $this->view('',
-                [
-                    'content' => 'hocvien/pages/xem-tai-lieu.php',
-                    'documents' => $documents,
-                ],[
-                    'JS_FILE' => ['public/js/view-document.js']
-                ]
-            );
-        } else {
-            navigate('/student/documents');
-        }
+        $this->view('',
+            [
+                'content' => 'hocvien/pages/xem-tai-lieu.php',
+                'documents' => $documents,
+            ],[
+                'JS_FILE' => ['public/js/view-document.js']
+            ]);
+        
     }
 
     private function teacher_list_documents(): void
     {
 
         $documents = $this->documentModel->getByTeacherId($_SESSION['user_id']);
-        if ($documents) {
-            $this->view('layouts/quanly_layout.php', 
-                    [
-                        'sidebar' => 'giaovien/partials/menu.php',
-                        'navbar' => 'giaovien/partials/quanly_navbar.php',
-                        'content' => 'giaovien/pages/xem-tai-lieu.php'
-                    ],
-                    [
-                        'documents' => $documents,
-                        'CSS_FILE' => [
-                            'public/css/giaovien.css',
-                            'public/css/gv-xem-tai-lieu.css'
-                        ]
-                    ]);
-        } else {
-            navigate('/student/documents');
-        }
+        $this->view('layouts/quanly_layout.php', 
+                [
+                    'sidebar' => 'giaovien/partials/menu.php',
+                    'navbar' => 'giaovien/partials/quanly_navbar.php',
+                    'content' => 'giaovien/pages/xem-tai-lieu.php'
+                ],
+                [
+                    'documents' => $documents,
+                    'CSS_FILE' => [
+                        'public/css/giaovien.css',
+                        'public/css/gv-xem-tai-lieu.css'
+                    ]
+                ]);
     }
 };

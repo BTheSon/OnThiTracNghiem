@@ -5,3 +5,6 @@
     <p><?php echo htmlspecialchars($document['ngay_dang']); ?></p>
 </div>
 <?php endforeach; ?>
+<?php if (empty($data['documents'])): ?>
+    <p>Không có tài liệu.</p>
+<?php endif; ?>
