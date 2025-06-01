@@ -90,7 +90,20 @@ body {
     color: #fff;
     text-align: center;
     padding: 5rem 1rem;
-    /* background-image: url("app/public/image/thuvien.jpg"); */
+    background-image: url("../image/qn.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    box-shadow: var(--box-shadow-light);
+
+
 }
 
 .hero h1 {
