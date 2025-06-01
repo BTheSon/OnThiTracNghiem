@@ -1,4 +1,7 @@
-<div class="menu-icon" id = "toggle-menu">☰</div>
+<div class="title-header">
+    Nền tảng ôn tập và kiểm tra trực tuyến
+</div>
+
 <div class="title">
     <i class='fa-solid'>QUIZ</i>    
 </div>

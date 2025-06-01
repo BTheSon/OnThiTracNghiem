@@ -7,6 +7,17 @@
             <div class="card-mota"><?=$classes['mo_ta']?></div>
             <div class="card-header"><?=$classes['ten_lop']?></div>
             <div class="card-teacher"><?=$classes['ten_gv']?></div>
+                    <button type="button" class="delete-class-btn" onclick="confirmDelete(event, <?=$classes['lh_id']?>)">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                </button>
+                <script>
+                function confirmDelete(event, classId) {
+                    event.preventDefault();
+                    if (confirm('Bạn có chắc chắn muốn rời lớp này?')) {
+                        window.location.href = 'student/out-class'   ;
+                    }
+                }
+                </script>
         </a>
     <?php endforeach;?>
 </div>

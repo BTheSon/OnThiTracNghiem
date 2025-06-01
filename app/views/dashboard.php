@@ -11,9 +11,6 @@ use function App\Includes\asset;
     <header class="header">
         <div class="logo">QUIZ</div>
         <nav class="nav">
-            <a href="#">Trang chủ</a>
-            <a href="#">Khám phá</a>
-            <a href="#">Giới thiệu</a>
             <a href="Auth/login" id="loginBtn">Đăng nhập</a>
         </nav>
     </header>
@@ -52,15 +49,6 @@ use function App\Includes\asset;
                 <div class="category-info">
                     <h3>Toán học</h3>
                     <p>Đại số, Hình học, Giải tích và nhiều hơn nữa</p>
-                    <a href="#" class="category-link">Xem chi tiết »</a>
-                </div>
-            </div>
-            
-            <div class="category-card">
-                <div class="category-img">🌎</div>
-                <div class="category-info">
-                    <h3>Tiếng Anh</h3>
-                    <p>Ngữ pháp, Từ vựng, Đọc hiểu, Nghe nói</p>
                     <a href="#" class="category-link">Xem chi tiết »</a>
                 </div>
             </div>
