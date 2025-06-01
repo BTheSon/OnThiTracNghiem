@@ -290,7 +290,7 @@ class Exam extends Controller
         header('Access-Control-Allow-Headers: Content-Type, Accept'); 
 
         $finalPoint = $this->calculatePoint($input);
-        echo json_encode(['status' => 'success', 'message' => "u got {$finalPoint} point yaa"]);
+        echo json_encode(['status' => 'success', 'message' => "u got {$finalPoint} point yaa", 'finalPoint' => $finalPoint]);
         // xử lí lưu vào hocsinhthi
         $hst_id = $_SESSION['exam_info']['hst_id'];
         $this->hocSinhThiModel->updateResult($hst_id, $finalPoint);

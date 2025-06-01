@@ -199,7 +199,10 @@ function submitTest() {
         alert('Lỗi: Không có ID bài thi');
         return;
     }
-
+    const confirmSubmit = confirm("Bạn có chắc chắn muốn nộp bài?");
+    if (!confirmSubmit) {
+        return; // Nếu người dùng không xác nhận, thoát hàm
+    }
     // Prepare data for submission
     const questions = testData
         .filter(q => q.answer !== null)
@@ -232,7 +235,8 @@ function submitTest() {
         return response.json();
     }).then(data => {
         alert(data.message);
-        window.location.href = 'student/assigned-tests';
+        document.getElementById('scrore-form').style.display = 'block';
+        document.getElementById('score').value = data.finalPoint;
     })
     .catch(error => {
         console.error('Error submitting test:', error);
