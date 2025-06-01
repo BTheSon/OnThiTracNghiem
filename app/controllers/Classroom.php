@@ -181,4 +181,23 @@ class Classroom extends Controller
                         ]
                         ]);
     }
+
+    public function delete($class_id) : void{
+        $result = $this->lopHocModel->clearAll($class_id);
+        if (!$result['success']) {
+            echo "<script>alert('Xóa lớp học thất bại! {$result['message']}');</script>";
+        }
+        navigate('/teacher/home');
+    }
+
+    public function out_class(int $class_id): void {
+        
+        $class_id = $class_id;
+        $student_id = $_SESSION['user_id'];
+
+        $result = $this->hocSinhLopModel->thoat_sach($class_id, $student_id);
+        if (!$result['success'])
+            echo "<script>alert('thoát lớp học thất bại! {$result['message']}');</script>";
+        navigate('/student/home');
+    }
 }

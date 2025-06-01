@@ -4,6 +4,7 @@ use App\Core\Controller;
 use App\Models\LopHocModel;
 use App\Models\HocSinhLopModel;
 use App\Models\HocSinhThiModel;
+use App\Models\ThongBaoModel;
 
 use function App\Includes\navigate;
 
@@ -12,6 +13,8 @@ class Teacher extends Controller
     private LopHocModel $model;
     private HocSinhLopModel $hocSinhLopModel;
     private HocSinhThiModel $hocSinhThiModel;
+    private ThongBaoModel $thongBaoModel;
+
     public function __construct() {
         // Kiểm tra xem người dùng đã đăng nhập chưa
         if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'gv') {
@@ -22,6 +25,7 @@ class Teacher extends Controller
         $this->model = $this->model('LopHocModel');
         $this->hocSinhLopModel = $this->model('HocSinhLopModel');
         $this->hocSinhThiModel = $this->model('HocSinhThiModel');
+        $this->thongBaoModel = $this->model('ThongBaoModel');
     }
     
     public function index(): void {
@@ -136,6 +140,8 @@ class Teacher extends Controller
             }
         }
 
+        $notifications = $this->thongBaoModel->getByClass($idClass);
+
         $this->view('layouts/main_layout.php', 
                     [
                         'sidebar' => 'giaovien/partials/menu.php',
@@ -145,6 +151,7 @@ class Teacher extends Controller
                         'info_students' => $students,
                         'info_classes' => $class,
                         'class_statistics' => $data_thong_ke,
+                        'notifications' => $notifications,
                         'CSS_FILE' => [
                             'public/css/giaovien.css',
                             'public/css/gv-taoCauHoi.css'

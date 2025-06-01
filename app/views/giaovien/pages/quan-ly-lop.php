@@ -307,33 +307,40 @@
     <div id="notification-container">
         <div class="notification-form-card">
             <h2><i class="fas fa-plus-circle mr-2 text-blue-500"></i>Tạo Thông Báo Mới</h2>
-            <form id="notification-form">
+            <form action="notification/create" method="post" id="notification-form">
                 <div class="mb-4">
                     <label for="notification-title">Tiêu đề:</label>
-                    <input type="text" id="notification-title" placeholder="Nhập tiêu đề thông báo" required>
+                    <input type="text" id="notification-title" placeholder="Nhập tiêu đề thông báo" required name='title'>
                 </div>
                 <div class="mb-4">
                     <label for="notification-description">Mô tả:</label>
-                    <textarea id="notification-description" placeholder="Nhập nội dung mô tả thông báo" required></textarea>
+                    <textarea id="notification-description" placeholder="Nhập nội dung mô tả thông báo" required name = 'description'></textarea>
                 </div>
                 <button type="submit">Gửi Thông Báo</button>
             </form>
         </div>
 
         <div id="notification-list">
-            <div class="classroom-item-card">
-                <div class="item-header">
-                    <h2 class="text-white">
-                        <i class="fas fa-bullhorn icon"></i>Lịch Thi Cuối Kỳ Đã Được Cập Nhật
-                    </h2>
-                    <span class="item-time">
-                        <i class="far fa-calendar-alt mr-1"></i>Ngày 01/06/2025
-                    </span>
-                </div>
-                <div class="item-content">
-                    <p>Các bạn học sinh lớp Lập Trình Web Nâng Cao chú ý: Lịch thi cuối kỳ đã được công bố chính thức. Vui lòng truy cập cổng thông tin sinh viên để xem chi tiết và chuẩn bị tốt nhất cho kỳ thi sắp tới.</p>
-                </div>
-            </div>
+
+            <?php if (!empty($data['notifications'])): ?>
+                <?php foreach ($data['notifications'] as $notification): ?>
+                    <div class="classroom-item-card">
+                        <div class="item-header">
+                            <h2 class="text-white">
+                                <i class="fas fa-bullhorn icon"></i><?= htmlspecialchars($notification['tieu_de']) ?>
+                            </h2>
+                            <span class="item-time">
+                                <i class="far fa-calendar-alt mr-1"></i><?= date('d/m/Y', strtotime($notification['ngay_tao'])) ?>
+                            </span>
+                        </div>
+                        <div class="item-content">
+                            <p><?= nl2br(htmlspecialchars($notification['noi_dung'])) ?></p>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <div style="text-align:center; color:#888; margin-top:2rem;">Chưa có thông báo nào.</div>
+            <?php endif; ?>
         </div>
     </div>
     <div class="thong-ke-container">

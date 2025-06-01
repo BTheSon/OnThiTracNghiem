@@ -4,6 +4,7 @@ use App\Core\Controller;
 use App\Models\DeThiModel;
 use App\Models\HocSinhLopModel;
 use App\Models\TaiLieuModel;
+use App\Models\ThongBaoModel;
 
 use function App\Includes\navigate;
 
@@ -12,6 +13,8 @@ class Student extends Controller
     private HocSinhLopModel $hocSinhLopModel;
     private TaiLieuModel $taiLieuModel;
     private DeThiModel $deThiModel;
+    private ThongBaoModel $thongBaoModel;
+
     public function __construct() {
         // Kiểm tra xem người dùng đã đăng nhập chưa
         if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'hs') {
@@ -22,6 +25,7 @@ class Student extends Controller
         $this->hocSinhLopModel = $this->model('HocSinhLopModel');
         $this->taiLieuModel = $this->model('TaiLieuModel');
         $this->deThiModel = $this->model('DeThiModel');
+        $this->thongBaoModel = $this->model('ThongBaoModel');
     }
     
     public function index(): void {
@@ -82,6 +86,7 @@ class Student extends Controller
 
         $classes = $this->hocSinhLopModel->getClassInfoByClassAndStudent($idClass, $_SESSION['user_id']);
         $document = $this->taiLieuModel->getByClass($idClass);
+        $notifications = $this->thongBaoModel->getByClass($idClass);
 
         $this->view('layouts/main_layout.php', 
                     [
@@ -91,6 +96,7 @@ class Student extends Controller
                     [
                         'classes' => $classes,
                         'documents' => $document,
+                        'notifications' => $notifications,
                         'CSS_FILE' => [
                             'public/css/hocsinh.css'
                         ],

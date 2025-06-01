@@ -11,8 +11,8 @@
                 <script>
                 function confirmDelete(event, classId) {
                     event.preventDefault();
-                    if (confirm('Bạn có chắc chắn muốn rời lớp này?')) {
-                        window.location.href = 'teacher/delete-class/' + classId;
+                    if (confirm('Bạn có chắc chắn muốn xóa lớp này?')) {
+                        window.location.href = 'classroom/out-class/' + classId;
                     }
                 }
                 </script>

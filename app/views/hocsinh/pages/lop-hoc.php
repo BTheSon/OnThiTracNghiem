@@ -10,6 +10,21 @@
     <div class="tb-ktra"> 
         <i class="fa-duotone fa-solid fa-bullhorn"></i>
         <a id="thong-bao"> Thông báo tại đây </a>
+        <div class="notifications-container">
+            <?php foreach ($data['notifications'] as $item): ?>
+            <div class="card-notification">
+                <div class="card-title">
+                    <?=$item['tieu_de']?>
+                </div>
+                <div class="card-content">
+                    <?=$item['noi_dung']?>
+                </div>
+                <div class="card-date">
+                    <?=$item['ngay_tao']?>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
     </div>
     <?php if (empty($data['documents'])): ?>
         <p class="no-file-msg">Giáo viên của bạn chưa gửi file ôn tập</p>
