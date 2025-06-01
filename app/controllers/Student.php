@@ -61,7 +61,10 @@ class Student extends Controller
     }
 
     public function assigned_tests(): void {
-        $exams = $this->deThiModel->getExamByStudent($_SESSION['user_id']);
+        $exams = $this->deThiModel->getUnattendedExamsByStudent($_SESSION['user_id']);
+        // Lấy các bài kiểm tra quá hạn
+        $joinAndMissExam = $this->deThiModel->getExpiredAndAttendedExamsByStudent($_SESSION['user_id']);
+        
         $this->view('layouts/main_layout.php', 
                     [
                         'sidebar' => 'hocsinh/partials/menu.php',
@@ -69,6 +72,7 @@ class Student extends Controller
                     ],
                     [
                         'exams' => $exams,
+                        'give_name' => $joinAndMissExam,
                         'CSS_FILE' => [
                             'public/css/hocsinh.css'
                         ]

@@ -54,8 +54,8 @@ class DeThiModel extends Model
      */
     public function create(array $data): int
     {
-        $sql = "INSERT INTO {$this->table} (nguoi_tao_id, lh_id, tieu_de, mo_ta, tg_phut, tong_diem, ngay_thi) 
-                VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO {$this->table} (nguoi_tao_id, lh_id, tieu_de, mo_ta, tg_phut, tong_diem, ngay_thi, ngay_dong) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         $this->db->execute($sql, [
             $data['nguoi_tao_id'],
             $data['lh_id'],
@@ -63,7 +63,8 @@ class DeThiModel extends Model
             $data['mo_ta'] ?? null,
             $data['tg_phut'],
             $data['tong_diem'],
-            $data['ngay_thi']
+            $data['ngay_thi'],
+            $data['ngay_khoa']
         ]);
         
         return (int)$this->db->fetch("SELECT LAST_INSERT_ID()")['LAST_INSERT_ID()'];
@@ -109,4 +110,66 @@ class DeThiModel extends Model
                 ORDER BY dt.ngay_thi DESC";
         return $this->db->fetchAll($sql, [$creatorId]);
     }
+
+    /**
+     * Lấy những đề thi trong lớp mà học sinh chưa tham gia
+     */
+    public function getUnattendedExamsByStudent(int $hs_id): array
+    {
+        $sql = "SELECT 
+                dt.id as de_thi_id,
+                dt.tieu_de,
+                dt.mo_ta,
+                dt.tg_phut,
+                dt.tong_diem,
+                dt.ngay_thi,
+                dt.ngay_dong,
+                dt.ngay_tao,
+                lh.ten_lop,
+                lh.ma_lop
+            FROM DeThi dt
+            INNER JOIN LopHoc lh ON dt.lh_id = lh.id
+            LEFT JOIN HocSinhThi hst ON dt.id = hst.de_thi_id AND hst.hs_id = ? -- hs_id
+            WHERE dt.ngay_dong > NOW() -- Kiểm tra đề thi chưa đóng
+            AND hst.de_thi_id IS NULL;";
+
+        return $this->db->fetchAll($sql, [$hs_id]) ?? [];
+    }
+
+    /**
+     * Lấy bài kiểm tra quá hạn và đã tham gia của một học sinh
+     */
+    public function getExpiredAndAttendedExamsByStudent(int $hs_id): array
+    {
+        $sql = "SELECT 
+                    dt.id,
+                    dt.tieu_de,
+                    dt.mo_ta,
+                    dt.tg_phut,
+                    dt.tong_diem,
+                    dt.ngay_thi,
+                    dt.ngay_dong,
+                    dt.ngay_tao,
+                    lh.ten_lop,
+                    lh.ma_lop,
+                    hst.diem,
+                    hst.bat_dau,
+                    hst.ket_thuc,
+                    CASE 
+                        WHEN hst.id IS NOT NULL THEN 'da_tham_gia'
+                        WHEN dt.ngay_dong <= NOW() THEN 'qua_han'
+                        ELSE 'khac'
+                    END as trang_thai
+                FROM DeThi dt
+                INNER JOIN LopHoc lh ON dt.lh_id = lh.id
+                LEFT JOIN HocSinhThi hst ON dt.id = hst.de_thi_id AND hst.hs_id = ?
+                WHERE (
+                    dt.ngay_dong <= NOW()
+                    OR hst.id IS NOT NULL
+                )
+                ORDER BY 
+                    CASE WHEN hst.id IS NOT NULL THEN 0 ELSE 1 END,
+                    dt.ngay_thi DESC";
+        return $this->db->fetchAll($sql, [$hs_id]) ?? [];
+    }    
 }
