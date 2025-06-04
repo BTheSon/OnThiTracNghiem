@@ -11,3 +11,12 @@
         <button class="submit-btn" onclick="submitTest()">Nộp bài</button>
     </div>
 </div>
+
+<form class="score-form" style="margin-top: 30px; text-align: center; display: none;" id="score-form"></form>
+    <h2>Kết quả bài kiểm tra</h2>
+    <label for="score">Điểm của bạn:</label>
+    <p type="text" id="score" name="score" readonly style="width: 60px; text-align: center;">
+    </p>
+    <br><br>
+    <button type="button" onclick="window.location.href='student/home';" class="exit-btn">Thoát</button>
+</form>
