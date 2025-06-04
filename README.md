@@ -28,17 +28,17 @@
 
 ```
 ### 2. Giải  rewrite URL và cấu trúc thư mục
-- __Chức năng từng folder__:
-  - `controlle` : chứa các class Controller, chuyên nhận dự liệu trả về của `model` và gửi `$data[]` cho view hiển thị hoặc trả về json dùng cho công nghệ ajax
-  - `core` : chứa các file cốt lõi cơ sở của dự án(hạn chế chính sửa code file này)
-  - `database` : chứa file sql csdl của dự án
+- __Vai trò từng folder__:
+  - `controllers` : chứa các class Controller, gọi `model` lấy dữ liệu trong csdl và truyền vào mảng `$data[]` gửi cho view hiển thị html hoặc controller trả về json dùng cho công nghệ ajax
+  - `core` : chứa các file, class cốt lõi cơ sở của dự án như App, các lớp MVC, ... (hạn chế chính sửa code file này)
+  - `database` : chứa file `.sql` csdl của dự án
   - `include` : chứa các file tiện dụng,thường được dùng ở nhiều nơi trong dự án
-  - `models`: chứa các class Model với thao tác chính là lấy dự liệu từ csdl và gửi về cho controller xử lí
+  - `models`: chứa các class Model với thao tác chính là lấy dữ liệu từ csdl và trả về cho controller xử lí. Đa số các lớp __đại diện cho một TABLE__ trong CSDL
   - `storages` : folder lưu trữ các file được client gửi về server
   - `view` : file chứa các mã html hiển thị lên trình duyệt client
   - `view/auth` : chứa các trang đăng nhập đăng kí (`dangky.php`,  `dangnhap.php`)
-  - `view/"vai trò"/partials` :  chứa thành phần con của layout như `menu.php` sidebarmenu được hiển thị bởi biển `$sidebar` trong file `layout/main_layout.php` chứa mã html được xử lí từ controller 
-  - `view/"vai trò"/pages` : chứa các trang hiển thị chính, được hiển thị bởi biến `$content` trong file layout chung `layout/main_layout.php`
+  - `view/{role}/partials` :  chứa thành phần con (header của trang, content, footer, ... ) của layout như `menu.php` sidebarmenu được hiển thị bởi biển `$sidebar` trong file `layout/main_layout.php` chứa mã html được xử lí từ controller 
+  - `view/{role}/pages` : chứa các trang hiển thị chính, được hiển thị bởi biến `$content` trong file layout chung `layout/main_layout.php`
 - __Các file cơ sở__:
 ```cmd
 D:.
