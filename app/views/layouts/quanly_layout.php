@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QUIZ</title>
+    <title><?=APP_NAME?></title>
     <base href="<?=BASE_URL?>/">    
     <link rel="stylesheet" href="public/css/main.css">
     <link rel="stylesheet" href="public/css/quanly_layout.css">
