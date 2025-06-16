@@ -297,10 +297,12 @@
             </button>
         </form>
     </div>
-    <button class="thong-ke" onclick="window.location.href='classroom/statistics'">
-        <i class="fa-solid fa-download"></i>
-        Xuất file excel
-    </button>
+    <a href="stats/all-student" download>
+        <button class="thong-ke">
+            <i class="fa-solid fa-download"></i>
+            Xuất file excel
+        </button>
+    </a>
 </div>
 
 <div class="main-content-wrapper">

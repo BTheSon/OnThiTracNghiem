@@ -11,7 +11,7 @@ use function App\Includes\asset;
     <header class="header">
         <div class="logo">QUIZ</div>
         <nav class="nav">
-            <a href="Auth/login" id="loginBtn">Đăng nhập</a>
+            <a href="auth/login" id="loginBtn">Đăng nhập</a>
         </nav>
     </header>
     
