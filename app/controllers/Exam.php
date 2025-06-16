@@ -267,21 +267,18 @@ class Exam extends Controller
         
         // Kiểm tra phương thức request
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            echo json_encode(['status' => 'error', 'message' => 'Invalid request method.']);
-            exit();
+            return_json(['status' => 'error', 'message' => 'Invalid request method.']);
         }
 
         // Kiểm tra thông tin bài thi trong session
         if (empty($_SESSION['exam_info']['hst_id']) || empty($_SESSION['exam_info']['dethi_id'])) {
-            echo json_encode(['status' => 'error', 'message' => 'Exam session not found.']);
-            exit();
+            return_json(['status' => 'error', 'message' => 'Exam session not found.']);
         }
 
         // Lấy dữ liệu gửi lên
         $input = json_decode($_POST['questions'], true);
         if (!is_array($input) || empty($input)) {
-            echo json_encode(['status' => 'error', 'message' => 'No answers submitted.']);
-            exit();
+            return_json(['status' => 'error', 'message' => 'No answers submitted.']);
         }
 
         header('Content-Type: application/json; charset=utf-8');
@@ -290,11 +287,12 @@ class Exam extends Controller
         header('Access-Control-Allow-Headers: Content-Type, Accept'); 
 
         $finalPoint = $this->calculatePoint($input);
-        echo json_encode(['status' => 'success', 'message' => "u got {$finalPoint} point yaa", 'finalPoint' => $finalPoint]);
         // xử lí lưu vào hocsinhthi
         $hst_id = $_SESSION['exam_info']['hst_id'];
         $this->hocSinhThiModel->updateResult($hst_id, $finalPoint);
-        exit();
+
+        
+        return_json(['status' => 'success', 'message' => "u got {$finalPoint} point yaa", 'finalPoint' => $finalPoint]);
     }
 
     private function calculatePoint(array $questions) :float  {
