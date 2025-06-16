@@ -12,11 +12,9 @@
     </div>
 </div>
 
-<form class="score-form" style="margin-top: 30px; text-align: center; display: none;" id="score-form"></form>
+<div class="score-container" id="score-container">
     <h2>Kết quả bài kiểm tra</h2>
-    <label for="score">Điểm của bạn:</label>
-    <p type="text" id="score" name="score" readonly style="width: 60px; text-align: center;">
-    </p>
-    <br><br>
-    <button type="button" onclick="window.location.href='student/home';" class="exit-btn">Thoát</button>
-</form>
+    <label for="score" class="score-label">Điểm của bạn:</label>
+    <p id="score-value" class="score-value"></p>
+    <button type="button" onclick="window.location.href='student/home'" class="exit-btn">Thoát</button>
+</div>

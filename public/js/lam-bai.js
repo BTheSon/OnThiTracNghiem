@@ -199,9 +199,9 @@ function submitTest() {
         alert('Lỗi: Không có ID bài thi');
         return;
     }
-    const confirmSubmit = confirm("Bạn có chắc chắn muốn nộp bài?");
-    if (!confirmSubmit) {
-        return; // Nếu người dùng không xác nhận, thoát hàm
+    const cancelSubmit = !confirm("Bạn có chắc chắn muốn nộp bài?");
+    if (cancelSubmit) {
+        return;
     }
     // Prepare data for submission
     const questions = testData
@@ -234,13 +234,24 @@ function submitTest() {
         alert('Bài thi đã được nộp!');
         return response.json();
     }).then(data => {
+        
         alert(data.message);
+        
+        if (data.status === "error")
+            return;
+
         document.getElementById('scrore-form').style.display = 'block';
         document.getElementById('score').value = data.finalPoint;
     })
     .catch(error => {
         console.error('Error submitting test:', error);
     });
+}
+
+function displayScore(score) {
+    document.querySelector('.container').style.display = 'none';
+    document.querySelector('.score-container').style.display = 'block';
+    document.querySelector('.score-container .score-value').innerText = score;
 }
 
 // Initialize
