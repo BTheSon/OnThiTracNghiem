@@ -7,6 +7,7 @@ use App\Models\HocSinhThiModel;
 use App\Models\NguoiDungModel;
 
 use function App\Includes\navigate;
+use function App\Includes\return_json;
 
 class Classroom extends Controller
 {
@@ -180,6 +181,49 @@ class Classroom extends Controller
                             'public/css/gv-xem-bai-kt.css'
                         ]
                         ]);
+    }
+
+    public function update(int $class_id) : void {
+        header('Content-Type: application/json; charset=utf-8');
+        header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Methods: POST');
+        header('Access-Control-Allow-Headers: Content-Type, Accept');
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $ten_lop = $_POST['ten_lop'] ?? '';
+            $mo_ta = $_POST['mo_ta'] ?? '';
+            $user_id = $_SESSION['user_id'];
+            $user_role = $_SESSION['user_role'];
+
+            // Chỉ giáo viên mới được cập nhật lớp học
+            if ($user_role !== 'gv') {
+                return_json(['success' => false, 'message' => 'Bạn không có quyền cập nhật lớp học.']);
+            }
+
+            // Validate input
+            if (empty($ten_lop)) {
+                return_json(['success' => false, 'message' => 'Tên lớp không được để trống.']);
+            }
+
+            // Kiểm tra quyền sở hữu lớp học
+            $class = $this->lopHocModel->getById($class_id);
+            if (!$class || $class['gv_id'] != $user_id) {
+                return_json(['success' => false, 'message' => 'Bạn không có quyền sửa lớp học này.']);
+            }
+
+            $result = $this->lopHocModel->update($class_id, [
+                'ten_lop' => $ten_lop,
+                'mo_ta' => $mo_ta
+            ]);
+
+            if ($result) {
+                return_json(['success' => true, 'message' => 'Cập nhật lớp học thành công.']);
+            } else {
+                return_json(['success' => false, 'message' => 'Cập nhật lớp học thất bại.']);
+            }
+        } else {
+            return_json(['success' => false, 'message' => 'Phương thức không hợp lệ.']);
+        }
     }
 
     public function delete($class_id) : void{

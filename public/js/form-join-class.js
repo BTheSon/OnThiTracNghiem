@@ -11,6 +11,13 @@ function hideForm() {
     document.getElementById('errorMessage').style.display = 'none'; // Ẩn thông báo lỗi
 }
 
+function confirmDelete(event, classId) {
+    event.preventDefault();
+    if (confirm('Bạn có chắc chắn muốn rời lớp này?\nmọi dữ liệu của bạn trong lớp này sẽ biến mất hoàn toàn!')) {
+        window.location.href = 'classroom/out-class/' + classId;
+    }
+}
+
 async function joinClass() {
     const classCode = document.getElementById('classCode').value;
     const errorMessage = document.getElementById('errorMessage');
