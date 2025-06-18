@@ -240,8 +240,7 @@ function submitTest() {
         if (data.status === "error")
             return;
 
-        document.getElementById('scrore-form').style.display = 'block';
-        document.getElementById('score').value = data.finalPoint;
+        displayScore(data.finalPoint);
     })
     .catch(error => {
         console.error('Error submitting test:', error);
@@ -249,9 +248,10 @@ function submitTest() {
 }
 
 function displayScore(score) {
+    console.log("hekio");
     document.querySelector('.container').style.display = 'none';
     document.querySelector('.score-container').style.display = 'block';
-    document.querySelector('.score-container .score-value').innerText = score;
+    document.getElementById('score-value').textContent = score;
 }
 
 // Initialize

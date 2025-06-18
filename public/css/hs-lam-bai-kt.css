@@ -127,6 +127,7 @@ body {
 }
 
 .score-container {
+    display: none;
     margin: 50px auto;
     max-width: 400px;
     padding: 30px;
