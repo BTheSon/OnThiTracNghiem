@@ -47,6 +47,9 @@ class Teacher extends Controller
                         'info_classes'=> $allClass,
                         'CSS_FILE' => [
                             'public/css/giaovien.css'
+                        ],
+                        'JS_FILE' => [
+                            'public/js/modal.js',
                         ]
                     ]);
     }
