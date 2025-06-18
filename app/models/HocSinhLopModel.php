@@ -87,6 +87,10 @@ class HocSinhLopModel extends Model
 
     /**
      * Học sinh thoát lớp học và xóa tất cả dữ liệu liên quan
+     * @return array
+     * - success: true nếu thành công, false nếu thất bại
+     * - message: thông báo kết quả
+     * - data: dữ liệu trả về (nếu có)
      */
     function thoat_sach(int $hs_id, int $lop_id): array {
         $db = $this->db;
