@@ -118,8 +118,9 @@ class Exam extends Controller
 
             // tạo bài thi
             $examId = $this->deThiModel->create($examData);
-            
-            if (!$examId) {
+            $hsthi = $this->hocSinhThiModel->addAllStudentsToExam($examId, $_SESSION['class_id']);
+
+            if (empty($examId) || $examId === 0) {
                 echo '<script>alert("Failed to create exam. Please try again.");</script>';
                 navigate('/teacher/home');
                 exit();
@@ -416,6 +417,7 @@ class Exam extends Controller
         }
 
         $this->hocSinhThiModel->updateResult($hst_id, $finalPoint);
+        $this->hocSinhThiModel->updateState($hst_id, 'hoan_thanh');
         $this->traLoiBaiThiModel->saveAnswersByTemp($hst_id);
 
         return_json(['status' => 'success', 'message' => "u got {$finalPoint} point yaa", 'finalPoint' => $finalPoint]);

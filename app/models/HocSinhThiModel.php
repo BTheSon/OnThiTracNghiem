@@ -74,6 +74,18 @@ class HocSinhThiModel extends Model
         
         return (int)$this->db->fetch("SELECT LAST_INSERT_ID()")['LAST_INSERT_ID()'];
     }
+
+    /**
+     * thêm tất cả học sinh trong lớp vào để thi
+     */
+    public function addAllStudentsToExam(int $deThiId, int $lh_id): int {
+        $sql = "INSERT IGNORE INTO HocSinhThi (de_thi_id, hs_id, trang_thai)
+                SELECT ?, hs_id, 'chua_lam'
+                FROM HocSinhLop
+                WHERE lh_id = ?;";
+        return $this->db->execute($sql, [$deThiId, $lh_id]);
+    }
+
     
     /**
      * Cập nhật kết quả thi
