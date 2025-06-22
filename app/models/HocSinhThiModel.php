@@ -133,4 +133,22 @@ class HocSinhThiModel extends Model
         $result = $this->db->fetch($sql, [$deThiId]);
         return $result['count'] ?? 0;
     }
+
+    /**
+     * Cập nhật thời gian lưu cuối cùng của bài thi
+     */
+    public function updateLastSave(int $id): int
+    {
+        $sql = "UPDATE {$this->table} SET luu_lan_cuoi = ? WHERE id = ?";
+        return $this->db->execute($sql, [date('Y-m-d H:i:s'), $id]);
+    }
+
+    /**
+     * Cập nhật trạng thái bài thi của học sinh
+     */
+    public function updateState(int $id, string $trangThai): int
+    {
+        $sql = "UPDATE {$this->table} SET trang_thai = ? WHERE id = ?";
+        return $this->db->execute($sql, [$trangThai, $id]);
+    }
 }
