@@ -1,4 +1,4 @@
-
+<!-- 
 <p style="
     background-color: red; 
     padding: 20px; 
@@ -8,4 +8,6 @@
     color: white;
     ">
     Thén quay lại nyc
-</p>
+</p> -->
+<?php
+echo PHP_BINARY;
