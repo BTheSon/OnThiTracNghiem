@@ -127,7 +127,9 @@
 | `hoc_sinh_id` | INT                 | FK -> NguoiDung.id             | ID của học sinh đã thực hiện bài làm này                                     |
 | `bat_dau`     | DATETIME            |                                | Thời điểm chính xác học sinh bắt đầu làm bài                                 |
 | `ket_thuc`    | DATETIME            | NULLABLE                       | Thời điểm học sinh nộp bài hoặc thời điểm hết giờ làm bài                     |
+| `luu_lan_cuoi`| DATETIME            | NULLABLE                       | Thời điểm lưu lại lần cuối cùng của học sinh trong quá trình làm bài          |
 | `diem`        | FLOAT               | NULLABLE                       | Điểm số cuối cùng học sinh đạt được                                          |
+| `trang_thai`  | ENUM('chua_lam', 'dang_lam', 'da_nop', 'gian_doan') | NULLABLE | Trạng thái của lượt thi (chưa làm bài, đang làm, đã nộp, gián đoạn trong quá trình thi)|
 
 ## 11. Bảng `TraLoiBaiThi` (Trả lời bài thi)
 
@@ -140,6 +142,17 @@
 | `cau_hoi_id` | INT                 | FK -> CauHoi.id                | ID của câu hỏi cụ thể mà học sinh đang trả lời                                          |
 | `da_id`      | INT                 | FK -> DapAn.id                 | ID của phương án lựa chọn (trong bảng `DapAn`) mà học sinh đã chọn                       |
 | `dung`       | BOOLEAN             |                                | Đánh dấu câu trả lời này đúng (`true`) hay sai (`false`)                                |
+
+## 12. Bảng `TraLoiTam` (Trả lời tạm)
+
+-  Lưu trữ các câu trả lời tạm thời của học sinh trong quá trình làm bài thi, cho phép họ lưu lại tiến độ và tiếp tục sau.
+
+| Tên Cột      | Kiểu Dữ liệu        | Ràng buộc/Ghi chú              | Mô tả                                                                                   |
+| :----------- | :------------------ | :----------------------------- | :-------------------------------------------------------------------------------------- |
+| `id`         | INT                 | PK, Auto Increment             | Khóa chính định danh duy nhất cho mỗi câu trả lời tạm thời của học sinh                 |
+| `hs_thi_id`  | INT                 | FK -> HocSinhThi.id            | ID của lượt làm bài thi (trong bảng `HocSinhThi`) mà câu trả lời này thuộc về           |
+| `cau_hoi_id` | INT                 | FK -> CauHoi.id                | ID của câu hỏi cụ thể mà học sinh đang trả lời                                          |
+| `da_id`      | INT                 | FK -> DapAn.id                 | ID của phương án lựa chọn (trong bảng `DapAn`) mà học sinh đã chọn                      |
 
 ---
 

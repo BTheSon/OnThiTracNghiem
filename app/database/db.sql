@@ -175,3 +175,31 @@ CREATE INDEX idx_hocsinthi_ket_thuc ON HocSinhThi(ket_thuc);
 CREATE INDEX idx_traloibaithi_hs_thi_id ON TraLoiBaiThi(hs_thi_id);
 CREATE INDEX idx_traloibaithi_cau_hoi_id ON TraLoiBaiThi(cau_hoi_id);
 CREATE INDEX idx_traloibaithi_da_id ON TraLoiBaiThi(da_id);
+
+
+-- sql cần chạy sau khi tạo bảng
+
+
+CREATE TABLE TraLoiTam (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    hs_thi_id INT NOT NULL,
+    cau_hoi_id INT NOT NULL,
+    da_id INT NOT NULL,
+    
+    UNIQUE KEY uq_tra_loi_tam (hs_thi_id, cau_hoi_id),
+    
+    FOREIGN KEY (hs_thi_id) REFERENCES HocSinhThi(id) ON DELETE CASCADE,
+    FOREIGN KEY (cau_hoi_id) REFERENCES CauHoi(id) ON DELETE CASCADE,
+    FOREIGN KEY (da_id) REFERENCES DapAn(id) ON DELETE CASCADE
+
+    INDEX idx_hs_thi (hs_thi_id),
+    INDEX idx_cau_hoi (cau_hoi_id)
+
+); CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+
+ALTER TABLE HocSinhThi
+ADD COLUMN luu_lan_cuoi DATETIME NULL AFTER ket_thuc;
+
+ALTER TABLE HocSinhThi
+ADD COLUMN trang_thai ENUM('chua_lam', 'dang_lam', 'da_nop', 'gian_doan') NULL AFTER luu_lan_cuoi;
