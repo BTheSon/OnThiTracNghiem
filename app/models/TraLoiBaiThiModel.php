@@ -40,6 +40,23 @@ class TraLoiBaiThiModel extends Model
         
         return (int)$this->db->fetch("SELECT LAST_INSERT_ID()")['LAST_INSERT_ID()'];
     }
+
+    /**
+     * Lưu câu trả lời từ bảng tạm vào bảng chính
+     */
+    public function saveAnswersByTemp($hst_id): int
+    {
+        $sql = "INSERT INTO TraLoiBaiThi (hs_thi_id, cau_hoi_id, da_id, dung)
+                SELECT 
+                    tlt.hs_thi_id,
+                    tlt.cau_hoi_id,
+                    tlt.da_id,
+                    da.da_dung AS dung
+                FROM TraLoiTam tlt
+                JOIN DapAn da ON tlt.da_id = da.id;
+                WHERE tlt.hs_thi_id = ?";
+        return $this->db->execute($sql, [$hst_id]);
+    }
     
     /**
      * Xóa câu trả lời
