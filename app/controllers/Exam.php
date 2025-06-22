@@ -7,6 +7,8 @@ use App\Models\CauHoiModel;
 use App\Models\DapAnModel;
 use App\Models\DeThiModel;
 use App\Models\HocSinhThiModel;
+use App\Models\TraLoiBaiThiModel;
+use App\Models\TraLoiTamModel;
 use Exception;
 
 use function App\Includes\navigate;
@@ -19,7 +21,8 @@ class Exam extends Controller
     private CauHoiDeThiModel $cauHoiDeThiModel;
     private HocSinhThiModel $hocSinhThiModel;
     private DapAnModel $dapAnModel;
-
+    private TraLoiTamModel $traLoiTamModel;
+    private TraLoiBaiThiModel $traLoiBaiThiModel;
     public function __construct() {
         if (empty($_SESSION['user_id'])) {
             navigate('/auth/login');
@@ -30,6 +33,8 @@ class Exam extends Controller
         $this->cauHoiDeThiModel = new CauHoiDeThiModel();
         $this->hocSinhThiModel = new HocSinhThiModel();
         $this->dapAnModel = new DapAnModel();
+        $this->traLoiTamModel = new TraLoiTamModel();
+        $this->traLoiBaiThiModel = new TraLoiBaiThiModel();
     }
 
     /**
@@ -263,8 +268,111 @@ class Exam extends Controller
             throw new Exception('phải là phương thức post');
         }
     } 
-    public function submit() {
+
+
+    /**
+     * Lưu trạng thái khi client gặp sự cố (ví dụ: mất kết nối, reload trang)
+     * Client sẽ gọi API này để lưu lại trạng thái làm bài hiện tại
+     */
+    public function on_crash(): void {
+        // Các header này không cần thiết khi dùng với sendBeacon, nhưng không gây lỗi nếu giữ lại
+        header('Content-Type: application/json; charset=utf-8');
+        header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Methods: POST');
+        header('Access-Control-Allow-Headers: Content-Type, Accept');
+
+        // Kiểm tra phương thức request
+        // sendBeacon thường gửi dữ liệu bằng phương thức POST, nhưng có thể không phải lúc nào cũng là POST
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            return_json(['status' => 'error', 'message' => 'Invalid request method.']);
+        }
+
+        if (empty($_SESSION['exam_info']['hst_id'])) {
+            return_json(['status' => 'error', 'message' => 'Exam session not found.']);
+        }
+
+        $hst_id = $_SESSION['exam_info']['hst_id'];
+
+        try {
+            $this->hocSinhThiModel->updateLastSave($hst_id);
+            $this->hocSinhThiModel->updateState($hst_id, 'gian_doan');
+            return_json(['status' => 'success', 'message' => 'Crash state saved.', 'time' => date('Y-m-d H:i:s')]);
+        } catch (Exception $e) {
+            return_json(['status' => 'error', 'message' => 'Failed to save crash state: ' . $e->getMessage()]);
+        }
+    }
+
+
+    /**
+     * lưu câu trả lời tạm thời của học sinh
+     */
+    public function save() : void {
+        header('Content-Type: application/json; charset=utf-8');
+        header('Accept: application/json');
+        header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Methods: POST');
+        header('Access-Control-Allow-Headers: Content-Type, Accept');
+
+        // Kiểm tra phương thức request
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            return_json(['status' => 'error', 'message' => 'Invalid request method.']);
+        }
+
+        // Kiểm tra thông tin bài thi trong session
+        if (empty($_SESSION['exam_info']['hst_id']) || empty($_SESSION['exam_info']['dethi_id'])) {
+            return_json(['status' => 'error', 'message' => 'Exam session not found.']);
+        }
         
+        $hst_id = $_SESSION['exam_info']['hst_id'];
+
+        // Lấy dữ liệu JSON từ body
+        $rawInput = file_get_contents('php://input');
+
+        if (empty($rawInput)) {
+            return_json(['status' => 'error', 'message' => 'No data received.']);
+        }
+
+        $input = json_decode($rawInput, true);
+
+        if (!is_array($input) || empty($input)) {
+            return_json(['status' => 'error', 'message' => 'No answers submitted.']);
+        }
+
+        $answers = $input['questions'] ?? [];
+        if (empty($answers)) {
+            return_json(['status' => 'error', 'message' => 'No answers submitted.']);
+        }
+
+        // Kiểm tra định dạng câu trả lời
+        foreach ($answers as $questionId => $answerId) {
+            if (!is_numeric($questionId) || !is_numeric($answerId)) {
+                return_json(['status' => 'error', 'message' => 'Invalid answer format.']);
+            }
+        }
+
+        // lưu câu trả lời tạm thời
+        try {
+            $this->hocSinhThiModel->updateLastSave($hst_id);
+            $numLineChange = $this->traLoiTamModel->updateAnswers($hst_id, $answers);
+        } catch (Exception $e) {
+            return_json(['status' => 'error', 'message' => 'Failed to save answers: ' . $e->getMessage()]);
+        }
+
+        return_json(['status' => 'success', 'message' => 'Save successful.', 'count' => $numLineChange]);
+    }
+
+    /**
+     * Nộp bài thi
+     * lấy data trong bảng tạm traloitam để lưu vào bảng traloibaithi
+     * tính điểm và lưu vào bảng hocsinhthi
+     */
+    public function submit() : void {
+        header('Content-Type: application/json; charset=utf-8');
+        header('Access-Control-Allow-Origin: *');
+        header('Accept: application/json');
+        header('Access-Control-Allow-Methods: POST');
+        header('Access-Control-Allow-Headers: Content-Type, Accept'); 
+
         // Kiểm tra phương thức request
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             return_json(['status' => 'error', 'message' => 'Invalid request method.']);
@@ -275,23 +383,41 @@ class Exam extends Controller
             return_json(['status' => 'error', 'message' => 'Exam session not found.']);
         }
 
-        // Lấy dữ liệu gửi lên
-        $input = json_decode($_POST['questions'], true);
+        $rawInput = file_get_contents('php://input');
+
+        if (empty($rawInput)) {
+            return_json(['status' => 'error', 'message' => 'No data received.']);
+        }
+
+        $input = json_decode($rawInput, true);
+
         if (!is_array($input) || empty($input)) {
+            return_json(['status' => 'error', 'message' => 'No data submitted.']);
+        }
+        
+        
+        $answers = $input['questions'] ?? [];
+        if (empty($answers)) {
             return_json(['status' => 'error', 'message' => 'No answers submitted.']);
         }
 
-        header('Content-Type: application/json; charset=utf-8');
-        header('Access-Control-Allow-Origin: *'); // Cho phép tất cả domain (có thể giới hạn domain cụ thể)
-        header('Access-Control-Allow-Methods: POST');
-        header('Access-Control-Allow-Headers: Content-Type, Accept'); 
+        // Kiểm tra định dạng câu trả lời
+        foreach ($answers as $questionId => $answerId) {
+            if (!is_numeric($questionId) || !is_numeric($answerId)) {
+                return_json(['status' => 'error', 'message' => 'Invalid answer format.']);
+            }
+        }
 
-        $finalPoint = $this->calculatePoint($input);
+        $finalPoint = $this->calculatePoint($answers);
         // xử lí lưu vào hocsinhthi
         $hst_id = $_SESSION['exam_info']['hst_id'];
-        $this->hocSinhThiModel->updateResult($hst_id, $finalPoint);
+        if (empty($hst_id)) {
+            return_json(['status' => 'error', 'message' => 'Exam session ID not found.']);
+        }
 
-        
+        $this->hocSinhThiModel->updateResult($hst_id, $finalPoint);
+        $this->traLoiBaiThiModel->saveAnswersByTemp($hst_id);
+
         return_json(['status' => 'success', 'message' => "u got {$finalPoint} point yaa", 'finalPoint' => $finalPoint]);
     }
 

@@ -2,6 +2,7 @@ let testData = [];
 let currentQuestion = 101; // Match first question ID
 let timeLeft = 1800; // Default fallback
 let hst_id = null;
+let autoSaveInterval = 60; // Thời gian tự động lưu (giây)
 
 // Render LaTeX with retry mechanism
 function renderLatex(mediaBlock, latex) {
@@ -82,7 +83,8 @@ function renderQuestion() {
 
 // Select option
 function selectOption(optionId) {
-    testData.find(q => q.id === currentQuestion).answer = optionId;
+    const question = testData.find(q => q.id === currentQuestion);
+    question.answer = optionId;
     renderQuestion();
 }
 
@@ -120,9 +122,50 @@ function updateAnsweredCount() {
     document.getElementById('answered-count').innerText = `Số câu đã chọn: ${answered}/${testData.length}`;
 }
 
+// Auto-save test data
+async function autoSave() {
+    if (!hst_id) {
+        console.warn('Không có ID bài thi để tự động lưu');
+        return;
+    }
+
+    // Prepare data for auto-save
+    const questions = testData
+        .filter(q => q.answer !== null)
+        .reduce((acc, q) => {
+            acc[q.id] = q.answer;
+            return acc;
+        }, {});
+
+    const payload = {
+        hst_id: hst_id,
+        questions: questions
+    };
+
+    try {
+        const response = await fetch(`exam/save`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+            throw new Error('Auto-save failed');
+        }
+
+        console.log('Tự động lưu thành công:', await response.json());
+    } catch (error) {
+        console.error('Lỗi khi tự động lưu:', error);
+    }
+}
+
 // Timer
 function startTimer() {
     const timerElement = document.getElementById('timer');
+    let autoSaveCounter = autoSaveInterval; // Đếm ngược cho tự động lưu
     setInterval(() => {
         if (timeLeft <= 0) {
             timerElement.innerText = 'Hết thời gian!';
@@ -134,9 +177,15 @@ function startTimer() {
         const seconds = timeLeft % 60;
         timerElement.innerText = `Thời gian còn lại: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
         timeLeft--;
+
+        // Kiểm tra tự động lưu mỗi giây
+        autoSaveCounter--;
+        if (autoSaveCounter <= 0) {
+            autoSave();
+            autoSaveCounter = autoSaveInterval; // Reset đếm ngược
+        }
     }, 1000);
 }
-
 
 // Fetch test data
 async function fetchTestData() {
@@ -194,7 +243,7 @@ async function fetchTestData() {
 }
 
 // Submit test
-function submitTest() {
+async function submitTest() {
     if (!hst_id) {
         alert('Lỗi: Không có ID bài thi');
         return;
@@ -203,6 +252,10 @@ function submitTest() {
     if (cancelSubmit) {
         return;
     }
+
+    // gọi lại auto save để lưu những câu hỏi cuối cùng vào bảng tạm
+    autoSave();
+
     // Prepare data for submission
     const questions = testData
         .filter(q => q.answer !== null)
@@ -211,40 +264,38 @@ function submitTest() {
             return acc;
         }, {});
 
-    const formData = new FormData();
-    formData.append('hst_id', hst_id);
-    formData.append('questions', JSON.stringify(questions));
-
-    const body = new URLSearchParams({
+    const payload = {
         hst_id: hst_id,
-        questions: JSON.stringify(questions)
-    });
-    fetch('exam/submit', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Accept': 'application/json'
-        },
-        body: body
-    })
-    .then(response => {
+        questions: questions
+    };
+
+    try {
+        const response = await fetch('exam/submit', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        });
+
         if (!response.ok) {
             throw new Error('Submission failed');
         }
+
+        const data = await response.json();
         alert('Bài thi đã được nộp!');
-        return response.json();
-    }).then(data => {
-        
         alert(data.message);
         
-        if (data.status === "error")
+        if (data.status === "error") {
             return;
+        }
 
         displayScore(data.finalPoint);
-    })
-    .catch(error => {
+    } catch (error) {
         console.error('Error submitting test:', error);
-    });
+        alert('Lỗi khi nộp bài thi');
+    }
 }
 
 function displayScore(score) {
@@ -259,7 +310,6 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchTestData();
 });
 
-document.addEventListener('beforeunload', () => {
-    submitTest();
+window.addEventListener('unload', () => {
+    navigator.sendBeacon('exam/on-crash');
 });
-
