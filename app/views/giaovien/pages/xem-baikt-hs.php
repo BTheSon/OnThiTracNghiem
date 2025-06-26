@@ -32,9 +32,9 @@
                         <td><?php echo $exam['bat_dau'] ? date('Y-m-d H:i', strtotime($exam['bat_dau'])) : 'Chưa xác định'; ?></td>
                         <td><?php echo htmlspecialchars($exam['tg_phut']); ?></td>
                         <td class="<?php echo $exam['diem'] !== null ? 'status-done' : 'status-pending'; ?>">
-                            <?php echo $exam['diem'] !== null ? 'Đã làm' : 'Chưa làm'; ?>
+                            <?php echo $exam['trang_thai']; ?>
                         </td>
-                        <td><?php echo $exam['diem'] !== null ? number_format($exam['diem'], 1) . '/' . '10.0' : '-'; ?></td>
+                        <td><?php echo $exam['diem'] !== null ? number_format((float)$exam['diem'], 1) . '/' . '10.0' : '-'; ?></td>
                     </tr>
                 <?php endforeach; ?>
             <?php else: ?>

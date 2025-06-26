@@ -141,7 +141,16 @@ class Classroom extends Controller
 
         $result = $this->hocSinhThiModel->getResultsByStudent($student_id);
         $userInfo = $this->nguoiDungModel->getById($student_id);
-
+        // formai lại $result['trang_thai'] thành trạng thái dễ đọc dùng switch case với các giá trị:'chua_lam', 'dang_lam', 'da_nop', 'gian_doan'
+        foreach ($result as &$exam) {
+            $exam['trang_thai'] = match ($exam['trang_thai']) {
+                'da_nop' => 'Đã nộp',
+                'dang_lam' => 'Đang làm',
+                'chua_lam' => 'Chưa làm',
+                'gian_doan' => 'Gián đoạn',
+                default => 'Không xác định'
+            };
+        }
     
         $this->view('layouts/main_layout.php', 
                     [// layout partials

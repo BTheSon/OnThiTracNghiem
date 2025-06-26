@@ -57,7 +57,7 @@
                     <div class="exam-score">
                         <span>
                             <?php
-                                if ($item['trang_thai'] === 'da_tham_gia') 
+                                if ($item['trang_thai'] === 'da_nop') 
                                     echo 'Điểm: ' . number_format($item['diem'] ?? 0.0, 1) . ' / 10.0';
                                 else
                                     echo '<strong style="color: red;"> Bạn chưa làm</strong>';

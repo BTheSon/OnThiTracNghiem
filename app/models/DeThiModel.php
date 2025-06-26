@@ -126,12 +126,19 @@ class DeThiModel extends Model
                 dt.ngay_dong,
                 dt.ngay_tao,
                 lh.ten_lop,
-                lh.ma_lop
+                lh.ma_lop,
+                hst.trang_thai,
+                hst.id as hst_id
             FROM DeThi dt
             INNER JOIN LopHoc lh ON dt.lh_id = lh.id
             LEFT JOIN HocSinhThi hst ON dt.id = hst.de_thi_id AND hst.hs_id = ? -- hs_id
-            WHERE dt.ngay_dong > NOW() -- Kiểm tra đề thi chưa đóng
-            AND hst.de_thi_id IS NULL;";
+            WHERE 
+                dt.ngay_dong > NOW() -- Kiểm tra đề thi chưa đóng
+                AND (
+                    hst.trang_thai <> 'da_nop'
+                    OR hst.id IS NULL -- Học sinh chưa tham gia
+                )
+            ORDER BY dt.ngay_thi DESC;";
 
         return $this->db->fetchAll($sql, [$hs_id]) ?? [];
     }
@@ -155,11 +162,7 @@ class DeThiModel extends Model
                     hst.diem,
                     hst.bat_dau,
                     hst.ket_thuc,
-                    CASE 
-                        WHEN hst.id IS NOT NULL THEN 'da_tham_gia'
-                        WHEN dt.ngay_dong <= NOW() THEN 'qua_han'
-                        ELSE 'khac'
-                    END as trang_thai
+                    hst.trang_thai
                 FROM DeThi dt
                 INNER JOIN LopHoc lh ON dt.lh_id = lh.id
                 LEFT JOIN HocSinhThi hst ON dt.id = hst.de_thi_id AND hst.hs_id = ?

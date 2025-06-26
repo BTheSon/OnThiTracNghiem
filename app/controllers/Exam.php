@@ -219,17 +219,25 @@ class Exam extends Controller
      * lấy câu hỏi trong bài thi bài thi với examid trong session
      */
     public function questions(): void {
+        header('Content-Type: application/json; charset=utf-8');
+        header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Methods: POST');
+        header('Access-Control-Allow-Headers: Content-Type, Accept'); 
+            
         // xác thực người dùng
         if (empty($_SESSION['user_role']) || $_SESSION['user_role'] !== 'hs') {
-            navigate('/auth/login');
-            exit();
+            return_json(["status" => "error", "message" => "Unauthorized"]);
         }
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $dethi_id = $_SESSION['exam_info']['dethi_id'];
             
-            $questions = $this->cauHoiDeThiModel->getQuestionsByExam($dethi_id);
-            $dethi = $this->deThiModel->getById($_SESSION['exam_info']['dethi_id']);
+            try {
+                $questions = $this->cauHoiDeThiModel->getQuestionsByExam($dethi_id);
+                $dethi = $this->deThiModel->getById($_SESSION['exam_info']['dethi_id']);
+            }catch (Exception $e) {
+                return_json(["status" => "error", "message" => $e->getMessage()]);
+            }
             
             $data = [
                 "status" => "success",
@@ -258,15 +266,10 @@ class Exam extends Controller
                 ]
                 ];
 
-            header('Content-Type: application/json; charset=utf-8');
-            header('Access-Control-Allow-Origin: *');
-            header('Access-Control-Allow-Methods: POST');
-            header('Access-Control-Allow-Headers: Content-Type, Accept'); 
-            
             echo json_encode($data);
             exit();
         } else {
-            throw new Exception('phải là phương thức post');
+            return_json(["status" => "error", "message" => "Invalid request method."]);
         }
     } 
 
@@ -415,11 +418,15 @@ class Exam extends Controller
         if (empty($hst_id)) {
             return_json(['status' => 'error', 'message' => 'Exam session ID not found.']);
         }
-
-        $this->hocSinhThiModel->updateResult($hst_id, $finalPoint);
-        $this->hocSinhThiModel->updateState($hst_id, 'hoan_thanh');
-        $this->traLoiBaiThiModel->saveAnswersByTemp($hst_id);
-
+        // xử lí ngoại lệ
+        try {
+            $this->hocSinhThiModel->updateResult($hst_id, $finalPoint);
+            $this->hocSinhThiModel->updateState($hst_id, 'da_nop');
+            $this->traLoiBaiThiModel->saveAnswersByTemp($hst_id);
+        } catch (Exception $e) {
+            return_json(['status' => 'error', 'message' => 'Failed to save answers: ' . $e->getMessage()]);
+        }
+        
         return_json(['status' => 'success', 'message' => "u got {$finalPoint} point yaa", 'finalPoint' => $finalPoint]);
     }
 

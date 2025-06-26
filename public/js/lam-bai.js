@@ -199,7 +199,7 @@ async function fetchTestData() {
         const result = await response.json();
         console.log('Server response:', result);
         if (result.status !== 'success') {
-            throw new Error('Failed to load test data');
+            throw new Error(result.message);
         }
 
         // Map response data to testData format
@@ -236,7 +236,7 @@ async function fetchTestData() {
         updateAnsweredCount();
         startTimer();
     } catch (error) {
-        console.error('Error fetching test data:', error);
+        console.error('Error fetching test data: ', error);
         document.getElementById('question-title').innerText = 'Lỗi tải bài thi';
         document.getElementById('media-block').innerHTML = '<div class="media-error">Không thể tải dữ liệu bài thi</div>';
     }
@@ -284,6 +284,9 @@ async function submitTest() {
         }
 
         const data = await response.json();
+        if (data.status === "error") {
+            throw new Error("Status error: " + data.message);
+        }
         alert('Bài thi đã được nộp!');
         alert(data.message);
         
