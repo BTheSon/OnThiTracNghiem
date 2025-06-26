@@ -15,7 +15,6 @@ class App {
             unset($url[0]);
         } else {
             // Sử dụng Controller mặc định nếu không tồn tại
-            
             print_r($url);
             die("k tim thay controller");
             $this->controller = 'App\\Controllers\\' . $this->controller;
@@ -31,6 +30,11 @@ class App {
                 $this->method = $methodName;
                 unset($url[1]);
             }
+        }
+
+        // nếu method index không tồn tại thì ném ngoại lệ
+        if (!method_exists($this->controller, $this->method)) {
+            die("Method {$this->method} không tồn tại trong controller {$this->controller}");
         }
 
         // Lấy các tham số còn lại
