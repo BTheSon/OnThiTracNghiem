@@ -131,6 +131,33 @@ class Document extends Controller
             exit();
         }
     }
+
+    public function delete(int $id): void
+    {
+        // Xác thực quyền truy cập
+        if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'gv') {
+            navigate('/auth/login');
+            exit();
+        }
+
+        // Lấy thông tin tài liệu từ cơ sở dữ liệu
+        $document = $this->documentModel->getById($id);
+        if ($document) {
+            $filePath = BASE_DIR . $document['file_dir'];
+            if (file_exists($filePath)) {
+                unlink($filePath);
+            }
+
+            if ($this->documentModel->delete($id)) {
+                navigate('/document/list');
+            } else {
+                echo "<script>alert('Lỗi khi xóa tài liệu.'); window.location.href = '/document/list';</script>";
+            }
+        } else {
+            echo "<script>alert('Tài liệu không tồn tại.'); window.location.href = '/document/list';</script>";
+        }
+    }
+
     public function list(): void
     {
         // xác thực quyền truy cập
