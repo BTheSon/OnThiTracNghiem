@@ -22,6 +22,11 @@ class Auth extends Controller
         $this->login();
         header('Location: '. BASE_URL .'/auth/login');
     }
+
+    /**
+     * Hiển thị trang đăng nhập.
+     * Xử lý đăng nhập nếu có yêu cầu POST.
+     */
     public function login(): void {
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -60,7 +65,10 @@ class Auth extends Controller
             $this->view('auth/dangnhap.php');
         }
     }
-
+/**
+     * Hiển thị trang đăng ký.
+     * Xử lý đăng ký nếu có yêu cầu POST.
+     */
     public function register(): void{
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $ho_ten = $_POST['name'];
@@ -105,7 +113,10 @@ class Auth extends Controller
             $this->view('auth/dangky.php');
         }
     }
-    
+    /**
+     * Hiển thị trang đổi mật khẩu.
+     * Xử lý đổi mật khẩu nếu có yêu cầu POST.
+     */
     public function change_password(){
         $userId = $_SESSION['user_id'] ?? null;
         $message = '';
@@ -136,7 +147,10 @@ class Auth extends Controller
         ]);
     }
 
-
+    /**
+     * Xử lý đăng xuất người dùng.
+     * Xóa session và chuyển hướng về trang đăng nhập.
+     */
     public function logout(): void {
         // Destroy the session
         session_destroy();

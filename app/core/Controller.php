@@ -3,6 +3,11 @@ namespace App\Core;
 
 use Exception;
 
+/**
+ * Controller class
+ * Cơ sở cho các controller trong ứng dụng.
+ * Cung cấp các phương thức để tải model và view.
+ */
 class Controller
 {
     // tải model sử dụng autoloading
@@ -89,7 +94,13 @@ class Controller
         $layoutPath = BASE_VIEWS_DIR . '/' . $layout;
         return $this->normalizePath($layoutPath);
     }
-
+    /** 
+     * cách hoạt động:
+     * - Duyệt qua mảng $layoutPartials
+     * - Với mỗi phần tử, kiểm tra xem file partial có tồn tại không
+     * - Nếu tồn tại, gọi hàm getHtml để lấy nội dung HTML của partial
+     * - Nếu không tồn tại, gán giá trị rỗng cho phần tử tương ứng
+     */
     private function loadPartials(array $layoutPartials, array $data): array {
         $partials = [];
         foreach ($layoutPartials as $key => $partialFile) {
@@ -104,6 +115,14 @@ class Controller
         return $partials;
     }
 
+    /**
+     * cách hoạt động:
+     * - Kiểm tra xem mảng $data có chứa khóa 'CSS_FILE' không
+     * - Nếu có, kiểm tra xem giá trị của khóa này là một mảng hay không
+     * - Nếu là mảng, duyệt qua từng phần tử và tạo thẻ <link> cho mỗi file CSS
+     * - Trả về chuỗi chứa tất cả các thẻ <link> đã được tạo
+     * - Nếu không có khóa 'CSS_FILE' hoặc giá trị không phải là mảng, trả về chuỗi rỗng
+     */
     private function buildCssLinks(array $data): string {
         if (isset($data['CSS_FILE']) && is_array($data['CSS_FILE'])) {
             $cssLinks = [];
@@ -115,6 +134,14 @@ class Controller
         return '';
     }
 
+    /**
+     * cách hoạt động:
+     * - Kiểm tra xem mảng $data có chứa khóa 'JS_FILE' không
+     * - Nếu có, kiểm tra xem giá trị của khóa này là một mảng hay không
+     * - Nếu là mảng, duyệt qua từng phần tử và tạo thẻ <script> cho mỗi file JS
+     * - Trả về chuỗi chứa tất cả các thẻ <script> đã được tạo
+     * - Nếu không có khóa 'JS_FILE' hoặc giá trị không phải là mảng, trả về chuỗi rỗng
+     */
     private function buildJsLinks(array $data): string {
         if (isset($data['JS_FILE']) && is_array($data['JS_FILE'])) {
             $jsLinks = [];
@@ -126,6 +153,15 @@ class Controller
         return '';
     }
 
+    /**
+     * Lấy nội dung của partial 'content' từ mảng $partials.
+     * Nếu không tìm thấy hoặc nội dung rỗng, ném ra ngoại lệ.
+     *
+     * @param array $partials Mảng chứa các partials đã được tải.
+     * @param array $layoutPartials Mảng chứa các phần của layout.
+     * @return string Nội dung của partial 'content'.
+     * @throws Exception Nếu không tìm thấy nội dung 'content'.
+     */
     private function getContentPartial(array $partials, array $layoutPartials): string {
         if (isset($partials['content']) && !empty($partials['content'])) {
             return $partials['content'];
@@ -133,6 +169,14 @@ class Controller
         throw new Exception("Nội dung partial không tìm thấy hoặc rỗng: " . ($layoutPartials['content'] ?? ''));
     }
 
+    /**
+     * Lấy nội dung HTML từ file view.
+     * Sử dụng output buffering để lấy nội dung mà không in ra trực tiếp.
+     *
+     * @param string $view Đường dẫn đến file view.
+     * @param array $data Dữ liệu để truyền vào view.
+     * @return string Nội dung HTML của view.
+     */
     private function getHtml($view, $data = []): string {
         ob_start();
         require $view;

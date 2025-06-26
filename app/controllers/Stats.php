@@ -4,6 +4,11 @@ use App\Core\Controller;
 use App\Models\ThongKeHocSinh;
 use DateTime;
 
+/**
+ * Stats Controller
+ * Xử lý các yêu cầu liên quan đến thống kê học sinh.
+ * Bao gồm thống kê điểm, thời gian làm bài và tỷ lệ hoàn thành.
+ */
 class Stats extends Controller {
 
     private ThongKeHocSinh $thong_ke_hoc_sinh;
@@ -11,7 +16,11 @@ class Stats extends Controller {
         $this->thong_ke_hoc_sinh = $this->model("ThongKeHocSinh");
     }
 
-    
+    /**
+     * Hiển thị thống kê tất cả học sinh.
+     * Chỉ dành cho giáo viên.
+     * response: xuất file Excel thống kê
+     */
     public function all_student(): void {
         $rawData = $this->thong_ke_hoc_sinh->getStudentAllStats();
         if (empty($rawData)){

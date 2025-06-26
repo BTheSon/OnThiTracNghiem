@@ -1,4 +1,8 @@
 <?php
+/**
+ * Các hằng số cấu hình cho ứng dụng
+ */
+
 
 $docRoot = realpath($_SERVER['DOCUMENT_ROOT']);         // /var/www
 $projectDir = BASE_DIR;                         // /www//onthitracnghiem/

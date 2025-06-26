@@ -4,12 +4,16 @@ namespace App\Controllers;
 use App\Core\Controller;
 use App\Models\CauHoiModel;
 use App\Models\DapAnModel;
-use ArrayIterator;
 use RuntimeException;
 
 use function App\Includes\navigate;
 use function App\Includes\return_json;
 
+/**
+ * Question Controller
+ * Xử lý các yêu cầu liên quan đến câu hỏi trong ngân hàng câu hỏi.
+ * Bao gồm thêm, sửa, xóa và tải lên câu hỏi.
+ */
 class Question extends Controller
 {
     private CauHoiModel $cauHoiModel;
@@ -24,14 +28,16 @@ class Question extends Controller
         $this->cauHoiModel = $this->model('CauHoiModel');
         $this->dapAnModel = $this->model('DapAnModel');
     }
+
     public function index() {
-        // Load the view for managing questions
         $this->list();
     }
+    
     /**
-     * hiển thị form thêm câu hỏi vào ngân hàng
+     * Hiển thị danh sách câu hỏi của giáo viên.
+     * Chỉ dành cho giáo viên.
+     * response: hiển thị danh sách câu hỏi
      */
-
     public function list() {
         // Kiểm tra quyền truy cập
         if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'gv') {
@@ -59,12 +65,22 @@ class Question extends Controller
         ]);
     }
 
+    /**
+     * Hiển thị form tạo câu hỏi mới.
+     * Chỉ dành cho giáo viên.
+     * response: hiển thị form tạo câu hỏi
+     */
     public function form_create(){
         $this->view('',[
             'content' => 'giaovien/pages/tao-cau-hoi.php'
         ]);
     }
 
+    /**
+     * Xử lý thêm câu hỏi mới.
+     * Chỉ dành cho giáo viên.
+     * response: chuyển hướng về danh sách câu hỏi
+     */
     public function add() {
         // Kiểm tra xem form đã được submit chưa
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -97,8 +113,13 @@ class Question extends Controller
 
             navigate('/question/list');
         }
-
     }
+
+    /**
+     * Xử lý tải lên câu hỏi từ file CSV.
+     * Chỉ dành cho giáo viên.
+     * response: trả về JSON với kết quả tải lên
+     */
     public function load_question() {
         // / Kiểm tra file upload
         header('Content-Type: application/json; charset=utf-8');
@@ -167,6 +188,13 @@ class Question extends Controller
         }
         return_json( ['status' => 'error', 'message' => 'Không có file được upload']);
     }
+
+    /**
+     * Đọc dữ liệu từ file CSV.
+     * @param string $filePath
+     * @return array
+     * @throws RuntimeException
+     */
     private function readCSV(string $filePath): array {
         $data = [];
 

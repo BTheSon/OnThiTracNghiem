@@ -4,14 +4,22 @@ use App\Core\Controller;
 use App\Models\TaiLieuModel;
 
 use function App\Includes\navigate;
-
+/**
+ * Document Controller
+ * Xử lý các yêu cầu liên quan đến tài liệu học tập.
+ * Bao gồm thêm, tải lên, tải xuống và xóa tài liệu.
+ */
 class Document extends Controller
 {
     private TaiLieuModel $documentModel;
     public function __construct() {
         $this->documentModel = new TaiLieuModel();
     }
-
+    /**
+     * Hiển thị form thêm tài liệu.
+     * Chỉ dành cho giáo viên.
+     * response: hiển thị form thêm tài liệu
+     */
     public function form() {
         if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'gv') {
             navigate('/auth/login');
@@ -29,7 +37,11 @@ class Document extends Controller
             ]
         );
     }
-
+    /**
+     * Xử lý tải lên tài liệu.
+     * Chỉ dành cho giáo viên.
+     * response: trả về JSON với kết quả tải lên
+     */
     public function upload(): void
     {
         // Thiết lập các header cho phản hồi
@@ -95,7 +107,11 @@ class Document extends Controller
             echo json_encode(['success' => false, 'message' => 'Phương thức không hợp lệ.']);
         }
     }
-
+    /**
+     * Xử lý tải xuống tài liệu.
+     * Chỉ dành cho học sinh.
+     * response: tải xuống file tài liệu
+     */
     public function download(int $id): void
     {
         // Xác thực quyền truy cập
@@ -131,7 +147,11 @@ class Document extends Controller
             exit();
         }
     }
-
+    /**
+     * Xử lý tải xuống tài liệu.
+     * Chỉ dành cho học sinh.
+     * response: tải xuống file tài liệu
+     */
     public function delete(int $id): void
     {
         // Xác thực quyền truy cập
@@ -157,7 +177,11 @@ class Document extends Controller
             echo "<script>alert('Tài liệu không tồn tại.'); window.location.href = '/document/list';</script>";
         }
     }
-
+/**
+     * Hiển thị danh sách tài liệu.
+     * Dựa trên vai trò người dùng (giáo viên hoặc học sinh).
+     * response: hiển thị danh sách tài liệu
+     */
     public function list(): void
     {
         // xác thực quyền truy cập
@@ -178,7 +202,10 @@ class Document extends Controller
         }
     }
 
-    // chưa test
+    /**
+     * Hiển thị danh sách tài liệu cho học sinh.
+     * response: hiển thị danh sách tài liệu
+     */
     private function student_list_documents(): void
     {
         if (!isset($_SESSION['class_id'])) {
@@ -196,7 +223,10 @@ class Document extends Controller
             ]);
         
     }
-
+    /**
+     * Hiển thị danh sách tài liệu cho giáo viên.
+     * response: hiển thị danh sách tài liệu
+     */
     private function teacher_list_documents(): void
     {
 

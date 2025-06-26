@@ -1,4 +1,7 @@
 <?php
+/** Cấu hình kết nối cơ sở dữ liệu */
+
+
 // Host của cơ sở dữ liệu
 define('DB_HOST', 'localhost');
 

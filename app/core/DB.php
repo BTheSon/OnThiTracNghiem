@@ -5,7 +5,11 @@ use PDO;
 use PDOException;   
 use PDOStatement;
 use RuntimeException;
-
+/**
+ * Lớp DB
+ * Quản lý kết nối đến cơ sở dữ liệu sử dụng PDO.
+ * Sử dụng Singleton pattern để đảm bảo chỉ có một kết nối duy nhất.
+ */
 class DB
 {
     private static ?DB $instance = null;

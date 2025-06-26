@@ -5,6 +5,11 @@ use App\Models\NguoiDungModel;
 
 use function App\Includes\navigate;
 
+/**
+ * User Controller
+ * Xử lý các yêu cầu liên quan đến người dùng.
+ * Bao gồm đổi tên, đổi ảnh đại diện.
+ */
 class User extends Controller {
     private NguoiDungModel $nguoi_dung_model;
 

@@ -23,6 +23,10 @@ class Exam extends Controller
     private DapAnModel $dapAnModel;
     private TraLoiTamModel $traLoiTamModel;
     private TraLoiBaiThiModel $traLoiBaiThiModel;
+
+    /**
+     * Khởi tạo các mô hình cần thiết và kiểm tra quyền truy cập
+     */
     public function __construct() {
         if (empty($_SESSION['user_id'])) {
             navigate('/auth/login');
@@ -39,6 +43,8 @@ class Exam extends Controller
 
     /**
      * hiển thị danh sách các bài thi của tạo bởi giáo viên
+     * Chỉ dành cho giáo viên.
+     * response: hiển thị danh sách bài thi
      */
     public function list() {
         if (empty($_SESSION['user_role']) || $_SESSION['user_role'] !== 'gv') 
@@ -64,6 +70,11 @@ class Exam extends Controller
         
     }
 
+    /**
+     * Hiển thị trang tạo bài thi.
+     * Chỉ dành cho giáo viên.
+     * response: hiển thị form tạo bài thi
+     */
     public function form_create(): void{
 
         if (!isset($_SESSION['class_id'])) {
@@ -86,6 +97,11 @@ class Exam extends Controller
         );
     }
 
+    /**
+     * Xử lý tạo bài thi.
+     * Chỉ dành cho giáo viên.
+     * response: tạo bài thi mới
+     */
     public function create(): void {
         if (!isset($_SESSION['class_id'])) {
             navigate('/teacher/home');
@@ -140,10 +156,16 @@ class Exam extends Controller
         }
     }
 
+    // Idk why it's here :))
     public function update(): void {
         
     }
 
+    /**
+     * Xóa bài thi theo ID.
+     * Chỉ dành cho giáo viên.
+     * response: xóa bài thi thành công hoặc thất bại
+     */
     public function delete($dethi_id): void {
         if ($_SESSION['user_role'] !== 'gv') {
             navigate('/teacher/home');
@@ -181,7 +203,9 @@ class Exam extends Controller
     }
 
     /**
-     * làm bài thi
+     * Bắt đầu làm bài thi cho học sinh.
+     * Chỉ dành cho học sinh.
+     * response: hiển thị trang làm bài thi
      */
     public function on_exam(int $dethi_id) {
         if (empty($_SESSION['user_role']) || $_SESSION['user_role'] !== 'hs') {
@@ -216,7 +240,9 @@ class Exam extends Controller
     }
 
     /**
-     * lấy câu hỏi trong bài thi bài thi với examid trong session
+     * Lấy danh sách câu hỏi của bài thi hiện tại.
+     * Chỉ dành cho học sinh.
+     * response: JSON chứa danh sách câu hỏi và thông tin bài thi
      */
     public function questions(): void {
         header('Content-Type: application/json; charset=utf-8');
@@ -248,21 +274,21 @@ class Exam extends Controller
                     "bat_dau" => $dethi['ngay_thi'] ?? null,
                     "ket_thuc" => $dethi['ngay_dong'] ?? null,
                     "cau_hoi" => array_map(function($q) {
-                        return [
-                            "id" => $q['id'],
-                            "noi_dung" => $q['noi_dung'],
-                            "hinh" => $q['hinh'] ?? null,
-                            "am_thanh" => $q['am_thanh'] ?? null,
-                            "cong_thuc" => $q['cong_thuc'] ?? null,
-                            "dap_an" => array_map(function($a) {
-                                $answer = [
-                                    "id" => $a['id'],
-                                    "noi_dung" => $a['noi_dung']
-                                ];
-                                return $answer;
-                            }, $this->dapAnModel->getByCauHoi($q['ch_id']))
-                        ];
-                    }, $questions)
+                                    return [
+                                        "id" => $q['id'],
+                                        "noi_dung" => $q['noi_dung'],
+                                        "hinh" => $q['hinh'] ?? null,
+                                        "am_thanh" => $q['am_thanh'] ?? null,
+                                        "cong_thuc" => $q['cong_thuc'] ?? null,
+                                        "dap_an" => array_map(function($a) {
+                                                        $answer = [
+                                                            "id" => $a['id'],
+                                                            "noi_dung" => $a['noi_dung']
+                                                        ];
+                                                        return $answer;
+                                                    }, $this->dapAnModel->getByCauHoi($q['ch_id']))
+                                    ];
+                                }, $questions)
                 ]
                 ];
 
@@ -308,7 +334,7 @@ class Exam extends Controller
 
 
     /**
-     * lưu câu trả lời tạm thời của học sinh
+     * lưu câu trả lời vào bảng tạm thời định kì
      */
     public function save() : void {
         header('Content-Type: application/json; charset=utf-8');

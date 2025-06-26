@@ -1,6 +1,10 @@
 <?php
 namespace App\Core;
 
+/**
+ * Model class
+ * Cơ sở dữ liệu kết nối và thao tác với bảng trong ứng dụng.
+ */
 class Model
 {
     protected DB $db;

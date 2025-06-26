@@ -5,6 +5,11 @@ use App\Models\ThongBaoModel;
 
 use function App\Includes\navigate;
 
+/**
+ * Notification Controller
+ * Xử lý các yêu cầu liên quan đến thông báo.
+ * Bao gồm tạo thông báo mới.
+ */
 class Notification extends Controller {
     private ThongBaoModel $thong_bao_model;
     public function __construct() {
@@ -14,6 +19,11 @@ class Notification extends Controller {
         $this->thong_bao_model = $this->model('ThongBaoModel');
     }
     
+    /**
+     * Hiển thị form tạo thông báo.
+     * Chỉ dành cho giáo viên.
+     * response: hiển thị form tạo thông báo
+     */
     public function create(): void{
 
         if (empty($_SESSION['user_role'])) {

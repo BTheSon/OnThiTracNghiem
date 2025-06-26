@@ -17,7 +17,9 @@ function asset($path) {
     return base_url('public/' . ltrim($path, '/'));
 }
 
-/** Hàm chuyển hướng đến một URL khác /controller/action/parameter1/parameter2 */
+/** Hàm chuyển hướng đến một URL khác
+ * /controller/action/parameter1/parameter2
+ */
 function navigate($url) {
     $url = BASE_URL . $url;
     header("Location: " . $url);
@@ -28,7 +30,9 @@ function navigate($url) {
 function normalizePath($path): string {
     return str_replace(['\\', '//'], '/', $path);
 }
-
+/** Hàm trả về JSON và kết thúc script
+ * Dùng để trả về dữ liệu dạng JSON cho AJAX requests
+ */
 function return_json(array $data): void {
     echo json_encode($data);
     exit();

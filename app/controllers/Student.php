@@ -8,6 +8,11 @@ use App\Models\ThongBaoModel;
 
 use function App\Includes\navigate;
 
+/**
+ * Student Controller
+ * Xử lý các yêu cầu liên quan đến học sinh.
+ * Bao gồm trang chủ, xem tài liệu, bài kiểm tra và thông báo.
+ */
 class Student extends Controller
 {
     private HocSinhLopModel $hocSinhLopModel;
@@ -32,6 +37,10 @@ class Student extends Controller
         $this->home();
     }
 
+    /**
+     * Hiển thị trang chủ của học sinh.
+     * Hiển thị danh sách các lớp học mà học sinh đã tham gia.
+     */
     public function home(): void{
             
         $result = $this->hocSinhLopModel-> getClassesByStudent($_SESSION['user_id']);
@@ -51,6 +60,10 @@ class Student extends Controller
                     ]);
     }
 
+    /**
+     * Hiển thị trang xem tài liệu của học sinh.
+     * Hiển thị danh sách tài liệu theo lớp học.
+     */
     public function review_materials(): void {
         $this->view('layouts/main_layout.php', 
                     [
@@ -63,7 +76,11 @@ class Student extends Controller
                         ]
                     ]);
     }
-
+    /**
+     * Hiển thị trang xem bài kiểm tra của học sinh.
+     * Hiển thị danh sách các bài kiểm tra đã được giao cho học sinh và đã tham gia.
+     * Cũng hiển thị các bài kiểm tra đã quá hạn.   
+     */
     public function assigned_tests(): void {
         $exams = $this->deThiModel->getUnattendedExamsByStudent($_SESSION['user_id']);
         // Lấy các bài kiểm tra quá hạn
@@ -82,6 +99,11 @@ class Student extends Controller
                         ]
                     ]);
     }
+
+    /**
+     * Hiển thị trang xem thông báo của học sinh.
+     * Hiển thị danh sách các thông báo theo lớp học.
+     */
     public function class_preview(string $idClass): void {
 
         $classes = $this->hocSinhLopModel->getClassInfoByClassAndStudent($idClass, $_SESSION['user_id']);

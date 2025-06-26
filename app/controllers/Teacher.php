@@ -8,6 +8,11 @@ use App\Models\ThongBaoModel;
 
 use function App\Includes\navigate;
 
+/**
+ * Teacher Controller
+ * Xử lý các yêu cầu liên quan đến giáo viên.
+ * Bao gồm trang chủ, quản lý lớp học, tạo lớp học và quản lý học sinh trong lớp.
+ */
 class Teacher extends Controller
 {
     private LopHocModel $model;
@@ -34,7 +39,11 @@ class Teacher extends Controller
     }
 
     
-
+    /**
+     * Hiển thị trang chủ của giáo viên.
+     * Hiển thị danh sách các lớp học mà giáo viên đã dạy.
+     * response: hiển thị danh sách lớp học
+     */
     public function home(): void {
         $allClass = $this->model->getByTeacherId($_SESSION['user_id']);
 
@@ -54,6 +63,10 @@ class Teacher extends Controller
                     ]);
     }
 
+    /**
+     * Hiển thị trang quản lý của giáo viên.
+     * response: hiển thị trang quản lý
+     */
     public function manager(): void {
         $this->view('layouts/quanly_layout.php', 
                     [
@@ -68,6 +81,10 @@ class Teacher extends Controller
                     ]);
     }
 
+    /**
+     * Hiển thị trang tạo lớp học.
+     * response: hiển thị form tạo lớp học
+     */
     public function add_class(): void {
         $this->view('layouts/main_layout.php', 
                     [
@@ -96,6 +113,9 @@ class Teacher extends Controller
      *       'anh' => 1
      *      ],
      * ]
+     * Hiển thị trang quản lý lớp học.
+     * Hiển thị danh sách học sinh trong lớp học.
+     * response: hiển thị danh sách học sinh trong lớp học
      */
     public function class_management(string $idClass): void {
         $this->create_session_class($idClass);
@@ -165,13 +185,19 @@ class Teacher extends Controller
                         ]
                     ]);
     }
-
+    /**
+     * Tạo session lớp học.
+     * Dùng để lưu thông tin lớp học hiện tại khi giáo viên truy cập vào trang
+     */
     private function create_session_class(string $idClass): void {
         $_SESSION['class_id'] = $idClass;
         $_SESSION['class_name'] = $this->model->getById($idClass)['ten_lop'];
     
     }
-
+    /**
+     * Xóa session lớp học.
+     * Dùng khi giáo viên đăng xuất hoặc chuyển hướng về trang khác.
+     */
     private function destroy_session_class(): void {
         unset($_SESSION['class_id']);
         unset($_SESSION['class_name']);
