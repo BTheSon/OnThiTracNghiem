@@ -4,8 +4,12 @@ use App\Core\Controller;
 use App\Models\NguoiDungModel;
 
 use function App\Includes\navigate;
-use function App\Includes\redirect;
 
+/**
+ * Auth Controller
+ * Nhận diện và xử lý các yêu cầu liên quan đến xác thực người dùng.
+ * Bao gồm đăng nhập, đăng ký, đổi mật khẩu và đăng xuất.
+ */
 class Auth extends Controller
 {
     private NguoiDungModel $model;

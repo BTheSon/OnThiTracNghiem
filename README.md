@@ -141,7 +141,6 @@ D:.
 
 - `helper.php`: File chứa các hàm tiện ích được sử dụng ở nhiều nơi trong dự án, giúp giảm thiểu việc lặp lại mã nguồn.
 
-
 - `main_layout.php`: File layout chính cho giao diện. Nó định nghĩa cấu trúc HTML cơ bản và sử dụng các biến như `$content` và `$sidebar` để hiển thị nội dung động từ các view.
 
 ### 3. Ảnh minh họa
@@ -165,3 +164,9 @@ D:.
   tương đương
   <?php echo "<script src='public/js/script.js'></script>"; ?>
   ```
+
+### 4. MVC
+- __Model__: Làm việc với cơ sở dữ liệu, thực hiện các truy vấn SQL và trả về dữ liệu cho controller.
+- __View__: Hiển thị dữ liệu cho người dùng. Nhận dữ liệu từ controller và hiển thị nó dưới dạng HTML, hoặc JSON.
+- __Controller__: Nhận yêu cầu từ người dùng, gọi model để lấy dữ liệu, xử lí dữ liệu và truyền dữ liệu đó cho view để hiển thị.
+- __Core__: Chứa các lớp cốt lõi của ứng dụng như App, Autoloader, Controller, Model, DB, giúp quản lý luồng dữ liệu và xử lý các yêu cầu.
